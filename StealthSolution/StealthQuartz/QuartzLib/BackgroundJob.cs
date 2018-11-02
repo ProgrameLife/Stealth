@@ -13,34 +13,49 @@ namespace StealthQuartz
     /// </summary>
     public class BackgroundJob<T> : IJob where T : IBackHandle
     {
+        /// <summary>
+        /// logger
+        /// </summary>
         readonly ILogger<BackgroundJob<T>> _logger;
-        readonly IBackHandle _handle;
-
+        /// <summary>
+        /// muntil backhandel
+        /// </summary>
         readonly Func<string, IBackHandle> _serviceAccessore;
-
-
 
         public BackgroundJob(ILogger<BackgroundJob<T>> logger, Func<string, IBackHandle> serviceAccessore)
         {
             _serviceAccessore = serviceAccessore;
             _logger = logger;
         }
+        /// <summary>
+        /// call back method
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task Execute(IJobExecutionContext context)
         {
             try
             {
-                //todo 参数没有处理
-                _serviceAccessore(context.JobDetail.JobDataMap.GetString("handlename")).Handle();
+                var result = _serviceAccessore(context.JobDetail.JobDataMap.GetString("handlename")).Handle();
+                _logger.LogInformation($"IBackHandle.Handle call return {result}");
             }
             catch (Exception exc)
             {
-                _logger.LogCritical($"{DateTime.Now}:{exc.Message}");
-                if (exc.InnerException != null)
-                {
-                    _logger.LogCritical($"     {DateTime.Now}:{exc.InnerException.Message}");
-                }
+                LogException(exc);
             }
             return Task.CompletedTask;
+        }
+        /// <summary>
+        /// log all exception
+        /// </summary>
+        /// <param name="exc"></param>
+        void LogException(Exception exc)
+        {
+            _logger.LogCritical(exc, exc.Message);
+            if (exc.InnerException != null)
+            {
+                LogException(exc.InnerException);
+            }
         }
     }
 }
