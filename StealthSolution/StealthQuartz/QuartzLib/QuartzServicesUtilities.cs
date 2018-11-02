@@ -9,13 +9,14 @@ namespace StealthQuartz
 {
     public static class QuartzServicesUtilities
     {
-        public async static void StartJob<TJob>(IScheduler scheduler, string cronExpression, string methodName)
+        public async static void StartJob<TJob>(IScheduler scheduler, string cronExpression, string handleName)
             where TJob : IJob
         {
 
-            var jobName = $"{typeof(TJob).FullName}_{methodName}_{cronExpression}";
+            var jobName = Guid.NewGuid().ToString();
             var job = JobBuilder.Create<TJob>()
-                .UsingJobData("","")
+                .UsingJobData("cronexpression", cronExpression)
+                .UsingJobData("handlename", handleName)
                 .WithIdentity(jobName)
                 .Build();
             var trigger = TriggerBuilder.Create()

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
+
 using System;
 using System.Threading.Tasks;
 
@@ -10,42 +11,26 @@ namespace StealthQuartz
     /// <summary>
     /// 后台任务
     /// </summary>
-    public class BackgroundJob : IJob
+    public class BackgroundJob<T> : IJob where T : IBackHandle
     {
-        readonly ILogger<BackgroundJob> _logger;
-        readonly  Action<bool> _action;
+        readonly ILogger<BackgroundJob<T>> _logger;
+        readonly IBackHandle _handle;
 
-        public BackgroundJob(ILogger<BackgroundJob> logger, Action<bool> action)
+        readonly Func<string, IBackHandle> _serviceAccessore;
+
+
+
+        public BackgroundJob(ILogger<BackgroundJob<T>> logger, Func<string, IBackHandle> serviceAccessore)
         {
-            _action = action;
+            _serviceAccessore = serviceAccessore;
             _logger = logger;
         }
         public Task Execute(IJobExecutionContext context)
         {
             try
             {
-                if (context.JobDetail is JobDetailImpl)
-                {
-                    var names = (context.JobDetail as Quartz.Impl.JobDetailImpl)?.Name.Split('_');
-                    var method = names.Length > 1 ? names[1] : "";
-                    if (!string.IsNullOrEmpty(method))
-                    {
-                        //todo 这里用什么方法实现自动调用？？？？？？
-                        //_action()
-                        //var methodInfo = _type.GetMethod(method);
-                        //var result = methodInfo.Invoke(_backgroundRepository, new object[0]);
-                        //var runResult = false;
-                        ////成功执行
-                        //if (bool.TryParse(result.ToString(), out runResult) && runResult)
-                        //{
-                        //    _logger.LogInformation($"BackgroundJob.Execute成功，方法：{method}");
-                        //}
-                        //else//不成功执行
-                        //{
-                        //    _logger.LogInformation($"BackgroundJob.Execute失败，方法：{method}");
-                        //}
-                    }
-                }
+                //todo 参数没有处理
+                _serviceAccessore(context.JobDetail.JobDataMap.GetString("handlename")).Handle();
             }
             catch (Exception exc)
             {
