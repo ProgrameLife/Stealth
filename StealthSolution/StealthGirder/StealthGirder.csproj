@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 
 </Project>
