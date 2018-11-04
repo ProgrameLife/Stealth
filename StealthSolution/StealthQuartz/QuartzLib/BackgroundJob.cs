@@ -1,8 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
 using Quartz;
-using Quartz.Impl;
-
 using System;
 using System.Threading.Tasks;
 

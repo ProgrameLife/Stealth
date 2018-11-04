@@ -27,7 +27,7 @@ namespace StealthGirder
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            AddQuartz(services);
+            AddQuartz(services, new BackHandle1("aaa"), new BackHandle2("123"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -38,40 +38,48 @@ namespace StealthGirder
                 app.UseDeveloperExceptionPage();
             }
 
-            QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, "10 33 8 * * ?", "BackHandle1");
 
-            QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, "40 33 8 * * ?", "BackHandle2");
+            UserBackHandle(app, scheduler);
+
             app.UseMvc();
         }
-
-        void AddQuartz(IServiceCollection services)
+        void UserBackHandle(IApplicationBuilder app, IScheduler scheduler)
         {
-            services.AddTransient(pro =>
+
+            QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, "10 33 8 * * ?", "BackHandle1");
+            QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, "40 33 8 * * ?", "BackHandle2");
+        }
+
+        void AddQuartz(IServiceCollection services, params IBackHandle[] backHandles)
+        {
+            foreach (var backHandle in backHandles)
             {
-                return new BackHandle1("abc");
-            });
-            services.AddTransient(pro =>
-            {
-                return new BackHandle2("abc");
-            });
+                services.AddTransient(pro =>
+                {
+                    return backHandle;
+                });
+            }
+
             services.AddSingleton(factory =>
             {
                 Func<string, IBackHandle> accesor = key =>
                 {
-                    switch (key)
+                    foreach (var backHandle in backHandles)
                     {
-                        case "BackHandle1":
-                            return factory.GetService<BackHandle1>();
-                        case "BackHandle2":
-                            return factory.GetService<BackHandle2>();
-                        default:
-                            throw new ArgumentException($"Not Support key : {key}");
+                        if (key == backHandle.GetType().Name)
+                        {
+                            return factory.GetService(backHandle.GetType()) as IBackHandle;
+                        }
                     }
+                    throw new ArgumentException($"Not Support key : {key}");
                 };
                 return accesor;
             });
 
             services.UseQuartz(typeof(BackgroundJob<IBackHandle>));
+
+
+
         }
     }
 }
