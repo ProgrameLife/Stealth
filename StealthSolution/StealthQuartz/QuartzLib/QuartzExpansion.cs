@@ -9,8 +9,16 @@ using System.Collections.Specialized;
 
 namespace StealthQuartz
 {
+    /// <summary>
+    /// Quartz Expansion in asp.net core
+    /// </summary>
     public static class QuartzExpansion
     {
+        /// <summary>
+        /// DI back handle class
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="backHandles"></param>
         public static void AddBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
         {
             foreach (var backHandle in backHandles)
@@ -54,6 +62,12 @@ namespace StealthQuartz
         }
 
 
+        /// <summary>
+        /// user middleware
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="scheduler"></param>
+        /// <param name="quartzEntities"></param>
         public static void UserBackHandle(this IApplicationBuilder app, IScheduler scheduler,params QuartzEntity[] quartzEntities)
         {           
             foreach (var quartzEntitie in quartzEntities)

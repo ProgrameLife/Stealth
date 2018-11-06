@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace StealthQuartz
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class QuartzServicesUtilities
     {
         public async static void StartJob<TJob>(IScheduler scheduler, string cronExpression, string handleName)
             where TJob : IJob
         {
-
             var jobName = Guid.NewGuid().ToString();
             var job = JobBuilder.Create<TJob>()
                 .UsingJobData("cronexpression", cronExpression)

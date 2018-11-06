@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthGirder", "StealthGirder\StealthGirder.csproj", "{8CE82498-A744-4FE4-8082-718B1EF274E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthQuartz", "StealthQuartz\StealthQuartz.csproj", "{F1C17D84-F8DD-4664-8277-07244815C105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthQuartz", "StealthQuartz\StealthQuartz.csproj", "{F1C17D84-F8DD-4664-8277-07244815C105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthPostgreProvider", "StealthPostgreProvider\StealthPostgreProvider.csproj", "{9BD0EFBA-F5EC-49CF-BD3E-2DB7AF1B3649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD0EFBA-F5EC-49CF-BD3E-2DB7AF1B3649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD0EFBA-F5EC-49CF-BD3E-2DB7AF1B3649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BD0EFBA-F5EC-49CF-BD3E-2DB7AF1B3649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD0EFBA-F5EC-49CF-BD3E-2DB7AF1B3649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

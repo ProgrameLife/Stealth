@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace StealthQuartz
 {
+    /// <summary>
+    /// back job fatory
+    /// </summary>
     public class QuartzJonFactory : IJobFactory
     {
 
@@ -21,7 +24,6 @@ namespace StealthQuartz
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
             var jobDetail = bundle.JobDetail;
-
             var job = (IJob)_serviceProvider.GetService(jobDetail.JobType);
             return job;
         }
