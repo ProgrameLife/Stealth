@@ -22,6 +22,7 @@ namespace StealthGirder
 
         public void ConfigureServices(IServiceCollection services)
         {
+       
             services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -32,6 +33,7 @@ namespace StealthGirder
             {
                 app.UseDeveloperExceptionPage();
             }
+           
             var quartzEntities = new List<QuartzEntity>();
             quartzEntities.Add(new QuartzEntity { Name = "BackHandle1", CronExpression = "10 33 8 * * ?" });
             quartzEntities.Add(new QuartzEntity { Name = "BackHandle2", CronExpression = "40 33 8 * * ?" });
