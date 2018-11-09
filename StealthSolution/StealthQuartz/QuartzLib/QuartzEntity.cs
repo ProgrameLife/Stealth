@@ -10,7 +10,11 @@
         /// </summary>
         public string Name
         { get; set; }
-
+        /// <summary>
+        /// Type Name
+        /// </summary>
+        public string TypeName
+        { get; set; }
         /// <summary>
         /// Corn Expression
         /// </summary>

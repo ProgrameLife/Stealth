@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using StealthGirder.Infrastructure;
+using StealthPostgreProvider;
 using StealthQuartz;
 using System.Collections.Generic;
 
@@ -22,8 +23,14 @@ namespace StealthGirder
 
         public void ConfigureServices(IServiceCollection services)
         {
-       
-            services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
+            #region base mode
+            //services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
+            #endregion
+
+            #region postgre mode
+            services.AddPostgreBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
+            #endregion
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -33,12 +40,16 @@ namespace StealthGirder
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            var quartzEntities = new List<QuartzEntity>();
-            quartzEntities.Add(new QuartzEntity { Name = "BackHandle1", CronExpression = "10 33 8 * * ?" });
-            quartzEntities.Add(new QuartzEntity { Name = "BackHandle2", CronExpression = "40 33 8 * * ?" });
+            #region base mode
+            //var quartzEntities = new List<QuartzEntity>();
+            //quartzEntities.Add(new QuartzEntity { Name = "BackHandle1", CronExpression = "10 33 8 * * ?" });
+            //quartzEntities.Add(new QuartzEntity { Name = "BackHandle2", CronExpression = "40 33 8 * * ?" });
+            //app.UserBackHandle(scheduler, quartzEntities.ToArray());
+            #endregion
 
-            app.UserBackHandle(scheduler, quartzEntities.ToArray());
+            #region postgre mode
+            app.UserPostgreBackHandle(scheduler);
+            #endregion
 
             app.UseMvc();
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace StealthQuartz
 {
     /// <summary>
-    /// 
+    /// quartz services utilities
     /// </summary>
     public static class QuartzServicesUtilities
     {

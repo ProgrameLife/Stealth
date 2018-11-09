@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace StealthQuartz
 {
     /// <summary>
-    /// 后台任务
+    /// back task
     /// </summary>
     public class BackgroundJob<T> : IJob where T : IBackHandle
     {

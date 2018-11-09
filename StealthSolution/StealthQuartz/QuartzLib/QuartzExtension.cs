@@ -12,7 +12,7 @@ namespace StealthQuartz
     /// <summary>
     /// Quartz Expansion in asp.net core
     /// </summary>
-    public static class QuartzExpansion
+    public static class QuartzExtension
     {
         /// <summary>
         /// DI back handle class
@@ -72,7 +72,7 @@ namespace StealthQuartz
         {           
             foreach (var quartzEntitie in quartzEntities)
             {
-                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.Name);
+                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.TypeName);
             }
         }
     }

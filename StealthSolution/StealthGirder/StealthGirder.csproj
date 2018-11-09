@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 

@@ -9,4 +9,8 @@
     <PackageReference Include="Npgsql" Version="4.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
+  </ItemGroup>
+
 </Project>
