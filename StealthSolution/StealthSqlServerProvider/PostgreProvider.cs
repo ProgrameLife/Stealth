@@ -1,21 +1,21 @@
 ﻿using Dapper;
-using Npgsql;
 using StealthQuartz;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
-namespace StealthPostgreProvider
+namespace StealthSqlServerProvider
 {
     /// <summary>
     /// postgresql provider
     /// </summary>
-    public class PostgreProvider : IProvider
+    public class SqlServerProvider : IProvider
     {
         /// <summary>
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
-        public PostgreProvider(string connectionString)
+        public SqlServerProvider(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -26,7 +26,7 @@ namespace StealthPostgreProvider
         public List<QuartzEntity> GetQuartzEntity()
         {
             var sql = "select * from quartzsettings where validate=true";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<QuartzEntity>(sql).ToList();
             }
@@ -40,7 +40,7 @@ namespace StealthPostgreProvider
         public List<StealthsStatu> GetAllStealthsStatus()
         {
             var sql = "select * from stealthstatus";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<StealthsStatu>(sql).ToList();
             }
@@ -84,14 +84,12 @@ namespace StealthPostgreProvider
             var sql = @"UPDATE stealthstatus SET status=@status, modifytime=@modifytime WHERE keyname=@keyname;
 INSERT INTO stealthstatus(keyname,status,modifytime) SELECT @keyname,@status,now()
 WHERE NOT EXISTS(SELECT 1 FROM stealthstatus WHERE keyname=@keyname);";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, new { keyname = keyName, status = status }) > 0;
             }
         }
         #endregion
-
-
 
     }
 }
