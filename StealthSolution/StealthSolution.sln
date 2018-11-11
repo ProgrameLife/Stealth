@@ -21,6 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthPostgreProvider", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthSqlServerProvider", "Providers\StealthSqlServerProvider\StealthSqlServerProvider.csproj", "{04D18985-91B0-41BE-ACDF-F7500516486F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{7B8F76B1-38A1-4E7E-8491-548258C7A5B8}"
+	ProjectSection(SolutionItems) = preProject
+		Stealth.png = Stealth.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
