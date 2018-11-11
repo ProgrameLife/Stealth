@@ -43,3 +43,47 @@ WITH (
 TABLESPACE pg_default;
 ALTER TABLE public.quartzsettings
     OWNER to postgres;
+
+
+
+-- Table: public.datasettings
+
+-- DROP TABLE public.datasettings;
+
+CREATE TABLE public.datasettings
+(
+    id serial,
+    keyname character varying(128) COLLATE pg_catalog."default",
+    connectionstring text COLLATE pg_catalog."default",
+    CONSTRAINT datasettings_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.datasettings
+    OWNER to postgres;
+
+
+-- Table: public.datasqls
+
+-- DROP TABLE public.datasqls;
+
+CREATE TABLE public.datasqls
+(
+    id serial,
+    datasettingid integer,
+    CONSTRAINT datasqls_pkey PRIMARY KEY (id),
+    CONSTRAINT datasettingid_fk FOREIGN KEY (id)
+        REFERENCES public.datasettings (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.datasqls
+    OWNER to postgres;
