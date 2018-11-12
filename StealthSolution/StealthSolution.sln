@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthGirder", "StealthGir
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthQuartz", "StealthQuartz\StealthQuartz.csproj", "{F1C17D84-F8DD-4664-8277-07244815C105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthFTPBackHandle", "StealthFTPBackHandle\StealthFTPBackHandle.csproj", "{E8BD5061-A6BD-4BCD-A99E-58B7027BC63C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackHandles", "BackHandles", "{0EA62497-9031-4FF8-8E1A-91C0A00EDE31}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthFTPBackHandle", "BackHandles\StealthFTPBackHandle\StealthFTPBackHandle.csproj", "{A1A34680-FB64-45DB-AE62-EC0819DC3921}"
@@ -40,10 +38,6 @@ Global
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1C17D84-F8DD-4664-8277-07244815C105}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8BD5061-A6BD-4BCD-A99E-58B7027BC63C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8BD5061-A6BD-4BCD-A99E-58B7027BC63C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8BD5061-A6BD-4BCD-A99E-58B7027BC63C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8BD5061-A6BD-4BCD-A99E-58B7027BC63C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1A34680-FB64-45DB-AE62-EC0819DC3921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1A34680-FB64-45DB-AE62-EC0819DC3921}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A34680-FB64-45DB-AE62-EC0819DC3921}.Release|Any CPU.ActiveCfg = Release|Any CPU
