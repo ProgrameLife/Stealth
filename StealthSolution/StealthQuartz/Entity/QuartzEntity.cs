@@ -1,4 +1,4 @@
-﻿namespace StealthQuartz
+﻿namespace StealthQuartz.Entity
 {
     /// <summary>
     /// Quartz Core Entity

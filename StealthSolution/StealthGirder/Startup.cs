@@ -5,9 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using StealthGirder.Infrastructure;
-using StealthPostgreProvider;
-using StealthQuartz;
-using System.Collections.Generic;
+
 
 namespace StealthGirder
 {
@@ -46,7 +44,7 @@ namespace StealthGirder
             //quartzEntities.Add(new QuartzEntity { Name = "BackHandle2", CronExpression = "40 33 8 * * ?" });
             //app.UserBackHandle(scheduler, quartzEntities.ToArray());
             #endregion
-
+            
             #region postgre mode
             app.UserPostgreBackHandle(scheduler);
             #endregion

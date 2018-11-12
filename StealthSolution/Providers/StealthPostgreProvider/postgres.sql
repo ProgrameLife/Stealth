@@ -13,17 +13,24 @@ CREATE DATABASE stealthdb
 
 -- Table: public.stealthstatus
 -- DROP TABLE public.stealthstatus;   
-CREATE TABLE public.stealthstatus
+
+CREATE TABLE public.quartzsettings
 (
-    keyname character varying(128) COLLATE pg_catalog."default" NOT NULL,
-    status integer,
-    modifytime time without time zone,
-    CONSTRAINT "StealthStatus_pkey" PRIMARY KEY (keyname)
+    id serial,
+    keyname character varying(512) COLLATE pg_catalog."default",
+    typename character varying(128) COLLATE pg_catalog."default",
+    cronexpression character varying(32) COLLATE pg_catalog."default",
+    validate boolean,
+    createon timestamp without time zone,
+    CONSTRAINT quartzsettings_pkey PRIMARY KEY (id),
+    CONSTRAINT keyname UNIQUE (keyname)
 )
 WITH (
-    OIDS = FALSE)
+    OIDS = FALSE
+)
 TABLESPACE pg_default;
-ALTER TABLE public.stealthstatus
+
+ALTER TABLE public.quartzsettings
     OWNER to postgres;
 
 

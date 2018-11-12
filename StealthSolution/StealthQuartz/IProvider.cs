@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using StealthQuartz.Entity;
+using System.Collections.Generic;
 
 namespace StealthQuartz
 {

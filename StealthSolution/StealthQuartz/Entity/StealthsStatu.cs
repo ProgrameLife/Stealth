@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StealthQuartz
+namespace StealthQuartz.Entity
 {
     /// <summary>
     /// exec statu
