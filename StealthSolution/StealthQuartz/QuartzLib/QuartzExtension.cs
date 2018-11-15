@@ -35,6 +35,7 @@ namespace StealthQuartz
                 {
                     foreach (var backHandle in backHandles)
                     {
+                        //use class type and quartzettings.typename compare
                         if (key == backHandle.GetType().Name)
                         {
                             return factory.GetService(backHandle.GetType()) as IBackHandle;

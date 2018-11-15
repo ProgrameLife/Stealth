@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 using StealthQuartz;
 using StealthQuartz.Entity;
@@ -16,9 +17,9 @@ namespace StealthPostgreProvider
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
-        public PostgreProvider(string connectionString)
+        public PostgreProvider(IConfiguration configuration)
         {
-            _connectionString = connectionString;
+            _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
         /// <summary>
         /// query QueartzEntity list

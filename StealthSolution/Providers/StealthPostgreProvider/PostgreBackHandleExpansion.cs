@@ -27,7 +27,7 @@ namespace StealthPostgreProvider
         /// <param name="backHandles">back handles</param>
         public static void AddPostgreBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
         {
-            services.AddScoped<IDBProvider, PostgreProvider>();
+            services.AddTransient<IDBProvider, PostgreProvider>();
             services.AddBackHandle(backHandles);
         }
     }

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using StealthGirder.Infrastructure;
-
+using StealthPostgreProvider;
 
 namespace StealthGirder
 {
