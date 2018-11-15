@@ -10,7 +10,7 @@ namespace StealthSqlServerProvider
     /// <summary>
     /// postgresql provider
     /// </summary>
-    public class SqlServerProvider : IProvider
+    public class SqlServerProvider : IDBProvider
     {
         /// <summary>
         /// postgresql connection string

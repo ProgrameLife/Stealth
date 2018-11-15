@@ -24,6 +24,39 @@ namespace StealthPostgreProvider
             }
         }
 
+        /// <summary>
+        /// get all sftpsetting
+        /// </summary>
+        /// <returns></returns>
+        public List<SFTPSetting> GetSFTPSettings()
+        {
+            var sql = "select * from sftpettings where validate=true";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Query<SFTPSetting>(sql).ToList();
+            }
+        }
 
+        public bool AddSFTPSetting(SFTPSetting sFTPSetting)
+        {
+            var sql = @"INSERT INTO sftpettings
+		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
+        (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, sFTPSetting) > 0;
+            }
+        }
+
+        public bool ModifySFTPSetting(SFTPSetting sFTPSetting)
+        {
+            var sql = @"INSERT INTO sftpettings
+		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
+        (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, sFTPSetting) > 0;
+            }
+        }
     }
 }

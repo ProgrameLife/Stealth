@@ -10,7 +10,7 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider
     /// </summary>
-    public partial class PostgreProvider : IProvider
+    public partial class PostgreProvider : IDBProvider
     {
         /// <summary>
         /// postgresql connection string

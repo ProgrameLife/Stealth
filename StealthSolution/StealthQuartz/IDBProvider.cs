@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StealthQuartz
 {
-    public interface IProvider
+    public interface IDBProvider
     {
         /// <summary>
         /// query QueartzEntity list

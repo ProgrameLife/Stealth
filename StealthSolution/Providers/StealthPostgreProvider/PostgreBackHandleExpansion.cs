@@ -17,7 +17,7 @@ namespace StealthPostgreProvider
         /// <param name="scheduler">quartz scheduler</param>
         public static void UserPostgreBackHandle(this IApplicationBuilder app, IScheduler scheduler)
         {
-            var provider = app.ApplicationServices.GetService<IProvider>();
+            var provider = app.ApplicationServices.GetService<IDBProvider>();
             app.UserBackHandle(scheduler, provider.GetQuartzEntity().ToArray());
         }
         /// <summary>
@@ -27,7 +27,7 @@ namespace StealthPostgreProvider
         /// <param name="backHandles">back handles</param>
         public static void AddPostgreBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
         {
-            services.AddScoped<IProvider, PostgreProvider>();
+            services.AddScoped<IDBProvider, PostgreProvider>();
             services.AddBackHandle(backHandles);
         }
     }
