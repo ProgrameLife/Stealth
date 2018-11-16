@@ -36,7 +36,11 @@ namespace StealthPostgreProvider
                 return con.Query<SFTPSetting>(sql).ToList();
             }
         }
-
+        /// <summary>
+        /// add sftpsetting
+        /// </summary>
+        /// <param name="sFTPSetting">sftpsetting</param>
+        /// <returns></returns>
         public bool AddSFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"INSERT INTO sftpettings
@@ -47,15 +51,33 @@ namespace StealthPostgreProvider
                 return con.Execute(sql, sFTPSetting) > 0;
             }
         }
-
+        /// <summary>
+        /// modify sftpsetting
+        /// </summary>
+        /// <param name="sFTPSetting">sftpsetting</param>
+        /// <returns></returns>
         public bool ModifySFTPSetting(SFTPSetting sFTPSetting)
         {
-            var sql = @"INSERT INTO sftpettings
-		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
-        (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
+            var sql = @"UPDATE sftpettings
+	SET  host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
+		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,validate = @validate	
+	WHERE id=@id";
             using (var con = new NpgsqlConnection(_connectionString))
             {
                 return con.Execute(sql, sFTPSetting) > 0;
+            }
+        }
+        /// <summary>
+        /// remove sftpsetting
+        /// </summary>
+        /// <param name="id">sftpsetting id</param>
+        /// <returns></returns>
+        public bool RemoveSFTPSetting(int id)
+        {
+            var sql = @"DELETE FROM sftpettings	WHERE id=@id";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, new { id }) > 0;
             }
         }
     }
