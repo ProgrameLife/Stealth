@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
 using System.Collections.Generic;
@@ -9,14 +10,24 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider backhandle settings
     /// </summary>
-    partial class PostgreProvider
+    public class SFTPPostgreProvider : PostgreProvider
     {
+        /// <summary>
+        /// postgresql connection string
+        /// </summary>
+        readonly string _connectionString;
+
+        public SFTPPostgreProvider(IConfiguration configuration) : base(configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnectionString");
+        }
         /// <summary>
         /// get all sftpsetting
         /// </summary>
         /// <returns></returns>
         public List<SFTPSetting> GetAllSFTPSetting()
         {
+
             var sql = "select * from sftpettings";
             using (var con = new NpgsqlConnection(_connectionString))
             {

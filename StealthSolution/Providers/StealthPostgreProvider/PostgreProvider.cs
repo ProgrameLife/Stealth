@@ -32,7 +32,7 @@ namespace StealthPostgreProvider
             {
                 return con.Query<QuartzEntity>(sql).ToList();
             }
-        } 
+        }
 
 
 

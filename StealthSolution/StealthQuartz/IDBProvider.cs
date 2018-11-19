@@ -5,6 +5,7 @@ namespace StealthQuartz
 {
     public interface IDBProvider
     {
+        
         /// <summary>
         /// query QueartzEntity list
         /// </summary>
