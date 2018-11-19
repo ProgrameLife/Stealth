@@ -10,4 +10,8 @@
     <PackageReference Include="Quartz" Version="3.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
+  </ItemGroup>
+
 </Project>

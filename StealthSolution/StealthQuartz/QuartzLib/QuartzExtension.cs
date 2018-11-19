@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
-using StealthQuartz.Entity;
+using SealthModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;

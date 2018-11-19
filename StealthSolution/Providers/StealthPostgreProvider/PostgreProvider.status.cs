@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Npgsql;
+using SealthModel;
 using StealthQuartz;
-using StealthQuartz.Entity;
 using System.Collections.Generic;
 using System.Linq;
 

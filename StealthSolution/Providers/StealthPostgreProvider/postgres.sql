@@ -129,3 +129,32 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.sftpettings
     OWNER to postgres;
+
+
+
+-- Table: public.settingemails
+-- DROP TABLE public.settingemails;
+CREATE TABLE public.emailsettings
+(
+    id integer NOT NULL DEFAULT nextval('settingemails_id_seq1'::regclass),
+    host character varying(256) COLLATE pg_catalog."default",
+    port integer,
+    fromaddress character varying(256) COLLATE pg_catalog."default",
+    username character varying(256) COLLATE pg_catalog."default",
+    password character varying(256) COLLATE pg_catalog."default",
+    subject character varying(128) COLLATE pg_catalog."default",
+    body text COLLATE pg_catalog."default",
+    toaddresses text COLLATE pg_catalog."default",
+    iscompress boolean,
+    validate boolean,
+    compresspassword character varying(254) COLLATE pg_catalog."default",
+    transferid integer,
+    CONSTRAINT emailsettings_pkey1 PRIMARY KEY (id)  
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.emailsettings
+    OWNER to postgres;
