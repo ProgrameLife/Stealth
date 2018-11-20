@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace StealthSqlServerProvider
@@ -17,7 +18,7 @@ namespace StealthSqlServerProvider
         /// </summary>
         readonly string _connectionString;
 
-        public PostgreEmailProvider(IConfiguration configuration)
+        public SqlServerEmailProvider(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
@@ -29,7 +30,7 @@ namespace StealthSqlServerProvider
         {
 
             var sql = "select * from emailsettings";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<EmailSetting>(sql).ToList();
             }
@@ -42,7 +43,7 @@ namespace StealthSqlServerProvider
         public List<EmailSetting> GetEmailSettings()
         {
             var sql = "select * from emailsettings where validate=true";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<EmailSetting>(sql).ToList();
             }
@@ -57,7 +58,7 @@ namespace StealthSqlServerProvider
             var sql = @"INSERT INTO public.emailsettings(
 	host, port, fromaddress, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
 	VALUES (@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, emailSetting) > 0;
             }
@@ -73,7 +74,7 @@ namespace StealthSqlServerProvider
 	SET  host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
 	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate, compresspassword=@compresspassword
 	WHERE id=@id;";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, emailSetting) > 0;
             }
@@ -86,7 +87,7 @@ namespace StealthSqlServerProvider
         public bool RemoveEmailSetting(int id)
         {
             var sql = @"DELETE FROM emailsettings	WHERE id=@id";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, new { id }) > 0;
             }
