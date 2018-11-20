@@ -18,15 +18,15 @@ namespace SealthProvider
         /// <summary>
         /// add sftpsetting
         /// </summary>
-        /// <param name="sFTPSetting">sftpsetting</param>
+        /// <param name="sftpSetting">sftpsetting</param>
         /// <returns></returns>
-        bool AddSFTPSetting(SFTPSetting sFTPSetting);
+        bool AddSFTPSetting(SFTPSetting sftpSetting);
         /// <summary>
         /// modify sftpsetting
         /// </summary>
-        /// <param name="sFTPSetting">sftpsetting</param>
+        /// <param name="sftpSetting">sftpsetting</param>
         /// <returns></returns>
-        bool ModifySFTPSetting(SFTPSetting sFTPSetting);
+        bool ModifySFTPSetting(SFTPSetting sftpSetting);
         /// <summary>
         /// remove sftpsetting
         /// </summary>

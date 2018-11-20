@@ -11,13 +11,13 @@ namespace StealthSqlServerProvider
     /// <summary>
     /// postgresql provider
     /// </summary>
-    public class SqlServerProvider : IQuartzProvider
+    public class SqlServerQuartzProvider : IQuartzProvider
     {
         /// <summary>
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
-        public SqlServerProvider(string connectionString)
+        public SqlServerQuartzProvider(string connectionString)
         {
             _connectionString = connectionString;
         }
