@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using SealthProvider;
 using StealthQuartz;
 
 namespace StealthPostgreProvider
@@ -17,7 +18,7 @@ namespace StealthPostgreProvider
         /// <param name="scheduler">quartz scheduler</param>
         public static void UserPostgreBackHandle(this IApplicationBuilder app, IScheduler scheduler)
         {
-            var provider = app.ApplicationServices.GetService<IDBProvider>();
+            var provider = app.ApplicationServices.GetService<IQuartzProvider>();
             app.UserBackHandle(scheduler, provider.GetQuartzEntity().ToArray());
         }
         /// <summary>
@@ -27,7 +28,7 @@ namespace StealthPostgreProvider
         /// <param name="backHandles">back handles</param>
         public static void AddPostgreBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
         {
-            services.AddTransient<IDBProvider, PostgreProvider>();
+            services.AddTransient<IQuartzProvider, PostgreQuartzProvider>();
             services.AddBackHandle(backHandles);
         }
     }

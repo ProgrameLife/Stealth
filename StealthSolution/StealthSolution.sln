@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{7B8F76B1-3
 		Stealth.png = Stealth.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SealthModel", "SealthModel\SealthModel.csproj", "{67964A30-0B21-44EA-ABE5-06AC68CC5117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthModel", "SealthModel\SealthModel.csproj", "{67964A30-0B21-44EA-ABE5-06AC68CC5117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SealthProvider", "SealthProvider\SealthProvider.csproj", "{2C59B88A-BE26-48D6-8540-44463E756879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C59B88A-BE26-48D6-8540-44463E756879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C59B88A-BE26-48D6-8540-44463E756879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

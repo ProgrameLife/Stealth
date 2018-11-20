@@ -1,16 +1,10 @@
 ﻿using SealthModel;
 using System.Collections.Generic;
 
-namespace StealthQuartz
-{
-    public interface IDBProvider
+namespace SealthProvider
+{ 
+    public interface IStatuProvider
     {
-        
-        /// <summary>
-        /// query QueartzEntity list
-        /// </summary>
-        /// <returns></returns>
-        List<QuartzEntity> GetQuartzEntity();
         /// <summary>
         /// get all stealths statu
         /// </summary>

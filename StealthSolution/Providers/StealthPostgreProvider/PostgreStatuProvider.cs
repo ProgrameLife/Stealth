@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
 using StealthQuartz;
@@ -10,8 +11,17 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider status setting
     /// </summary>
-     partial class PostgreProvider 
-    {        
+     public class PostgreProvider 
+    {
+        /// <summary>
+        /// postgresql connection string
+        /// </summary>
+        readonly string _connectionString;
+        public PostgreProvider(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnectionString");
+        }
+
         /// <summary>
         /// get all stealths statu
         /// </summary>

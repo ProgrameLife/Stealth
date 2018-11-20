@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
+using SealthProvider;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,14 +11,14 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider backhandle settings
     /// </summary>
-    public class SFTPPostgreProvider : PostgreProvider
+    public class PostgreSFTPProvider : ISFTPProvider
     {
         /// <summary>
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
 
-        public SFTPPostgreProvider(IConfiguration configuration) : base(configuration)
+        public PostgreSFTPProvider(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
