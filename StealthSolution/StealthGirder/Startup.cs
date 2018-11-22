@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using SealthProvider;
 using StealthGirder.Infrastructure;
 using StealthPostgreProvider;
 
@@ -29,6 +30,10 @@ namespace StealthGirder
             services.AddPostgreBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
             #endregion
 
+            #region stealth provider
+            services.AddTransient<IEmailProvider, PostgreEmailProvider>();
+            services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
+            #endregion
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -44,7 +49,7 @@ namespace StealthGirder
             //quartzEntities.Add(new QuartzEntity { Name = "BackHandle2", CronExpression = "40 33 8 * * ?" });
             //app.UserBackHandle(scheduler, quartzEntities.ToArray());
             #endregion
-            
+
             #region postgre mode
             app.UserPostgreBackHandle(scheduler);
             #endregion

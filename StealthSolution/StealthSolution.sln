@@ -26,7 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{7B8F76B1-3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthModel", "SealthModel\SealthModel.csproj", "{67964A30-0B21-44EA-ABE5-06AC68CC5117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SealthProvider", "SealthProvider\SealthProvider.csproj", "{2C59B88A-BE26-48D6-8540-44463E756879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "SealthProvider\SealthProvider.csproj", "{2C59B88A-BE26-48D6-8540-44463E756879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthEmailHandle", "BackHandles\StealthEmailHandle\StealthEmailHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{2C59B88A-BE26-48D6-8540-44463E756879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{DE4595C6-2422-4A4D-90D5-CC1AF3E810DE} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 		{427495C9-9734-40AD-A3F5-4A5D4680333D} = {2F85E218-017D-4874-8E0F-5C73980A5664}
 		{04D18985-91B0-41BE-ACDF-F7500516486F} = {2F85E218-017D-4874-8E0F-5C73980A5664}
+		{04125AE7-8F68-4C3D-A395-5F67DB11E025} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0056CDA-02E4-4761-818D-8C84AE6B12B0}

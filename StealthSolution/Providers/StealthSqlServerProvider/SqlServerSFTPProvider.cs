@@ -43,7 +43,7 @@ namespace StealthSqlServerProvider
         public List<SFTPSetting> GetSFTPSettings()
         {
             var sql = "select * from sftpettings where validate=true";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<SFTPSetting>(sql).ToList();
             }
@@ -58,7 +58,7 @@ namespace StealthSqlServerProvider
             var sql = @"INSERT INTO sftpettings
 		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
         (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, sFTPSetting) > 0;
             }
@@ -74,7 +74,7 @@ namespace StealthSqlServerProvider
 	SET  host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
 		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,validate = @validate	
 	WHERE id=@id";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, sFTPSetting) > 0;
             }
@@ -87,7 +87,7 @@ namespace StealthSqlServerProvider
         public bool RemoveSFTPSetting(int id)
         {
             var sql = @"DELETE FROM sftpettings	WHERE id=@id";
-            using (var con = new NpgsqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, new { id }) > 0;
             }
