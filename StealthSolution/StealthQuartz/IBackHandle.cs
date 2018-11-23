@@ -14,6 +14,6 @@ namespace StealthQuartz
         /// </summary>
         /// <param name="parmeters"></param>
         /// <returns></returns>
-        bool Handle(params object[] parmeters);
+        bool Handle(string content, Encoding encoding, params object[] parmeters);
     }
 }
