@@ -8,6 +8,7 @@ namespace StealthFTPBackHandle
     {
         public bool Handle(string content, Encoding encoding, params object[] parmeters)
         {
+
             throw new NotImplementedException();
         }
     }
