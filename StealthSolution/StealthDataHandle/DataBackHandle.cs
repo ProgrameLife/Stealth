@@ -3,9 +3,9 @@ using StealthQuartz;
 using System;
 using System.Text;
 
-namespace StealthFTPBackHandle
+namespace StealthDataHandle
 {
-    public class FTPBackHandle : IBackHandle
+    public class DataBackHandle : IBackHandle
     {
         public bool Handle()
         {
@@ -13,7 +13,6 @@ namespace StealthFTPBackHandle
         }
         public bool Handle(string content, Encoding encoding, params object[] parmeters)
         {
-
             throw new NotImplementedException();
         }
     }

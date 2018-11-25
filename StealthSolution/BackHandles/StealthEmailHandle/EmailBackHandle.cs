@@ -4,12 +4,13 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using SealthModel;
+using StealthBackHandle;
 using StealthQuartz;
 using System;
 using System.IO;
 using System.Text;
 
-namespace StealthEmailHandle
+namespace StealthEmailBackHandle
 {
     public class EmailBackHandle : IBackHandle
     {
@@ -18,7 +19,10 @@ namespace StealthEmailHandle
         {
             _logger = logger;
         }
-
+        public bool Handle()
+        {
+            throw new NotImplementedException();
+        }
         public bool Handle(string content,Encoding encoding, params object[] parmeters)
         {           
             var fileName = parmeters[0].ToString();

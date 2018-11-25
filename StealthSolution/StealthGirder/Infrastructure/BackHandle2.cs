@@ -1,4 +1,5 @@
-﻿using StealthQuartz;
+﻿using StealthBackHandle;
+using StealthQuartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace StealthGirder.Infrastructure
         public BackHandle2(string name)
         {
             Console.WriteLine($"BackHandle2：{name}");
+        }
+        public bool Handle()
+        {
+            throw new NotImplementedException();
         }
         public bool Handle(string content, Encoding encoding, params object[] parmeters)
         {

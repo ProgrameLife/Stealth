@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using SealthProvider;
+using StealthBackHandle;
 using StealthQuartz;
 
 namespace StealthPostgreProvider

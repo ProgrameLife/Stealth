@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>StealthEmailBackHandle</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\StealthBackHandle\StealthBackHandle.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 
