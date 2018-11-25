@@ -28,7 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthModel", "SealthModel\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "SealthProvider\SealthProvider.csproj", "{2C59B88A-BE26-48D6-8540-44463E756879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthEmailHandle", "BackHandles\StealthEmailHandle\StealthEmailHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthEmailHandle", "BackHandles\StealthEmailHandle\StealthEmailHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthUI", "StealthUI\StealthUI.csproj", "{58ADDF84-BE16-4F43-83EB-A5665E1973BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58ADDF84-BE16-4F43-83EB-A5665E1973BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58ADDF84-BE16-4F43-83EB-A5665E1973BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58ADDF84-BE16-4F43-83EB-A5665E1973BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58ADDF84-BE16-4F43-83EB-A5665E1973BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
