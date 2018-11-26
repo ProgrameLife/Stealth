@@ -30,11 +30,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "SealthPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthEmailBackHandle", "BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthUI", "StealthUI\StealthUI.csproj", "{58ADDF84-BE16-4F43-83EB-A5665E1973BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthUI", "StealthUI\StealthUI.csproj", "{58ADDF84-BE16-4F43-83EB-A5665E1973BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthDataBackHandle", "StealthDataHandle\StealthDataBackHandle.csproj", "{8D580293-3E02-4D52-8DEB-8425E8372573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthDataBackHandle", "StealthDataHandle\StealthDataBackHandle.csproj", "{8D580293-3E02-4D52-8DEB-8425E8372573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthBackHandle", "StealthBackHandle\StealthBackHandle.csproj", "{B6E1AD55-EA54-4B41-B973-65FA975EF7B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthBackHandle", "StealthBackHandle\StealthBackHandle.csproj", "{B6E1AD55-EA54-4B41-B973-65FA975EF7B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

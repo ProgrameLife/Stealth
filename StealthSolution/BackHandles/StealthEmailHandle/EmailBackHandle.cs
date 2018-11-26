@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using MimeKit;
 using SealthModel;
 using StealthBackHandle;
-using StealthQuartz;
 using System;
 using System.IO;
 using System.Text;
@@ -31,11 +30,11 @@ namespace StealthEmailBackHandle
         /// <param name="encoding"></param>
         /// <param name="emailSetting"></param>
         /// <returns></returns>
-        bool Handle(string fileName,string content,Encoding encoding, EmailSetting emailSetting)
-        { 
+        bool SendEmail(string content, Encoding encoding, EmailSetting emailSetting)
+        {
             try
             {
-                _logger.LogInformation($"email");            
+                _logger.LogInformation($"email");
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(emailSetting.UserName, emailSetting.FromAddresses));
@@ -46,18 +45,18 @@ namespace StealthEmailBackHandle
                 }
                 message.Subject = emailSetting.Subject;
                 var builder = new BodyBuilder();
-                builder.TextBody = emailSetting.Body;               
+                builder.TextBody = emailSetting.Body;
                 var inStream = new MemoryStream(encoding.GetBytes(content));
                 var outStream = new MemoryStream();
 
                 if (emailSetting.IsCompress)
                 {
-                    outStream = CreateToMemoryStream(inStream, fileName + ".csv", emailSetting.CompressPassword);
-                    builder.Attachments.Add($"{fileName}.zip", outStream);
+                    outStream = CreateToMemoryStream(inStream, emailSetting.CompressFile, emailSetting.CompressPassword);
+                    builder.Attachments.Add($"{Path.GetFileNameWithoutExtension(emailSetting.CompressFile)}.zip", outStream);
                 }
                 else
                 {
-                    builder.Attachments.Add($"{fileName}.csv", inStream);
+                    builder.Attachments.Add($"{emailSetting.AttachmentName}", inStream);
                 }
                 message.Body = builder.ToMessageBody();
                 using (var client = new SmtpClient())
@@ -72,15 +71,15 @@ namespace StealthEmailBackHandle
                 inStream.Close();
                 outStream.Close();
 
-                _logger.LogInformation($"email send fileName:{fileName} success");
+                _logger.LogInformation($"email send  success");
                 return true;
             }
             catch (Exception exc)
             {
-                _logger.LogCritical(exc, $"email send fileName:{fileName} failure");
+                _logger.LogCritical(exc, $"email send failure");
                 return false;
             }
-           
+
             MemoryStream CreateToMemoryStream(MemoryStream memStreamIn, string zipEntryName, string compresspassword)
             {
                 var outputMemStream = new MemoryStream();
