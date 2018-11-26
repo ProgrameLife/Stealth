@@ -7,7 +7,7 @@ namespace StealthDataHandle
 {
     public class DataBackHandle : IBackHandle
     {
-        public bool Handle()
+        public bool Handle(string keyName)
         {
             throw new NotImplementedException();
         }

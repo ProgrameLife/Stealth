@@ -19,17 +19,23 @@ namespace StealthEmailBackHandle
         {
             _logger = logger;
         }
-        public bool Handle()
+        public bool Handle(string keyName)
         {
             throw new NotImplementedException();
         }
-        public bool Handle(string content,Encoding encoding, params object[] parmeters)
-        {           
-            var fileName = parmeters[0].ToString();
+        /// <summary>
+        /// send email
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="content"></param>
+        /// <param name="encoding"></param>
+        /// <param name="emailSetting"></param>
+        /// <returns></returns>
+        bool Handle(string fileName,string content,Encoding encoding, EmailSetting emailSetting)
+        { 
             try
             {
-                _logger.LogInformation($"email");
-                var emailSetting = parmeters[0] as EmailSetting;
+                _logger.LogInformation($"email");            
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(emailSetting.UserName, emailSetting.FromAddresses));

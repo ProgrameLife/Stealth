@@ -6,9 +6,9 @@
     public class QuartzEntity
     {
         /// <summary>
-        /// Corn Name
+        /// Key Name
         /// </summary>
-        public string Name
+        public string KeyName
         { get; set; }
         /// <summary>
         /// Type Name

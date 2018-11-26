@@ -7,7 +7,7 @@ namespace StealthSFTPBackHandle
 {
     public class SFTPBackHandle : IBackHandle
     {
-        public bool Handle()
+        public bool Handle(string keyName)
         {
             throw new NotImplementedException();
         }

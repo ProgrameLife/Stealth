@@ -7,7 +7,7 @@ namespace StealthFTPBackHandle
 {
     public class FTPBackHandle : IBackHandle
     {
-        public bool Handle()
+        public bool Handle(string keyName)
         {
             throw new NotImplementedException();
         }

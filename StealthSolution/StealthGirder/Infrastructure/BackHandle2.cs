@@ -13,12 +13,8 @@ namespace StealthGirder.Infrastructure
         public BackHandle2(string name)
         {
             Console.WriteLine($"BackHandle2：{name}");
-        }
-        public bool Handle()
-        {
-            throw new NotImplementedException();
-        }
-        public bool Handle(string content, Encoding encoding, params object[] parmeters)
+        }        
+        public bool Handle(string keyName)
         {
             Console.WriteLine("BackHandle2");
             return true;

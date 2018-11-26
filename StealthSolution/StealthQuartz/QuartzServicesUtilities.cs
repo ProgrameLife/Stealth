@@ -1,9 +1,6 @@
 ﻿
 using Quartz;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StealthQuartz
 {
@@ -12,13 +9,14 @@ namespace StealthQuartz
     /// </summary>
     public static class QuartzServicesUtilities
     {
-        public async static void StartJob<TJob>(IScheduler scheduler, string cronExpression, string handleName)
+        public async static void StartJob<TJob>(IScheduler scheduler, string cronExpression, string typeName, string keyName)
             where TJob : IJob
         {
             var jobName = Guid.NewGuid().ToString();
             var job = JobBuilder.Create<TJob>()
                 .UsingJobData("cronexpression", cronExpression)
-                .UsingJobData("handlename", handleName)
+                .UsingJobData("typename", typeName)
+                .UsingJobData("keyname", keyName)
                 .WithIdentity(jobName)
                 .Build();
             var trigger = TriggerBuilder.Create()

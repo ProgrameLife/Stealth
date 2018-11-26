@@ -35,7 +35,7 @@ namespace StealthQuartz
         {
             try
             {
-                var result = _serviceAccessore(context.JobDetail.JobDataMap.GetString("handlename")).Handle();
+                var result = _serviceAccessore(context.JobDetail.JobDataMap.GetString("typename")).Handle(context.JobDetail.JobDataMap.GetString("keyname"));
                 _logger.LogInformation($"IBackHandle.Handle call return {result}");
             }
             catch (Exception exc)

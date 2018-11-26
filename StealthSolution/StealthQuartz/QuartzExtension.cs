@@ -75,7 +75,7 @@ namespace StealthQuartz
         {           
             foreach (var quartzEntitie in quartzEntities)
             {
-                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.TypeName);
+                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.TypeName,quartzEntitie.KeyName);
             }
         }
     }
