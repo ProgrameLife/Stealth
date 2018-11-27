@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BackHandles\StealthBackHandle\StealthBackHandle.csproj" />
     <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
 
