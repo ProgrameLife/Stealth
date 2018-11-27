@@ -5,22 +5,41 @@ using Microsoft.Extensions.Logging;
 using MimeKit;
 using SealthModel;
 using StealthBackHandle;
+using StealthBuildData;
 using System;
 using System.IO;
 using System.Text;
 
 namespace StealthEmailBackHandle
 {
+    /// <summary>
+    /// handle email
+    /// </summary>
     public class EmailBackHandle : IBackHandle
     {
+        /// <summary>
+        /// logger
+        /// </summary>
         readonly ILogger<EmailBackHandle> _logger;
-        public EmailBackHandle(ILogger<EmailBackHandle> logger)
+        /// <summary>
+        /// data builder
+        /// </summary>
+        readonly IBuildData _buildData;
+
+        public EmailBackHandle(ILogger<EmailBackHandle> logger, IBuildData buildData)
         {
+            _buildData = buildData;
             _logger = logger;
         }
+        /// <summary>
+        /// email handle method
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
         public bool Handle(string keyName)
         {
-            throw new NotImplementedException();
+            var content = _buildData.BuildData<string>(keyName);
+            return SendEmail(content, Encoding.UTF8, null);
         }
         /// <summary>
         /// send email

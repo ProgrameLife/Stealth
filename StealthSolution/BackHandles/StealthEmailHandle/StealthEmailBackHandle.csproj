@@ -11,8 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\StealthBackHandle\StealthBackHandle.csproj" />
+    <ProjectReference Include="..\..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
+    <ProjectReference Include="..\StealthBackHandle\StealthBackHandle.csproj" />
   </ItemGroup>
 
 </Project>
