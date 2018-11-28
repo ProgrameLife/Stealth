@@ -15,8 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BackHandles\StealthSFTPBackHandle\StealthSFTPBackHandle.csproj" />
     <ProjectReference Include="..\..\SealthModel\SealthModel.csproj" />
-    <ProjectReference Include="..\..\SealthProvider\SealthProvider.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
+    <ProjectReference Include="..\SealthProvider\SealthProvider.csproj" />
   </ItemGroup>
 
 </Project>

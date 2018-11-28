@@ -26,8 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{7B8F76B1-3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthModel", "SealthModel\SealthModel.csproj", "{67964A30-0B21-44EA-ABE5-06AC68CC5117}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "SealthProvider\SealthProvider.csproj", "{2C59B88A-BE26-48D6-8540-44463E756879}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthEmailBackHandle", "BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthUI", "StealthUI\StealthUI.csproj", "{58ADDF84-BE16-4F43-83EB-A5665E1973BF}"
@@ -38,7 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildData", "BuildData", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthBackHandle", "BackHandles\StealthBackHandle\StealthBackHandle.csproj", "{ADB79F33-A8FF-452D-9F1A-D0AA5F3BCD7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthBuildData", "BuildData\StealthBuildData\StealthBuildData.csproj", "{D7071D48-B941-498A-AFFA-EEBF2718426C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthBuildData", "BuildData\StealthBuildData\StealthBuildData.csproj", "{D7071D48-B941-498A-AFFA-EEBF2718426C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "Providers\SealthProvider\SealthProvider.csproj", "{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,10 +74,6 @@ Global
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67964A30-0B21-44EA-ABE5-06AC68CC5117}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C59B88A-BE26-48D6-8540-44463E756879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C59B88A-BE26-48D6-8540-44463E756879}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C59B88A-BE26-48D6-8540-44463E756879}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04125AE7-8F68-4C3D-A395-5F67DB11E025}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,6 +94,10 @@ Global
 		{D7071D48-B941-498A-AFFA-EEBF2718426C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7071D48-B941-498A-AFFA-EEBF2718426C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7071D48-B941-498A-AFFA-EEBF2718426C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +111,7 @@ Global
 		{8D580293-3E02-4D52-8DEB-8425E8372573} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 		{ADB79F33-A8FF-452D-9F1A-D0AA5F3BCD7E} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 		{D7071D48-B941-498A-AFFA-EEBF2718426C} = {F2327D4C-A37C-4300-8BB1-323B01BFAFAE}
+		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B} = {2F85E218-017D-4874-8E0F-5C73980A5664}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0056CDA-02E4-4761-818D-8C84AE6B12B0}

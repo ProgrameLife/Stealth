@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ftp.dll" Version="2.0.18141.1053" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 

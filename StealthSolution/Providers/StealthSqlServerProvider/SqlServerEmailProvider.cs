@@ -35,7 +35,19 @@ namespace StealthSqlServerProvider
                 return con.Query<EmailSetting>(sql).ToList();
             }
         }
-
+        /// <summary>
+        /// get a emailsetting by keyname
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
+        public EmailSetting GetEmailSetting(string keyName)
+        {
+            var sql = "select * from emailsettings where keyname=@keyname";
+            using (var con = new SqlConnection(_connectionString))
+            {
+                return con.Query<EmailSetting>(sql, new { keyname = keyName }).FirstOrDefault();
+            }
+        }
         /// <summary>
         /// get all emailSetting
         /// </summary>

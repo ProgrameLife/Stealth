@@ -4,6 +4,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using SealthModel;
+using SealthProvider;
 using StealthBackHandle;
 using StealthBuildData;
 using System;
@@ -26,10 +27,13 @@ namespace StealthEmailBackHandle
         /// </summary>
         readonly IBuildData _buildData;
 
-        public EmailBackHandle(ILogger<EmailBackHandle> logger, IBuildData buildData)
+        readonly IEmailProvider _emailProvider;
+
+        public EmailBackHandle(ILogger<EmailBackHandle> logger, IBuildData buildData, IEmailProvider emailProvider)
         {
             _buildData = buildData;
             _logger = logger;
+            _emailProvider = emailProvider;
         }
         /// <summary>
         /// email handle method
@@ -39,7 +43,8 @@ namespace StealthEmailBackHandle
         public bool Handle(string keyName)
         {
             var content = _buildData.BuildData<string>(keyName);
-            return SendEmail(content, Encoding.UTF8, null);
+            var emailsetting = _emailProvider.GetEmailSetting(keyName);
+            return SendEmail(content, Encoding.UTF8, emailsetting);
         }
         /// <summary>
         /// send email
@@ -53,8 +58,7 @@ namespace StealthEmailBackHandle
         {
             try
             {
-                _logger.LogInformation($"email");
-
+                _logger.LogInformation($"send email begin");
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(emailSetting.UserName, emailSetting.FromAddresses));
                 var toaddresses = emailSetting.ToAddresses?.Split(',');
@@ -64,18 +68,25 @@ namespace StealthEmailBackHandle
                 }
                 message.Subject = emailSetting.Subject;
                 var builder = new BodyBuilder();
+
                 builder.TextBody = emailSetting.Body;
                 var inStream = new MemoryStream(encoding.GetBytes(content));
                 var outStream = new MemoryStream();
-
-                if (emailSetting.IsCompress)
+                if (emailSetting.IsAttachment)
                 {
-                    outStream = CreateToMemoryStream(inStream, emailSetting.CompressFile, emailSetting.CompressPassword);
-                    builder.Attachments.Add($"{Path.GetFileNameWithoutExtension(emailSetting.CompressFile)}.zip", outStream);
+                    if (emailSetting.IsCompress)
+                    {
+                        outStream = CreateToMemoryStream(inStream, emailSetting.CompressFile, emailSetting.CompressPassword);
+                        builder.Attachments.Add($"{Path.GetFileNameWithoutExtension(emailSetting.CompressFile)}.zip", outStream);
+                    }
+                    else
+                    {
+                        builder.Attachments.Add($"{emailSetting.AttachmentName}", inStream);
+                    }
                 }
                 else
                 {
-                    builder.Attachments.Add($"{emailSetting.AttachmentName}", inStream);
+                    builder.TextBody += content;
                 }
                 message.Body = builder.ToMessageBody();
                 using (var client = new SmtpClient())
@@ -90,7 +101,7 @@ namespace StealthEmailBackHandle
                 inStream.Close();
                 outStream.Close();
 
-                _logger.LogInformation($"email send  success");
+                _logger.LogInformation($"send email  success");
                 return true;
             }
             catch (Exception exc)

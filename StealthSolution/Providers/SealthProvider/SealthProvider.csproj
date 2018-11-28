@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
+    <ProjectReference Include="..\..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
 
 </Project>

@@ -35,6 +35,19 @@ namespace StealthPostgreProvider
                 return con.Query<EmailSetting>(sql).ToList();
             }
         }
+        /// <summary>
+        /// get a emailsetting by keyname
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
+        public EmailSetting GetEmailSetting(string keyName)
+        {
+            var sql = "select * from emailsettings where keyname=@keyname";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Query<EmailSetting>(sql, new { keyname = keyName }).FirstOrDefault();
+            }
+        }
 
         /// <summary>
         /// get all emailSetting
@@ -68,7 +81,7 @@ namespace StealthPostgreProvider
         /// </summary>
         /// <param name="emailSetting">emailSetting</param>
         /// <returns></returns>
-        public bool ModifyEmailSetting(EmailSetting  emailSetting)
+        public bool ModifyEmailSetting(EmailSetting emailSetting)
         {
             var sql = @"UPDATE public.emailsettings
 	SET  host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,

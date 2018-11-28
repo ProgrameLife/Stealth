@@ -16,6 +16,14 @@ namespace SealthProvider
         /// </summary>
         /// <returns></returns>
         List<EmailSetting> GetEmailSettings();
+
+        /// <summary>
+        /// get a emailsetting by keyname
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        EmailSetting GetEmailSetting(string keyName);
+
         /// <summary>
         /// add emailsetting
         /// </summary>

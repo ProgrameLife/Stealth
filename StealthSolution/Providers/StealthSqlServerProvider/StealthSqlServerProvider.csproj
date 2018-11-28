@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SealthProvider\SealthProvider.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
+    <ProjectReference Include="..\SealthProvider\SealthProvider.csproj" />
   </ItemGroup>
 
 </Project>
