@@ -21,6 +21,8 @@ namespace SealthModel
 
         public string TransferFilePrefix { get; set; }
 
+        public string FileName { get; set; }
+
         public bool Validate { get; set; }
         public DateTime CreateOn { get; set; }
     }

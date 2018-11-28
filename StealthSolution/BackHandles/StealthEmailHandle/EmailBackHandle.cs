@@ -26,7 +26,9 @@ namespace StealthEmailBackHandle
         /// data builder
         /// </summary>
         readonly IBuildData _buildData;
-
+        /// <summary>
+        /// email provider
+        /// </summary>
         readonly IEmailProvider _emailProvider;
 
         public EmailBackHandle(ILogger<EmailBackHandle> logger, IBuildData buildData, IEmailProvider emailProvider)

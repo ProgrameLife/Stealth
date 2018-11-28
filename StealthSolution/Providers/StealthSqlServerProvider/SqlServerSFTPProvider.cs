@@ -49,6 +49,19 @@ namespace StealthSqlServerProvider
             }
         }
         /// <summary>
+        /// get a sftpsetting
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
+        public SFTPSetting GetSFTPSetting(string keyName)
+        {
+            var sql = "select * from sftpettings where validate=true and keyname=@keyname";
+            using (var con = new SqlConnection(_connectionString))
+            {
+                return con.Query<SFTPSetting>(sql, new { keyname = keyName }).FirstOrDefault();
+            }
+        }
+        /// <summary>
         /// add sftpsetting
         /// </summary>
         /// <param name="sFTPSetting">sftpsetting</param>

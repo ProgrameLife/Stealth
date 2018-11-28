@@ -42,7 +42,7 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public EmailSetting GetEmailSetting(string keyName)
         {
-            var sql = "select * from emailsettings where keyname=@keyname";
+            var sql = "select * from emailsettings where keyname=@keyname and  validate=true";
             using (var con = new NpgsqlConnection(_connectionString))
             {
                 return con.Query<EmailSetting>(sql, new { keyname = keyName }).FirstOrDefault();

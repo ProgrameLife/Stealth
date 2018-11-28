@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SSH.NET" Version="2016.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildData\StealthBuildData\StealthBuildData.csproj" />
+    <ProjectReference Include="..\..\Providers\SealthProvider\SealthProvider.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 

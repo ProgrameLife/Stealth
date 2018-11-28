@@ -1,6 +1,7 @@
 ﻿using Limilabs.FTP.Client;
 using Microsoft.Extensions.Logging;
 using SealthModel;
+using SealthProvider;
 using StealthBackHandle;
 using StealthBuildData;
 using System;
@@ -19,17 +20,21 @@ namespace StealthFTPBackHandle
         /// </summary>
         readonly IBuildData _buildData;
 
-
-
-        public FTPBackHandle(ILogger<FTPBackHandle> logger, IBuildData buildData)
+        /// <summary>
+        /// ftp provider
+        /// </summary>
+        readonly ISFTPProvider _sftpProvider;
+        public FTPBackHandle(ILogger<FTPBackHandle> logger, IBuildData buildData, ISFTPProvider sftpProvider)
         {
             _buildData = buildData;
             _logger = logger;
+            _sftpProvider = sftpProvider;
         }
         public bool Handle(string keyName)
         {
             var content = _buildData.BuildData<string>(keyName);
-            return FTPTransfer(content, null);
+            var ftpsetting = _sftpProvider.GetSFTPSetting(keyName);
+            return FTPTransfer(content, ftpsetting);
         }
 
         bool FTPTransfer(string content, SFTPSetting sftpSetting)
@@ -43,7 +48,7 @@ namespace StealthFTPBackHandle
                     ftp.Login(sftpSetting.UserName, sftpSetting.Password);
                     ftp.Mode = FtpMode.Active;
                     ftp.ChangeFolder(sftpSetting.TransferDirectory);
-                    var response = ftp.Upload($"{sftpSetting.TransferFilePrefix}", 0, Encoding.UTF8.GetBytes(content));
+                    var response = ftp.Upload($"{sftpSetting.TransferFilePrefix}{sftpSetting.FileName}", 0, Encoding.UTF8.GetBytes(content));
                     if (response.Code.HasValue && (response.Code.Value == 226 || response.Code.Value == 200))
                     {
 

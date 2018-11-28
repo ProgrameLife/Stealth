@@ -16,6 +16,12 @@ namespace SealthProvider
         /// <returns></returns>
         List<SFTPSetting> GetSFTPSettings();
         /// <summary>
+        /// get sftpsetting
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
+        SFTPSetting GetSFTPSetting(string keyName);
+        /// <summary>
         /// add sftpsetting
         /// </summary>
         /// <param name="sftpSetting">sftpsetting</param>
