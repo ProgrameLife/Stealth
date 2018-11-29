@@ -9,6 +9,9 @@ using System.Text;
 
 namespace StealthFTPBackHandle
 {
+    /// <summary>
+    /// ftp back handle
+    /// </summary>
     public class FTPBackHandle : IBackHandle
     {
         /// <summary>
@@ -24,19 +27,36 @@ namespace StealthFTPBackHandle
         /// ftp provider
         /// </summary>
         readonly ISFTPProvider _sftpProvider;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="logger">dependency injection logger</param>
+        /// <param name="buildData">dependency injection builddate</param>
+        /// <param name="sftpProvider">dependency injection  sftp provider</param>
         public FTPBackHandle(ILogger<FTPBackHandle> logger, IBuildData buildData, ISFTPProvider sftpProvider)
         {
             _buildData = buildData;
             _logger = logger;
             _sftpProvider = sftpProvider;
         }
+        /// <summary>
+        /// handle ftp
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
         public bool Handle(string keyName)
         {
             var content = _buildData.BuildData<string>(keyName);
             var ftpsetting = _sftpProvider.GetSFTPSetting(keyName);
             return FTPTransfer(content, ftpsetting);
         }
-
+        /// <summary>
+        /// ftp transfer
+        /// </summary>
+        /// <param name="content">ftp content</param>
+        /// <param name="sftpSetting">ftp setting</param>
+        /// <returns></returns>
         bool FTPTransfer(string content, SFTPSetting sftpSetting)
         {
             try

@@ -12,6 +12,9 @@ using System.Text;
 
 namespace StealthSFTPBackHandle
 {
+    /// <summary>
+    /// sftp back handle
+    /// </summary>
     public class SFTPBackHandle : IBackHandle
     {
         /// <summary>
@@ -27,12 +30,23 @@ namespace StealthSFTPBackHandle
         /// ftp provider
         /// </summary>
         readonly ISFTPProvider _sftpProvider;
+        /// <summary>
+        /// sftp ctor
+        /// </summary>
+        /// <param name="logger">dependency injection  logger</param>
+        /// <param name="buildData">dependency injection builddate </param>
+        /// <param name="sftpProvider">dependency injection sftp provider</param>
         public SFTPBackHandle(ILogger<SFTPBackHandle> logger, IBuildData buildData, ISFTPProvider sftpProvider)
         {
             _buildData = buildData;
             _logger = logger;
             _sftpProvider = sftpProvider;
         }
+        /// <summary>
+        /// handle sftp
+        /// </summary>
+        /// <param name="keyName">key name</param>
+        /// <returns></returns>
         public bool Handle(string keyName)
         {
             var content = _buildData.BuildData<string>(keyName);
@@ -40,7 +54,12 @@ namespace StealthSFTPBackHandle
             return SFTPTransfer(content, ftpsetting);
         }
 
-
+        /// <summary>
+        /// sftp transfer
+        /// </summary>
+        /// <param name="content">sftp content</param>
+        /// <param name="sftpSetting">sftpsetting</param>
+        /// <returns></returns>
         bool SFTPTransfer(string content, SFTPSetting sftpSetting)
         {
             _logger.LogInformation("sftp begin");

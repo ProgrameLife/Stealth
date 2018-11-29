@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>
 

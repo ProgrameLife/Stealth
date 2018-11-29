@@ -14,7 +14,7 @@ using System.Text;
 namespace StealthEmailBackHandle
 {
     /// <summary>
-    /// handle email
+    /// email back handle
     /// </summary>
     public class EmailBackHandle : IBackHandle
     {
@@ -31,6 +31,12 @@ namespace StealthEmailBackHandle
         /// </summary>
         readonly IEmailProvider _emailProvider;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="logger">dependency injection logger</param>
+        /// <param name="buildData">dependency injection  builddate</param>
+        /// <param name="emailProvider">dependency injection  email provider</param>
         public EmailBackHandle(ILogger<EmailBackHandle> logger, IBuildData buildData, IEmailProvider emailProvider)
         {
             _buildData = buildData;
@@ -40,7 +46,7 @@ namespace StealthEmailBackHandle
         /// <summary>
         /// email handle method
         /// </summary>
-        /// <param name="keyName"></param>
+        /// <param name="keyName">key name</param>
         /// <returns></returns>
         public bool Handle(string keyName)
         {
@@ -50,11 +56,9 @@ namespace StealthEmailBackHandle
         }
         /// <summary>
         /// send email
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="content"></param>
-        /// <param name="encoding"></param>
-        /// <param name="emailSetting"></param>
+        /// </summary> 
+        /// <param name="content">email content</param>
+        /// <param name="emailSetting">email setting</param>
         /// <returns></returns>
         bool SendEmail(string content, EmailSetting emailSetting)
         {
@@ -117,7 +121,8 @@ namespace StealthEmailBackHandle
             {
                 var outputMemStream = new MemoryStream();
                 var zipStream = new ZipOutputStream(outputMemStream);
-                zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
+                //0-9, 9 being the highest level of compression
+                zipStream.SetLevel(3); 
                 if (!string.IsNullOrEmpty(compresspassword?.Trim()))
                 {
                     zipStream.Password = compresspassword;
@@ -128,9 +133,10 @@ namespace StealthEmailBackHandle
                 var length = memStreamIn.Length < 1024 ? 1024 : memStreamIn.Length;
                 StreamUtils.Copy(memStreamIn, zipStream, new byte[length]);
                 zipStream.CloseEntry();
-
-                zipStream.IsStreamOwner = false;    // False stops the Close also Closing the underlying stream.
-                zipStream.Close();          // Must finish the ZipOutputStream before using outputMemStream.
+                //False stops the Close also Closing the underlying stream.
+                zipStream.IsStreamOwner = false;
+                //Must finish the ZipOutputStream before using outputMemStream.
+                zipStream.Close();          
 
                 outputMemStream.Position = 0;
                 return outputMemStream;
