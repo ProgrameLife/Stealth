@@ -11,150 +11,83 @@ CREATE DATABASE stealthdb
 
 
 
--- Table: public.stealthstatus
--- DROP TABLE public.stealthstatus;   
+CREATE TABLE "public"."quartzsettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(512), 
+	"typename" varchar(128), 
+	"cronexpression" varchar(32), 
+	"validate" boolean, 
+	"createon" timestamp(6)
+);
 
-CREATE TABLE public.quartzsettings
-(
-    id serial,
-    keyname character varying(512) COLLATE pg_catalog."default",
-    typename character varying(128) COLLATE pg_catalog."default",
-    cronexpression character varying(32) COLLATE pg_catalog."default",
-    validate boolean,
-    createon timestamp without time zone,
-    CONSTRAINT quartzsettings_pkey PRIMARY KEY (id),
-    CONSTRAINT keyname UNIQUE (keyname)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.quartzsettings
-    OWNER to postgres;
+CREATE UNIQUE INDEX "keyname"
+	ON "public"."quartzsettings"
+	USING btree (keyname);
 
 
 
--- Table: public.datasettings
--- DROP TABLE public.datasettings;
-CREATE TABLE public.datasettings
-(
-    id serial,
-    keyname character varying(128) COLLATE pg_catalog."default",
-    connectionstring text COLLATE pg_catalog."default",
-    groupno character varying(64) COLLATE pg_catalog."default",
-    validate boolean,
-    createon timestamp without time zone,
-    CONSTRAINT datasettings_pkey PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
+CREATE TABLE "public"."datasettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(128), 
+	"connectionstring" text, 
+	"groupno" varchar(64), 
+	"validate" boolean, 
+	"createon" timestamp(6)
+);
 
-ALTER TABLE public.datasettings
-    OWNER to postgres;
-
-
-
--- Table: public.datasqls
--- DROP TABLE public.datasqls;
-CREATE TABLE public.datasqls
-(
-    id serial,
-    datasettingid integer,
-    sql text COLLATE pg_catalog."default",
-    transactionno character varying(64) COLLATE pg_catalog."default",
-    groupno character varying(64) COLLATE pg_catalog."default",
-    validate boolean,
-    createon timestamp without time zone,
-    CONSTRAINT datasqls_pkey PRIMARY KEY (id),
-    CONSTRAINT datasettingid_fk FOREIGN KEY (id)
-        REFERENCES public.datasettings (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.datasqls
-    OWNER to postgres;
+CREATE TABLE "public"."datasqls" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(512), 
+	"datasettingid" integer, 
+	"sql" text, 
+	"transactionno" varchar(64), 
+	"groupno" varchar(64), 
+	"validate" boolean, 
+	"createon" timestamp(6), 
+	FOREIGN KEY ("id")
+		REFERENCES "public"."datasettings" ("id")
+		ON UPDATE NO ACTION ON DELETE NO ACTION
+);
 
 
-
--- Table: public.quartzsettings
--- DROP TABLE public.quartzsettings;
-CREATE TABLE public.quartzsettings
-(
-    id serial,
-    name character varying(512) COLLATE pg_catalog."default",
-    typename character varying(128) COLLATE pg_catalog."default",
-    cronexpression character varying(32) COLLATE pg_catalog."default",
-    validate boolean,
-    createon timestamp without time zone,
-    CONSTRAINT quartzsettings_pkey PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.quartzsettings
-    OWNER to postgres;
-
+CREATE TABLE "public"."emailsettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(512), 
+	"host" varchar(256), 
+	"port" integer, 
+	"fromaddress" varchar(256), 
+	"username" varchar(256), 
+	"password" varchar(256), 
+	"subject" varchar(128), 
+	"body" text, 
+	"toaddresses" text, 
+	"iscompress" boolean, 
+	"compressfile" varchar(254), 
+	"compresspassword" varchar(254), 
+	"isattachment" boolean, 
+	"attachmentname" varchar(512), 
+	"validate" boolean, 
+	"createon" timestamp(6) DEFAULT now()
+);
 
 
--- Table: public.sftpettings
--- DROP TABLE public.sftpettings;
-CREATE TABLE public.sftpettings
-(
-    id serial,
-    host character varying(128) COLLATE pg_catalog."default",
-    port integer,
-    username character varying(128) COLLATE pg_catalog."default",
-    password character varying(128) COLLATE pg_catalog."default",
-    certificatepath character varying(256) COLLATE pg_catalog."default",
-    transferdirectory character varying(256) COLLATE pg_catalog."default",
-    transferfileprefix character varying(256) COLLATE pg_catalog."default",
-    validate boolean,
-    createon timestamp without time zone,
-    CONSTRAINT sftpettings_pkey PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
+CREATE TABLE "public"."sftpettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(512), 
+	"host" varchar(128), 
+	"port" integer, 
+	"username" varchar(128), 
+	"password" varchar(128), 
+	"certificatepath" varchar(256), 
+	"transferdirectory" varchar(256), 
+	"transferfileprefix" varchar(256), 
+	"filename" varchar(512), 
+	"createon" timestamp(6), 
+	"validate" boolean
+);
 
-ALTER TABLE public.sftpettings
-    OWNER to postgres;
-
-
-
--- Table: public.settingemails
--- DROP TABLE public.settingemails;
-CREATE TABLE public.emailsettings
-(
-    id integer NOT NULL DEFAULT nextval('settingemails_id_seq1'::regclass),
-    host character varying(256) COLLATE pg_catalog."default",
-    port integer,
-    fromaddress character varying(256) COLLATE pg_catalog."default",
-    username character varying(256) COLLATE pg_catalog."default",
-    password character varying(256) COLLATE pg_catalog."default",
-    subject character varying(128) COLLATE pg_catalog."default",
-    body text COLLATE pg_catalog."default",
-    toaddresses text COLLATE pg_catalog."default",
-    iscompress boolean,
-    validate boolean,
-    compresspassword character varying(254) COLLATE pg_catalog."default",
-    transferid integer,
-    CONSTRAINT emailsettings_pkey1 PRIMARY KEY (id)  
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.emailsettings
-    OWNER to postgres;
+CREATE TABLE "public"."stealthstatus" (
+	"keyname" varchar(128) NOT NULL PRIMARY KEY, 
+	"status" integer, 
+	"modifytime" time(6)
+);
