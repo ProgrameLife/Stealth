@@ -23,6 +23,8 @@ namespace SealthModel
 
         public string FileName { get; set; }
 
+        public string FileEncoding { get; set; }
+
         public bool Validate { get; set; }
         public DateTime CreateOn { get; set; }
     }

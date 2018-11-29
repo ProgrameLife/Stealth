@@ -37,15 +37,13 @@ namespace StealthSFTPBackHandle
         {
             var content = _buildData.BuildData<string>(keyName);
             var ftpsetting = _sftpProvider.GetSFTPSetting(keyName);
-            return SFTPTransfer(content, Encoding.UTF8, ftpsetting);
+            return SFTPTransfer(content, ftpsetting);
         }
 
 
-        bool SFTPTransfer(string content, Encoding encoding, SFTPSetting sftpSetting)
+        bool SFTPTransfer(string content, SFTPSetting sftpSetting)
         {
             _logger.LogInformation("sftp begin");
-
-
             var authMethods = new List<AuthenticationMethod>();
             if (!string.IsNullOrEmpty(sftpSetting.Password?.Trim()))
             {
@@ -60,12 +58,11 @@ namespace StealthSFTPBackHandle
             var connectionInfo = new ConnectionInfo(sftpSetting.Host, sftpSetting.Port,
                                         sftpSetting.UserName,
                                         authMethods.ToArray()
-                                        );
-            //todo 这里没有作长连接，因为用户量较小，用户量较大时，可以设置长连接
+                                        );           
             using (var client = new SftpClient(connectionInfo))
             {
                 client.Connect();
-                //创建用户保存文件夹,并且进入文件夹下
+                //create directory and enter this directory
                 var dirArr = sftpSetting.TransferDirectory.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
                 var mark = true;
                 foreach (var dir in dirArr)
@@ -80,6 +77,7 @@ namespace StealthSFTPBackHandle
                     }
                     client.ChangeDirectory(dir);
                 }
+                var encoding = Encoding.GetEncoding(sftpSetting.FileEncoding);
                 var attachmentArry = encoding.GetBytes(content);
                 var stream = new MemoryStream(attachmentArry);
                 try

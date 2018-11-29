@@ -46,7 +46,7 @@ namespace StealthEmailBackHandle
         {
             var content = _buildData.BuildData<string>(keyName);
             var emailsetting = _emailProvider.GetEmailSetting(keyName);
-            return SendEmail(content, Encoding.UTF8, emailsetting);
+            return SendEmail(content,emailsetting);
         }
         /// <summary>
         /// send email
@@ -56,7 +56,7 @@ namespace StealthEmailBackHandle
         /// <param name="encoding"></param>
         /// <param name="emailSetting"></param>
         /// <returns></returns>
-        bool SendEmail(string content, Encoding encoding, EmailSetting emailSetting)
+        bool SendEmail(string content, EmailSetting emailSetting)
         {
             try
             {
@@ -72,6 +72,7 @@ namespace StealthEmailBackHandle
                 var builder = new BodyBuilder();
 
                 builder.TextBody = emailSetting.Body;
+                var encoding = Encoding.GetEncoding(emailSetting.AttachmentEncoding);
                 var inStream = new MemoryStream(encoding.GetBytes(content));
                 var outStream = new MemoryStream();
                 if (emailSetting.IsAttachment)
