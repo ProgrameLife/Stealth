@@ -4,6 +4,9 @@ using SealthProvider;
 using StealthBackHandle;
 using StealthBuildData;
 using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 
 namespace StealthFileBackHandle
 {
@@ -57,13 +60,15 @@ namespace StealthFileBackHandle
         bool SendEmail(string content, FileSetting fileSetting)
         {
             try
-            {
-               //todo no code
-                return true;
+            {           
+                var file = Path.Combine(string.IsNullOrEmpty(fileSetting.FilePath) ? Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) : fileSetting.FilePath, fileSetting.FileName);
+                File.WriteAllText(file, content, Encoding.GetEncoding(fileSetting.FileEncoding));
+                _logger.LogInformation($"sava file  success");
+                return true;         
             }
             catch (Exception exc)
             {
-                _logger.LogCritical(exc, $"email send failure");
+                _logger.LogCritical(exc, $"sava file  failure");
                 return false;
             }  
         }
