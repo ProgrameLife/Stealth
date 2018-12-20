@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using StealthBackHandle;
 
 namespace StealthGirder.Controllers
 {
@@ -10,10 +11,18 @@ namespace StealthGirder.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        readonly Func<string, IBackHandle> _srviceAccessore;
+        public ValuesController(Func<string, IBackHandle> serviceAccessore)
+        {
+            _srviceAccessore = serviceAccessore;
+     
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            _srviceAccessore("EmailBackHandle").Handle("abc");
             return new string[] { "value1", "value2" };
         }
 

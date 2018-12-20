@@ -73,12 +73,12 @@ namespace StealthFTPBackHandle
                     {
 
                         ftp.Close();
-                        _logger.LogInformation($"email send success");
+                        _logger.LogInformation($"ftp uplodad success");
                         return true;
                     }
                     else
                     {
-                        _logger.LogError($"ftp failure，because：{response.Message}");
+                        _logger.LogError($"ftp uplodad failure，because：{response.Message}");
                         ftp.Close();
                         return false;
                     }
@@ -86,7 +86,7 @@ namespace StealthFTPBackHandle
             }
             catch (Exception exc)
             {
-                _logger.LogCritical(exc, $"ftp send failure:{exc.Message}");
+                _logger.LogCritical(exc, $"ftp uplodad failure:{exc.Message}");
 
                 return false;
             }

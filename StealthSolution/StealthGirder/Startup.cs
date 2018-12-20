@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using SealthProvider;
-using StealthGirder.Infrastructure;
+using StealthBackHandle;
+using StealthBuildData;
+using StealthEmailBackHandle;
 using StealthPostgreProvider;
 
 namespace StealthGirder
@@ -25,15 +27,19 @@ namespace StealthGirder
             #region base mode
             //services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
             #endregion
-
-            #region postgre mode
-            services.AddPostgreBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
-            #endregion
-
+            
             #region stealth provider
             services.AddTransient<IEmailProvider, PostgreEmailProvider>();
             services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
             #endregion
+
+            #region postgre mode
+            //services.AddPostgreBackHandle(new BackHandle1(), new BackHandle1());         
+            services.AddTransient<IBuildData, DemoBuildData>();
+            services.AddTransient<EmailBackHandle>();
+            services.AddPostgreBackHandle();
+            #endregion
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -53,12 +59,19 @@ namespace StealthGirder
             #region postgre mode
             app.UserPostgreBackHandle(scheduler);
             #endregion
-
+          
             app.UseMvc();
         }
 
 
 
 
+    }
+    class BackHandle1 : IBackHandle
+    {
+        public bool Handle(string keyName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

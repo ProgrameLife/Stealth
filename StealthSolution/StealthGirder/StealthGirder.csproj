@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
     <Folder Include="Model\" />
   </ItemGroup>
@@ -17,8 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj" />
     <ProjectReference Include="..\BackHandles\StealthFTPBackHandle\StealthFTPBackHandle.csproj" />
     <ProjectReference Include="..\BackHandles\StealthSFTPBackHandle\StealthSFTPBackHandle.csproj" />
+    <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
   </ItemGroup>

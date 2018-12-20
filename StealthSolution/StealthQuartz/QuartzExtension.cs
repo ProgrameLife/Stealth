@@ -21,27 +21,23 @@ namespace StealthQuartz
         /// </summary>
         /// <param name="services"></param>
         /// <param name="backHandles"></param>
-        public static void AddBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
+        public static void AddBackHandle(this IServiceCollection services)
         {
-            foreach (var backHandle in backHandles)
-            {
-                services.AddTransient(pro =>
-                {
-                    return backHandle;
-                });
-            }
             services.AddSingleton(factory =>
             {
                 Func<string, IBackHandle> accesor = key =>
                 {
-                    foreach (var backHandle in backHandles)
+                    foreach (var service in services)
                     {
-                        //use class type and quartzettings.typename compare
-                        if (key == backHandle.GetType().Name)
+                        if (service.ImplementationType?.Name == key)
                         {
-                            return factory.GetService(backHandle.GetType()) as IBackHandle;
+                            var backHandle = factory.GetService(service.ImplementationType);
+                            if(backHandle!=null)
+                            {
+                                return backHandle as IBackHandle;
+                            }                        
                         }
-                    }
+                    }                   
                     throw new ArgumentException($"Not Support key : {key}");
                 };
                 return accesor;
@@ -71,11 +67,11 @@ namespace StealthQuartz
         /// <param name="app"></param>
         /// <param name="scheduler"></param>
         /// <param name="quartzEntities"></param>
-        public static void UserBackHandle(this IApplicationBuilder app, IScheduler scheduler,params QuartzEntity[] quartzEntities)
-        {           
+        public static void UserBackHandle(this IApplicationBuilder app, IScheduler scheduler, params QuartzEntity[] quartzEntities)
+        {
             foreach (var quartzEntitie in quartzEntities)
             {
-                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.TypeName,quartzEntitie.KeyName);
+                QuartzServicesUtilities.StartJob<BackgroundJob<IBackHandle>>(scheduler, quartzEntitie.CronExpression, quartzEntitie.TypeName, quartzEntitie.KeyName);
             }
         }
     }
