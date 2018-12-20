@@ -15,15 +15,14 @@ namespace StealthGirder.Controllers
         public ValuesController(Func<string, IBackHandle> serviceAccessore)
         {
             _srviceAccessore = serviceAccessore;
-     
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _srviceAccessore("EmailBackHandle").Handle("abc");
-            return new string[] { "value1", "value2" };
+            var result = _srviceAccessore("EmailBackHandle").Handle("emailtest");
+            return new string[] { "value1", "value2" + result };
         }
 
         // GET api/values/5

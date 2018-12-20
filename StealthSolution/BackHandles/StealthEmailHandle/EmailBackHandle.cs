@@ -77,7 +77,7 @@ namespace StealthEmailBackHandle
 
                 builder.TextBody = emailSetting.Body;
                 var encoding = Encoding.GetEncoding(emailSetting.AttachmentEncoding);
-                var inStream = new MemoryStream(encoding.GetBytes(content));
+                var inStream = new MemoryStream(encoding.GetBytes(content??""));
                 var outStream = new MemoryStream();
                 if (emailSetting.IsAttachment)
                 {
@@ -93,7 +93,7 @@ namespace StealthEmailBackHandle
                 }
                 else
                 {
-                    builder.TextBody += content;
+                    builder.TextBody += content??"";
                 }
                 message.Body = builder.ToMessageBody();
                 using (var client = new SmtpClient())

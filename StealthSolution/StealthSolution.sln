@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthGirder", "StealthGirder\StealthGirder.csproj", "{8CE82498-A744-4FE4-8082-718B1EF274E2}"
 EndProject
@@ -39,6 +39,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthBuildData", "BuildData\StealthBuildData\StealthBuildData.csproj", "{D7071D48-B941-498A-AFFA-EEBF2718426C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "Providers\SealthProvider\SealthProvider.csproj", "{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthFileBackHandle", "BackHandles\StealthFileBackHandle\StealthFileBackHandle.csproj", "{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,6 +100,10 @@ Global
 		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{ADB79F33-A8FF-452D-9F1A-D0AA5F3BCD7E} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 		{D7071D48-B941-498A-AFFA-EEBF2718426C} = {F2327D4C-A37C-4300-8BB1-323B01BFAFAE}
 		{FF5E4CBC-A8FE-4263-9FE5-8507B552200B} = {2F85E218-017D-4874-8E0F-5C73980A5664}
+		{D92EB3B5-8E21-423B-BBCC-785E2888B7C2} = {0EA62497-9031-4FF8-8E1A-91C0A00EDE31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0056CDA-02E4-4761-818D-8C84AE6B12B0}

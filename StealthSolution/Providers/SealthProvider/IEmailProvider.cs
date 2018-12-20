@@ -27,13 +27,13 @@ namespace SealthProvider
         /// <summary>
         /// add emailsetting
         /// </summary>
-        /// <param name="emailSetting">sftpsetting</param>
+        /// <param name="emailSetting">emailsetting</param>
         /// <returns></returns>
         bool AddEmailSetting(EmailSetting emailSetting);
         /// <summary>
         /// modify emailsetting
         /// </summary>
-        /// <param name="sFTPSetting">sftpsetting</param>
+        /// <param name="sFTPSetting">emailsetting</param>
         /// <returns></returns>
         bool ModifyEmailSetting(EmailSetting emailSetting);
         /// <summary>

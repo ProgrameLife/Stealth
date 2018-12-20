@@ -22,7 +22,7 @@ namespace SealthModel
         public string CompressPassword { get; set; }
         public bool IsAttachment { get; set; }
         public string AttachmentEncoding { get; set; }
-        public bool AttachmentName { get; set; }
+        public string AttachmentName { get; set; }
         public bool Validate { get; set; }
         public DateTime CreateOn { get; set; }
     }

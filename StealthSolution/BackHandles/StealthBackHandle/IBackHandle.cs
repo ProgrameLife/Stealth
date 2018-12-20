@@ -13,6 +13,5 @@
         /// <returns></returns>
         bool Handle(string keyName);
 
-
     }
 }
