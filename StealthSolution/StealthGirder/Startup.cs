@@ -8,6 +8,7 @@ using SealthProvider;
 using StealthBackHandle;
 using StealthBuildData;
 using StealthEmailBackHandle;
+using StealthFileBackHandle;
 using StealthPostgreProvider;
 
 namespace StealthGirder
@@ -33,10 +34,10 @@ namespace StealthGirder
             services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
             #endregion
 
-            #region postgre mode
-            //services.AddPostgreBackHandle(new BackHandle1(), new BackHandle1());         
+            #region postgre mode               
             services.AddTransient<IBuildData, DemoBuildData>();
             services.AddTransient<EmailBackHandle>();
+            services.AddTransient<FileBackHandle>();
             services.AddPostgreBackHandle();
             #endregion
 

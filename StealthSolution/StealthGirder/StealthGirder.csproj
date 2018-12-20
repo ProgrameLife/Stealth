@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj" />
+    <ProjectReference Include="..\BackHandles\StealthFileBackHandle\StealthFileBackHandle.csproj" />
     <ProjectReference Include="..\BackHandles\StealthFTPBackHandle\StealthFTPBackHandle.csproj" />
     <ProjectReference Include="..\BackHandles\StealthSFTPBackHandle\StealthSFTPBackHandle.csproj" />
     <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />

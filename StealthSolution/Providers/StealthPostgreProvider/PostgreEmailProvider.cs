@@ -28,7 +28,6 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public List<EmailSetting> GetAllEmailSetting()
         {
-
             var sql = "select * from emailsettings";
             using (var con = new NpgsqlConnection(_connectionString))
             {

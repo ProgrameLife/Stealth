@@ -14,9 +14,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BackHandles\StealthSFTPBackHandle\StealthSFTPBackHandle.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\StealthDapperPlus\StealthDapperPlus.csproj" />
     <ProjectReference Include="..\..\SealthModel\SealthModel.csproj" />
     <ProjectReference Include="..\..\StealthQuartz\StealthQuartz.csproj" />
     <ProjectReference Include="..\SealthProvider\SealthProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
