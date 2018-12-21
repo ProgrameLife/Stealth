@@ -15,12 +15,6 @@ namespace SealthProvider
         List<FileSetting> GetAllFileSetting();
 
         /// <summary>
-        /// get all fileSetting
-        /// </summary>
-        /// <returns></returns>
-        List<FileSetting> GetFileSetting();
-
-        /// <summary>
         /// get a fileSetting by keyname
         /// </summary>
         /// <param name="keyName"></param>
