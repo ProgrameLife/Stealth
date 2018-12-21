@@ -10,7 +10,10 @@ Perform various tasks in the background！
 4. FileBackHandle
 
 ##### PostgreProvider
-
+1. EmailProvider
+2. FTPProvider
+3. SFTPProvider
+4. FileProvider
 
 ## Milestone
 1. implementation PostgreProvider
