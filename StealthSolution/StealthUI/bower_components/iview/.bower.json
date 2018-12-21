@@ -1,0 +1,14 @@
+{
+  "name": "iview",
+  "homepage": "https://github.com/iview/iview",
+  "version": "3.2.0",
+  "_release": "3.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.2.0",
+    "commit": "7b35c4ca2dc086f51711ae1ef3714a871a6d96b8"
+  },
+  "_source": "https://github.com/iview/iview.git",
+  "_target": "3.2.0",
+  "_originalSource": "iview"
+}

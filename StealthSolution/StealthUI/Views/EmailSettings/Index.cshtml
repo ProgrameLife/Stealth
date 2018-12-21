@@ -1,0 +1,492 @@
+﻿@{
+    ViewData["Title"] = "EmailSetting";
+}
+
+<div style="margin-top:10px;">
+    <h2 style="height: 50px;">EmailSettings</h2>
+</div>
+<div id="addemailsetting" style="text-align:right;margin:10px;">
+    <addmodal></addmodal>
+</div>
+<div id="tablediv" style="padding:10px;">
+    <emailsetting-row :emailsettings="emailsettings"></emailsetting-row>
+</div>
+<div id="editdiv">
+    <editmodal v-bind:editdata="editdata"></editmodal>
+</div>
+@section Scripts{
+
+    <script type="text/x-template" id="emailsetting-tr">
+        <div>
+            <row :gutter="16">
+                <Col span="24">
+                <Table border :columns="columns1" :data="data1"></Table>
+                </Col>
+            </row>
+        </div>
+    </script>
+    <script>
+        var editVue = null;
+        var tempemailsetting = null;
+        //table组件
+        Vue.component("emailsetting-row", {
+            template: "#emailsetting-tr",
+            props: ["emailsettings"],
+            data: function () {
+                return {
+                    columns1: [
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width: 50,
+                        },
+                        {
+                            title: 'KeyName',
+                            key: 'keyName',                      
+                        },
+                        {
+                            title: 'Host',
+                            key: 'host',
+                         
+                        },
+                        {
+                            title: 'Port',
+                            key: 'port'
+                        },
+                        {
+                            title: 'UserName',
+                            key: 'userName',
+                          
+                        },
+                        {
+                            title: 'Password',
+                            key: 'password',                          
+                        },
+                        {
+                            title: 'EmailSubject',
+                            key: 'subject',                           
+                        },
+                        {
+                            title: 'EmailBody',
+                            key: 'body',                         
+                        },
+                        {
+                            title: 'FromAddresses',
+                            key: 'fromAddresses',                         
+                        },
+                        {
+                            title: 'ToAddresses',
+                            key: 'toAddresses',                           
+                        },
+                        {
+                            title: 'IsCompress',
+                            key: 'isCompress',                         
+                        },
+                        {
+                            title: 'CompressFileName',
+                            key: 'compressFile',                            
+                        },
+                        {
+                            title: 'IsAttachment',
+                            key: 'isAttachment',                        
+                        },
+                        {
+                            title: 'AttachmentName',
+                            key: 'attachmentName',                         
+                        },
+                        {
+                            title: 'Validate',
+                            key: 'validate',
+                            width: 90,
+                        },
+                        {
+                            title: 'operate',
+                            key: 'action',
+                            width: 100,
+                            align: 'center',
+                            render: (h, params) => {
+                                return h('div', [
+                                    h('Button', {
+                                        props: {
+                                            type: 'success',
+                                            icon:'md-create',
+                                            size: 'small'
+                                        },
+                                        style: {
+                                            marginRight: '5px'
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.edit(params.row)
+                                            }
+                                        }
+                                    }),
+                                    h('Button', {
+                                        props: {
+                                            type: 'error',
+                                            icon:'ios-trash',
+                                            size: 'small',                                           
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.delete(params.row, params.index)
+                                            }
+                                        }
+                                    })
+                                ]);
+                            }
+                        }
+                    ],
+                    data1: this.emailsettings
+                }
+            },
+            methods: {
+                edit: function (emailsetting) {
+                    if (editVue == null) {
+                        editVue = new Vue({
+                            el: "#editdiv",
+                            data: {
+                                editdata: {
+                                    emailsetting: emailsetting,
+                                    showmodal: true,
+                                    ruleValidate: {
+                                        keyName: [
+                                            { required: true, message: 'keyName不能为空，并且必须与其他项不同。', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: '长度不能超过64', trigger: 'blur' }
+                                        ],
+                                        methodName: [
+                                            { required: true, message: 'methodName不能为空。', trigger: 'blur' },
+                                            { type: 'string', max: 128, message: '长度不能超过128', trigger: 'blur' }
+                                        ],
+                                        settlementType: [
+                                            { required: true, message: 'settlementType不能为空。', trigger: 'blur' },
+                                            { type: 'string', max: 32, message: '长度不能超过32', trigger: 'blur' }
+                                        ],
+                                        cronExpression: [
+                                            { required: true, message: 'cronExpression不能为空。', trigger: 'blur' },
+                                            { validator: validateCron, message: 'Cron表达式不正确' }
+
+                                        ]
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        editVue.editdata.emailsetting = emailsetting;
+                        editVue.editdata.showmodal = true;
+                    }
+
+                    //深度clone
+                    tempemailsetting = JSON.parse(JSON.stringify(editVue.editdata.emailsetting))
+                },
+                delete: function (emailsetting, index) {
+                    if (confirm("确定要删除" + emailsetting.keyName + "?")) {
+                        axios.delete("/removeemailsetting/" + emailsetting.id)
+                            .then(function (response) {
+                                //判断请求状态
+                                if (response.status == 200) {
+                                    var returnData = response.data
+                                    if (returnData.result) {
+                                        settlemtntSettingVue.emailsettings.splice(index, 1)
+                                    } else {
+                                        alert(returnData.messages)
+                                    }
+                                }
+                                else {
+                                    alert(response.statusText);
+                                }
+                            })
+                            .catch(function (error) {
+                                alert(error)
+                                console.log(error);
+                            });
+                    }
+                }
+            }
+        })
+        var settlemtntSettingVue = null;
+        axios.get("/emailsettings")
+            .then(function (response) {
+                //判断请求状态
+                if (response.status == 200) {
+                    var returnData = response.data
+                    if (returnData.result) {
+                        settlemtntSettingVue = new Vue({
+                            el: "#tablediv",
+                            data: {
+                                emailsettings: returnData.data
+                            }
+                        });
+                    } else {
+                        alert(returnData.messages)
+                    }
+                }
+                else {
+                    alert(response.statusText);
+                }
+            })
+            .catch(function (error) {
+                alert(error)
+                console.log(error);
+            });
+    </script>
+
+    <script type="text/x-template" id="editmodal-div">
+        <Modal v-model="editdata.showmodal"
+               title="edit"
+               width="1000px"
+               :mask-closable="false">
+            <div>
+                <Form ref="editdata.emailsetting" :model="editdata.emailsetting" :rules="editdata.ruleValidate" label-position="top">
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="KeyName" prop="keyName">
+                            <Input v-model="editdata.emailsetting.keyName"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="Host" prop="host">
+                            <Input v-model="editdata.emailsetting.host"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="Port" prop="port">
+                            <Input type="number" v-model="editdata.emailsetting.port"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="UserName" prop="userName">
+                            <Input v-model="editdata.emailsetting.userName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="有效性">
+                            <i-switch v-model="editdata.emailsetting.validate" size="large">
+                                <span slot="open">有效</span>
+                                <span slot="close">无效</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                    </row>
+                </Form>
+            </div>
+            <div slot="footer">
+                <Button type="text" size="large" v-on:click="modalCancel">取消</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">确定</Button>
+            </div>
+        </Modal>
+    </script>
+    <script>
+        Vue.component("editmodal", {
+            template: "#editmodal-div",
+            props: ["editdata"],
+            methods: {
+                modalOk() {
+
+                    this.$refs['editdata.emailsetting'].validate((valid) => {
+                        if (valid) {
+                            axios.put("/modifyemailsetting", this.editdata.emailsetting)
+                                .then(function (response) {
+                                    //判断请求状态
+                                    if (response.status == 200) {
+                                        var returnData = response.data;
+                                        if (returnData.result) {
+                                            editVue.editdata.showmodal = false;
+                                        } else {
+                                            alert(returnData.messages);
+                                        }
+                                    }
+                                    else {
+                                        alert(response.statusText);
+                                    }
+                                })
+                                .catch(function (error) {
+                                    alert(error)
+                                    console.log(error);
+                                });
+
+                        } else {
+                            this.$Message.error('验证失败!');
+                        }
+                    })
+                },
+                modalCancel() {
+                    for (var key in this.editdata.emailsetting) {
+                        this.editdata.emailsetting[key] = tempemailsetting[key];
+                    }
+                    editVue.editdata.showmodal = false;
+                }
+            }
+        })
+    </script>
+
+
+    <script type="text/x-template" id="addmodal-div">
+        <div>
+            <Button type="primary" v-on:click="showmodal = true" icon="android-add-circle">添加</Button>
+            <Modal v-model="showmodal"
+                   title="添加"
+                   width="1000px"
+                   :mask-closable="false">
+                <div>
+                    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="名称" prop="keyName">
+                                <Input v-model="formValidate.keyName"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="调用方法名" prop="methodName">
+                                <Input v-model="formValidate.methodName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="结算类型" prop="settlementType">
+                                <Input v-model="formValidate.settlementType"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Cron表达式" prop="cronExpression">
+                                <Input v-model="formValidate.cronExpression"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="有效性">
+                                <i-switch v-model="formValidate.validate" size="large">
+                                    <span slot="open">有效</span>
+                                    <span slot="close">无效</span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+                        </row>
+                    </Form>
+                </div>
+                <div slot="footer">
+                    <Button type="text" size="large" v-on:click="modalCancel">取消</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">确定</Button>
+                </div>
+            </Modal>
+        </div>
+    </script>
+    <script>
+
+        Vue.component("addmodal", {
+            template: "#addmodal-div",
+            data: function () {
+                return {
+                    showmodal: false,
+                    formValidate: {
+                        id: 0,
+                        keyName: "",
+                        methodName: "",
+                        settlementType: "",
+                        cronExpression: "",
+                        validate: false
+                    },
+                    ruleValidate: {
+                        keyName: [
+                            { required: true, message: 'keyName不能为空，并且必须与其他项不同。', trigger: 'blur' },
+                            { type: 'string', max: 64, message: '长度不能超过64', trigger: 'blur' }
+                        ],
+                        methodName: [
+                            { required: true, message: 'methodName不能为空。', trigger: 'blur' },
+                            { type: 'string', max: 128, message: '长度不能超过128', trigger: 'blur' }
+                        ],
+                        settlementType: [
+                            { required: true, message: 'settlementType不能为空。', trigger: 'blur' },
+                            { type: 'string', max: 32, message: '长度不能超过32', trigger: 'blur' }
+                        ],
+                        cronExpression: [
+                            { required: true, message: 'cronExpression不能为空。', trigger: 'blur' },
+                            { validator: validateCron, message: 'Cron表达式不正确' }
+                        ]
+                    }
+                }
+            },
+            methods: {
+                modalOk() {
+                    this.$refs['formValidate'].validate((valid) => {
+                        if (valid) {
+                            var obj = this;
+                            addSett(this.formValidate, function (newSettlemtntSetting) {
+                                console.log(newSettlemtntSetting)
+                                //深度clone
+                                // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
+                                settlemtntSettingVue.emailsettings.push(newSettlemtntSetting)
+                                obj.$refs['formValidate'].resetFields();
+                                obj.showmodal = false;
+                            });
+                        } else {
+                            this.$Message.error('验证失败!');
+                        }
+                    })
+
+                },
+                modalCancel() {
+                    this.showmodal = false;
+                }
+            }
+        })
+
+        function validateCron(rule, value, callback) {
+            if (value.length > 10) {
+                axios.get("/validatecron", { params: { 'cronExpression': value } })
+                    .then(function (response) {
+                        //判断请求状态
+                        if (response.status == 200) {
+                            var returnData = response.data;
+                            if (returnData) {
+                                callback([]);
+                            } else {
+                                callback([new Error(rule.message)]);
+                            }
+                        }
+                        else {
+                            console.log(response.statusText);
+                            callback([new Error(rule.message)]);
+                        }
+                    })
+                    .catch(function (error) {
+                        callback([new Error(rule.message)]);
+                        console.log(error);
+                    });
+            } else {
+                callback([new Error(rule.message)]);
+            }
+        }
+        function addSett(emailsetting, callback) {
+            axios.post("/addemailsetting", emailsetting)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        var returnData = response.data;
+                        if (returnData.result) {
+                            callback(returnData.data);
+                        } else {
+                            alert(returnData.messages);
+                        }
+                    }
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error);
+                    console.log(error);
+                });
+        }
+        new Vue({
+            el: "#addemailsetting"
+        });
+    </script>
+
+}

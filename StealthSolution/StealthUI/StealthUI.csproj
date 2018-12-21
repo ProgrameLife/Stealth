@@ -9,9 +9,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\axios\dist\axios.js" />
+    <None Include="wwwroot\lib\axios\dist\axios.map" />
+    <None Include="wwwroot\lib\axios\dist\axios.min.js" />
+    <None Include="wwwroot\lib\axios\dist\axios.min.map" />
     <None Include="wwwroot\lib\iview\dist\iview.js" />
     <None Include="wwwroot\lib\iview\dist\iview.js.map" />
     <None Include="wwwroot\lib\iview\dist\iview.min.js" />
@@ -92,6 +97,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Settings\" />
+    <ProjectReference Include="..\Providers\SealthProvider\SealthProvider.csproj" />
+    <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
+    <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
 </Project>
