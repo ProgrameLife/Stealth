@@ -19,9 +19,9 @@
     <script type="text/x-template" id="emailsetting-tr">
         <div>
             <row :gutter="16">
-                <Col span="24">
-                <Table border :columns="columns1" :data="data1"></Table>
-                </Col>
+                <col span="24">
+                <Table border :columns="columns" :data="data"></Table>
+                </col>
             </row>
         </div>
     </script>
@@ -34,7 +34,7 @@
             props: ["emailsettings"],
             data: function () {
                 return {
-                    columns1: [
+                    columns: [
                         {
                             title: 'ID',
                             key: 'id',
@@ -42,12 +42,12 @@
                         },
                         {
                             title: 'KeyName',
-                            key: 'keyName',                      
+                            key: 'keyName',
                         },
                         {
                             title: 'Host',
                             key: 'host',
-                         
+
                         },
                         {
                             title: 'Port',
@@ -56,43 +56,43 @@
                         {
                             title: 'UserName',
                             key: 'userName',
-                          
+
                         },
                         {
                             title: 'Password',
-                            key: 'password',                          
+                            key: 'password',
                         },
                         {
                             title: 'EmailSubject',
-                            key: 'subject',                           
+                            key: 'subject',
                         },
                         {
                             title: 'EmailBody',
-                            key: 'body',                         
+                            key: 'body',
                         },
                         {
                             title: 'FromAddresses',
-                            key: 'fromAddresses',                         
+                            key: 'fromAddresses',
                         },
                         {
                             title: 'ToAddresses',
-                            key: 'toAddresses',                           
+                            key: 'toAddresses',
                         },
                         {
                             title: 'IsCompress',
-                            key: 'isCompress',                         
+                            key: 'isCompress',
                         },
                         {
                             title: 'CompressFileName',
-                            key: 'compressFile',                            
+                            key: 'compressFile',
                         },
                         {
                             title: 'IsAttachment',
-                            key: 'isAttachment',                        
+                            key: 'isAttachment',
                         },
                         {
                             title: 'AttachmentName',
-                            key: 'attachmentName',                         
+                            key: 'attachmentName',
                         },
                         {
                             title: 'Validate',
@@ -109,7 +109,7 @@
                                     h('Button', {
                                         props: {
                                             type: 'success',
-                                            icon:'md-create',
+                                            icon: 'md-create',
                                             size: 'small'
                                         },
                                         style: {
@@ -124,8 +124,8 @@
                                     h('Button', {
                                         props: {
                                             type: 'error',
-                                            icon:'ios-trash',
-                                            size: 'small',                                           
+                                            icon: 'ios-trash',
+                                            size: 'small',
                                         },
                                         on: {
                                             click: () => {
@@ -137,7 +137,7 @@
                             }
                         }
                     ],
-                    data1: this.emailsettings
+                    data: this.emailsettings
                 }
             },
             methods: {
@@ -151,22 +151,28 @@
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
-                                            { required: true, message: 'keyName不能为空，并且必须与其他项不同。', trigger: 'blur' },
-                                            { type: 'string', max: 64, message: '长度不能超过64', trigger: 'blur' }
+                                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
                                         ],
-                                        methodName: [
-                                            { required: true, message: 'methodName不能为空。', trigger: 'blur' },
-                                            { type: 'string', max: 128, message: '长度不能超过128', trigger: 'blur' }
+                                        host: [
+                                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
                                         ],
-                                        settlementType: [
-                                            { required: true, message: 'settlementType不能为空。', trigger: 'blur' },
-                                            { type: 'string', max: 32, message: '长度不能超过32', trigger: 'blur' }
+                                        port: [
+                                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
+                                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
                                         ],
-                                        cronExpression: [
-                                            { required: true, message: 'cronExpression不能为空。', trigger: 'blur' },
-                                            { validator: validateCron, message: 'Cron表达式不正确' }
-
-                                        ]
+                                        userName: [
+                                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        password: [
+                                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        fromAddresses: [
+                                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        toAddresses: [
+                                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
+                                        ],
                                     }
                                 }
                             }
@@ -180,7 +186,7 @@
                     tempemailsetting = JSON.parse(JSON.stringify(editVue.editdata.emailsetting))
                 },
                 delete: function (emailsetting, index) {
-                    if (confirm("确定要删除" + emailsetting.keyName + "?")) {
+                    if (confirm("delete" + emailsetting.keyName + "?")) {
                         axios.delete("/removeemailsetting/" + emailsetting.id)
                             .then(function (response) {
                                 //判断请求状态
@@ -233,50 +239,104 @@
 
     <script type="text/x-template" id="editmodal-div">
         <Modal v-model="editdata.showmodal"
-               title="edit"
-               width="1000px"
+               title="Edit"
+               width="800px"
                :mask-closable="false">
             <div>
                 <Form ref="editdata.emailsetting" :model="editdata.emailsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
-                        <Col span="12">
+                        <Col span="24">
                         <FormItem label="KeyName" prop="keyName">
                             <Input v-model="editdata.emailsetting.keyName"></Input>
                         </FormItem>
                         </Col>
+                    </row>
+                    <row :gutter="16">
                         <Col span="12">
                         <FormItem label="Host" prop="host">
                             <Input v-model="editdata.emailsetting.host"></Input>
                         </FormItem>
                         </Col>
+                        <Col span="12">
+                        <FormItem label="Port" prop="port">
+                            <Input v-model="editdata.emailsetting.port"></Input>
+                        </FormItem>
+                        </Col>
+
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="Port" prop="port">
-                            <Input type="number" v-model="editdata.emailsetting.port"></Input>
+                        <FormItem label="FromAddresses" prop="fromAddresses">
+                            <Input v-model="editdata.emailsetting.fromAddresses"></Input>
                         </FormItem>
                         </Col>
+                        <Col span="12">
+                        <FormItem label="ToAddresses" prop="toAddresses">
+                            <Input v-model="editdata.emailsetting.toAddresses"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
                         <Col span="12">
                         <FormItem label="UserName" prop="userName">
                             <Input v-model="editdata.emailsetting.userName"></Input>
                         </FormItem>
                         </Col>
+                        <Col span="12">
+                        <FormItem label="Password" prop="password">
+                            <Input v-model="editdata.emailsetting.password"></Input>
+                        </FormItem>
+                        </Col>
                     </row>
                     <row :gutter="16">
-                        <Col span="12">
-                        <FormItem label="有效性">
-                            <i-switch v-model="editdata.emailsetting.validate" size="large">
-                                <span slot="open">有效</span>
-                                <span slot="close">无效</span>
+                        <Col span="24">
+                        <FormItem label="EmailSubject" prop="subject">
+                            <Input v-model="editdata.emailsetting.subject"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="24">
+                        <FormItem label="EmailBody" prop="body">
+                            <Input type="textarea" v-model="editdata.emailsetting.body"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="3">
+                        <FormItem label="IsCompress">
+                            <i-switch v-model="editdata.emailsetting.isCompress" size="large">
+                                <span slot="open">true</span>
+                                <span slot="close">false</span>
                             </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="21">
+                        <FormItem label="CompressFileName" prop="compressFileName">
+                            <Input v-model="editdata.emailsetting.compressFileName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="3">
+                        <FormItem label="IsAttachment">
+                            <i-switch v-model="editdata.emailsetting.isAttachment" size="large">
+                                <span slot="open">true</span>
+                                <span slot="close">false</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="21">
+                        <FormItem label="AttachmentName" prop="attachmentName">
+                            <Input v-model="editdata.emailsetting.attachmentName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="text" size="large" v-on:click="modalCancel">取消</Button>
-                <Button type="primary" size="large" v-on:click="modalOk">确定</Button>
+                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
             </div>
         </Modal>
     </script>
@@ -310,7 +370,7 @@
                                 });
 
                         } else {
-                            this.$Message.error('验证失败!');
+                            this.$Message.error('validate failure!');
                         }
                     })
                 },
@@ -327,58 +387,110 @@
 
     <script type="text/x-template" id="addmodal-div">
         <div>
-            <Button type="primary" v-on:click="showmodal = true" icon="android-add-circle">添加</Button>
+            <Button type="primary" v-on:click="showmodal = true">Add</Button>
             <Modal v-model="showmodal"
-                   title="添加"
-                   width="1000px"
+                   title="Add"
+                   width="800px"
                    :mask-closable="false">
                 <div>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
                         <row :gutter="16">
-                            <Col span="12">
-                            <FormItem label="名称" prop="keyName">
+                            <Col span="24">
+                            <FormItem label="KeyName" prop="keyName">
                                 <Input v-model="formValidate.keyName"></Input>
                             </FormItem>
                             </Col>
+                        </row>
+                        <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="调用方法名" prop="methodName">
-                                <Input v-model="formValidate.methodName"></Input>
+                            <FormItem label="Host" prop="host">
+                                <Input v-model="formValidate.host"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Port" prop="port">
+                                <Input v-model="formValidate.port"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="结算类型" prop="settlementType">
-                                <Input v-model="formValidate.settlementType"></Input>
+                            <FormItem label="FromAddresses" prop="fromAddresses">
+                                <Input v-model="formValidate.fromAddresses"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Cron表达式" prop="cronExpression">
-                                <Input v-model="formValidate.cronExpression"></Input>
+                            <FormItem label="ToAddresses" prop="toAddresses">
+                                <Input v-model="formValidate.toAddresses"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="有效性">
-                                <i-switch v-model="formValidate.validate" size="large">
-                                    <span slot="open">有效</span>
-                                    <span slot="close">无效</span>
+                            <FormItem label="UserName" prop="userName">
+                                <Input v-model="formValidate.userName"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Password" prop="password">
+                                <Input v-model="formValidate.password"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="EmailSubject" prop="subject">
+                                <Input v-model="formValidate.subject"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="EmailBody" prop="body">
+                                <Input type="textarea" v-model="formValidate.body"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="3">
+                            <FormItem label="IsCompress">
+                                <i-switch v-model="formValidate.isCompress" size="large">
+                                    <span slot="open">true</span>
+                                    <span slot="close">false</span>
                                 </i-switch>
+                            </FormItem>
+                            </Col>
+                            <Col span="21">
+                            <FormItem label="CompressFileName" prop="compressFileName">
+                                <Input v-model="formValidate.compressFileName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="3">
+                            <FormItem label="IsAttachment">
+                                <i-switch v-model="formValidate.isAttachment" size="large">
+                                    <span slot="open">true</span>
+                                    <span slot="close">false</span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+                            <Col span="21">
+                            <FormItem label="AttachmentName" prop="attachmentName">
+                                <Input v-model="formValidate.attachmentName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                     </Form>
                 </div>
                 <div slot="footer">
-                    <Button type="text" size="large" v-on:click="modalCancel">取消</Button>
-                    <Button type="primary" size="large" v-on:click="modalOk">确定</Button>
+                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
                 </div>
             </Modal>
         </div>
     </script>
     <script>
-
         Vue.component("addmodal", {
             template: "#addmodal-div",
             data: function () {
@@ -387,28 +499,44 @@
                     formValidate: {
                         id: 0,
                         keyName: "",
-                        methodName: "",
-                        settlementType: "",
-                        cronExpression: "",
+                        host: "",
+                        port: 0,
+                        fromAddresses: "",
+                        toAddresses: "",
+                        userName: "",
+                        password: "",
+                        subject: "",
+                        body: "",
+                        isCompress: false,
+                        compressFileName: "",
+                        isAttachment: false,
+                        attachmentName: "",
                         validate: false
                     },
                     ruleValidate: {
                         keyName: [
-                            { required: true, message: 'keyName不能为空，并且必须与其他项不同。', trigger: 'blur' },
-                            { type: 'string', max: 64, message: '长度不能超过64', trigger: 'blur' }
+                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
+                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
                         ],
-                        methodName: [
-                            { required: true, message: 'methodName不能为空。', trigger: 'blur' },
-                            { type: 'string', max: 128, message: '长度不能超过128', trigger: 'blur' }
+                        host: [
+                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
                         ],
-                        settlementType: [
-                            { required: true, message: 'settlementType不能为空。', trigger: 'blur' },
-                            { type: 'string', max: 32, message: '长度不能超过32', trigger: 'blur' }
+                        port: [
+                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
+                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
                         ],
-                        cronExpression: [
-                            { required: true, message: 'cronExpression不能为空。', trigger: 'blur' },
-                            { validator: validateCron, message: 'Cron表达式不正确' }
-                        ]
+                        userName: [
+                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        password: [
+                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        fromAddresses: [
+                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        toAddresses: [
+                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
+                        ],
                     }
                 }
             },
@@ -417,19 +545,18 @@
                     this.$refs['formValidate'].validate((valid) => {
                         if (valid) {
                             var obj = this;
-                            addSett(this.formValidate, function (newSettlemtntSetting) {
-                                console.log(newSettlemtntSetting)
+                            addEmail(this.formValidate, function (newEmailSetting) {
+                                console.log(newEmailSetting)
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
-                                settlemtntSettingVue.emailsettings.push(newSettlemtntSetting)
+                                settlemtntSettingVue.emailsettings.push(newEmailSetting)
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
                         } else {
-                            this.$Message.error('验证失败!');
+                            this.$Message.error('validate failure!');
                         }
                     })
-
                 },
                 modalCancel() {
                     this.showmodal = false;
@@ -437,33 +564,7 @@
             }
         })
 
-        function validateCron(rule, value, callback) {
-            if (value.length > 10) {
-                axios.get("/validatecron", { params: { 'cronExpression': value } })
-                    .then(function (response) {
-                        //判断请求状态
-                        if (response.status == 200) {
-                            var returnData = response.data;
-                            if (returnData) {
-                                callback([]);
-                            } else {
-                                callback([new Error(rule.message)]);
-                            }
-                        }
-                        else {
-                            console.log(response.statusText);
-                            callback([new Error(rule.message)]);
-                        }
-                    })
-                    .catch(function (error) {
-                        callback([new Error(rule.message)]);
-                        console.log(error);
-                    });
-            } else {
-                callback([new Error(rule.message)]);
-            }
-        }
-        function addSett(emailsetting, callback) {
+        function addEmail(emailsetting, callback) {
             axios.post("/addemailsetting", emailsetting)
                 .then(function (response) {
                     //判断请求状态
@@ -488,5 +589,4 @@
             el: "#addemailsetting"
         });
     </script>
-
 }
