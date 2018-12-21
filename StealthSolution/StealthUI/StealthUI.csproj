@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <Version>1.0.0-alpha</Version>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,4 +11,87 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\iview\dist\iview.js" />
+    <None Include="wwwroot\lib\iview\dist\iview.js.map" />
+    <None Include="wwwroot\lib\iview\dist\iview.min.js" />
+    <None Include="wwwroot\lib\iview\dist\iview.min.js.gz" />
+    <None Include="wwwroot\lib\iview\dist\iview.min.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\ar-SA.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\ar-SA.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\cs-CZ.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\cs-CZ.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\de-DE.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\de-DE.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\el-GR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\el-GR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\en-US.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\en-US.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\es-ES.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\es-ES.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\fa-IR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\fa-IR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\fi-FI.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\fi-FI.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\fr-FR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\fr-FR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\hi-IN.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\hi-IN.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\id-ID.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\id-ID.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\it-IT.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\it-IT.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\ja-JP.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\ja-JP.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\ko-KR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\ko-KR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\mn-MN.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\mn-MN.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\mn-TR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\mn-TR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\nl-NL.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\nl-NL.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\pt-BR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\pt-BR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\pt-PT.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\pt-PT.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\ro-RO.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\ro-RO.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\ru-RU.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\ru-RU.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\sv-SE.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\sv-SE.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\th-TH.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\th-TH.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\tr-TR.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\tr-TR.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\uk-UA.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\uk-UA.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\vi-VN.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\vi-VN.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\zh-CN.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\zh-CN.js.map" />
+    <None Include="wwwroot\lib\iview\dist\locale\zh-TW.js" />
+    <None Include="wwwroot\lib\iview\dist\locale\zh-TW.js.map" />
+    <None Include="wwwroot\lib\iview\dist\styles\fonts\ionicons.svg" />
+    <None Include="wwwroot\lib\vue\dist\README.md" />
+    <None Include="wwwroot\lib\vue\dist\vue.common.dev.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.common.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.common.prod.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.esm.browser.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.esm.browser.min.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.esm.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.min.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.common.dev.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.common.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.common.prod.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.esm.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.js" />
+    <None Include="wwwroot\lib\vue\dist\vue.runtime.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Settings\" />
+  </ItemGroup>
 </Project>
