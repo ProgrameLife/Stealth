@@ -332,6 +332,18 @@
                         </FormItem>
                         </Col>
                     </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="Validate">
+                            <i-switch v-model="editdata.emailsetting.validate" size="large">
+                                <span slot="valid">true</span>
+                                <span slot="invalid">false</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">                        
+                        </Col>
+                    </row>
                 </Form>
             </div>
             <div slot="footer">

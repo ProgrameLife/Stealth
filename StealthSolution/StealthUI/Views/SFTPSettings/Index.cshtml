@@ -63,36 +63,24 @@
                             key: 'password',
                         },
                         {
-                            title: 'SFTPSubject',
-                            key: 'subject',
+                            title: 'CertificatePath',
+                            key: 'certificatePath',
                         },
                         {
-                            title: 'SFTPBody',
-                            key: 'body',
+                            title: 'TransferDirectory',
+                            key: 'transferDirectory',
                         },
                         {
-                            title: 'FromAddresses',
-                            key: 'fromAddresses',
+                            title: 'TransferFilePrefix',
+                            key: 'transferFilePrefix',
                         },
                         {
-                            title: 'ToAddresses',
-                            key: 'toAddresses',
+                            title: 'FileName',
+                            key: 'filename',
                         },
                         {
-                            title: 'IsCompress',
-                            key: 'isCompress',
-                        },
-                        {
-                            title: 'CompressFileName',
-                            key: 'compressFile',
-                        },
-                        {
-                            title: 'IsAttachment',
-                            key: 'isAttachment',
-                        },
-                        {
-                            title: 'AttachmentName',
-                            key: 'attachmentName',
+                            title: 'FileEncoding',
+                            key: 'fileEncoding',
                         },
                         {
                             title: 'Validate',
@@ -167,12 +155,7 @@
                                         password: [
                                             { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
                                         ],
-                                        fromAddresses: [
-                                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
-                                        ],
-                                        toAddresses: [
-                                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
-                                        ],
+
                                     }
                                 }
                             }
@@ -289,46 +272,41 @@
                         </Col>
                     </row>
                     <row :gutter="16">
-                        <Col span="24">
-                        <FormItem label="SFTPSubject" prop="subject">
-                            <Input v-model="editdata.SFTPsetting.subject"></Input>
+                        <Col span="12">
+                        <FormItem label="CertificatePath" prop="certificatePath">
+                            <Input v-model="editdata.SFTPsetting.certificatePath"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="TransferDirectory" prop="transferDirectory">
+                            <Input v-model="editdata.SFTPsetting.transferDirectory"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
-                        <Col span="24">
-                        <FormItem label="SFTPBody" prop="body">
-                            <Input type="textarea" v-model="editdata.SFTPsetting.body"></Input>
+                        <Col span="12">
+                        <FormItem label="TransferFilePrefix" prop="transferFilePrefix">
+                            <Input v-model="editdata.SFTPsetting.transferFilePrefix"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="FileName" prop="fileName">
+                            <Input v-model="editdata.SFTPsetting.fileName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
-                        <Col span="3">
-                        <FormItem label="IsCompress">
-                            <i-switch v-model="editdata.SFTPsetting.isCompress" size="large">
-                                <span slot="open">true</span>
-                                <span slot="close">false</span>
+                        <Col span="12">
+                        <FormItem label="FileEncoding" prop="fileEncoding">
+                            <Input v-model="editdata.SFTPsetting.fileEncoding"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="Validate">
+                            <i-switch v-model="editdata.emailsetting.validate" size="large">
+                                <span slot="valid">true</span>
+                                <span slot="invalid">false</span>
                             </i-switch>
-                        </FormItem>
-                        </Col>
-                        <Col span="21">
-                        <FormItem label="CompressFileName" prop="compressFileName">
-                            <Input v-model="editdata.SFTPsetting.compressFileName"></Input>
-                        </FormItem>
-                        </Col>
-                    </row>
-                    <row :gutter="16">
-                        <Col span="3">
-                        <FormItem label="IsAttachment">
-                            <i-switch v-model="editdata.SFTPsetting.isAttachment" size="large">
-                                <span slot="open">true</span>
-                                <span slot="close">false</span>
-                            </i-switch>
-                        </FormItem>
-                        </Col>
-                        <Col span="21">
-                        <FormItem label="AttachmentName" prop="attachmentName">
-                            <Input v-model="editdata.SFTPsetting.attachmentName"></Input>
                         </FormItem>
                         </Col>
                     </row>
@@ -483,7 +461,7 @@
                         id: 0,
                         keyName: "",
                         host: "",
-                        port: 0,                  
+                        port: 0,
                         userName: "",
                         password: "",
                         subject: "",
@@ -511,7 +489,7 @@
                         ],
                         password: [
                             { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
-                        ],              
+                        ],
                     }
                 }
             },
