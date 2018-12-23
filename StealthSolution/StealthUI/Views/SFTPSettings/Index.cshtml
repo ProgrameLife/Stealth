@@ -1,0 +1,592 @@
+﻿@{
+    ViewData["Title"] = "SFTPSetting";
+}
+
+<div style="margin-top:10px;">
+    <h2 style="height: 50px;">SFTPSettings</h2>
+</div>
+<div id="addSFTPsetting" style="text-align:right;margin:10px;">
+    <addmodal></addmodal>
+</div>
+<div id="tablediv" style="padding:10px;">
+    <SFTPsetting-row :SFTPsettings="SFTPsettings"></SFTPsetting-row>
+</div>
+<div id="editdiv">
+    <editmodal v-bind:editdata="editdata"></editmodal>
+</div>
+@section Scripts{
+
+    <script type="text/x-template" id="SFTPsetting-tr">
+        <div>
+            <row :gutter="16">
+                <col span="24">
+                <Table border :columns="columns" :data="data"></Table>
+                </col>
+            </row>
+        </div>
+    </script>
+    <script>
+        var editVue = null;
+        var tempSFTPsetting = null;
+        //table组件
+        Vue.component("SFTPsetting-row", {
+            template: "#SFTPsetting-tr",
+            props: ["SFTPsettings"],
+            data: function () {
+                return {
+                    columns: [
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width: 50,
+                        },
+                        {
+                            title: 'KeyName',
+                            key: 'keyName',
+                        },
+                        {
+                            title: 'Host',
+                            key: 'host',
+
+                        },
+                        {
+                            title: 'Port',
+                            key: 'port'
+                        },
+                        {
+                            title: 'UserName',
+                            key: 'userName',
+
+                        },
+                        {
+                            title: 'Password',
+                            key: 'password',
+                        },
+                        {
+                            title: 'SFTPSubject',
+                            key: 'subject',
+                        },
+                        {
+                            title: 'SFTPBody',
+                            key: 'body',
+                        },
+                        {
+                            title: 'FromAddresses',
+                            key: 'fromAddresses',
+                        },
+                        {
+                            title: 'ToAddresses',
+                            key: 'toAddresses',
+                        },
+                        {
+                            title: 'IsCompress',
+                            key: 'isCompress',
+                        },
+                        {
+                            title: 'CompressFileName',
+                            key: 'compressFile',
+                        },
+                        {
+                            title: 'IsAttachment',
+                            key: 'isAttachment',
+                        },
+                        {
+                            title: 'AttachmentName',
+                            key: 'attachmentName',
+                        },
+                        {
+                            title: 'Validate',
+                            key: 'validate',
+                            width: 90,
+                        },
+                        {
+                            title: 'operate',
+                            key: 'action',
+                            width: 100,
+                            align: 'center',
+                            render: (h, params) => {
+                                return h('div', [
+                                    h('Button', {
+                                        props: {
+                                            type: 'success',
+                                            icon: 'md-create',
+                                            size: 'small'
+                                        },
+                                        style: {
+                                            marginRight: '5px'
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.edit(params.row)
+                                            }
+                                        }
+                                    }),
+                                    h('Button', {
+                                        props: {
+                                            type: 'error',
+                                            icon: 'ios-trash',
+                                            size: 'small',
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.delete(params.row, params.index)
+                                            }
+                                        }
+                                    })
+                                ]);
+                            }
+                        }
+                    ],
+                    data: this.SFTPsettings
+                }
+            },
+            methods: {
+                edit: function (SFTPsetting) {
+                    if (editVue == null) {
+                        editVue = new Vue({
+                            el: "#editdiv",
+                            data: {
+                                editdata: {
+                                    SFTPsetting: SFTPsetting,
+                                    showmodal: true,
+                                    ruleValidate: {
+                                        keyName: [
+                                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                        ],
+                                        host: [
+                                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        port: [
+                                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
+                                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
+                                        ],
+                                        userName: [
+                                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        password: [
+                                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        fromAddresses: [
+                                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        toAddresses: [
+                                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        editVue.editdata.SFTPsetting = SFTPsetting;
+                        editVue.editdata.showmodal = true;
+                    }
+
+                    //深度clone
+                    tempSFTPsetting = JSON.parse(JSON.stringify(editVue.editdata.SFTPsetting))
+                },
+                delete: function (SFTPsetting, index) {
+                    if (confirm("delete" + SFTPsetting.keyName + "?")) {
+                        axios.delete("/removeSFTPsetting/" + SFTPsetting.id)
+                            .then(function (response) {
+                                //判断请求状态
+                                if (response.status == 200) {
+                                    var returnData = response.data
+                                    if (returnData.result) {
+                                        settlemtntSettingVue.SFTPsettings.splice(index, 1)
+                                    } else {
+                                        alert(returnData.messages)
+                                    }
+                                }
+                                else {
+                                    alert(response.statusText);
+                                }
+                            })
+                            .catch(function (error) {
+                                alert(error)
+                                console.log(error);
+                            });
+                    }
+                }
+            }
+        })
+        var settlemtntSettingVue = null;
+        axios.get("/SFTPsettings")
+            .then(function (response) {
+                //判断请求状态
+                if (response.status == 200) {
+                    var returnData = response.data
+                    if (returnData.result) {
+                        settlemtntSettingVue = new Vue({
+                            el: "#tablediv",
+                            data: {
+                                SFTPsettings: returnData.data
+                            }
+                        });
+                    } else {
+                        alert(returnData.messages)
+                    }
+                }
+                else {
+                    alert(response.statusText);
+                }
+            })
+            .catch(function (error) {
+                alert(error)
+                console.log(error);
+            });
+    </script>
+
+    <script type="text/x-template" id="editmodal-div">
+        <Modal v-model="editdata.showmodal"
+               title="Edit"
+               width="800px"
+               :mask-closable="false">
+            <div>
+                <Form ref="editdata.SFTPsetting" :model="editdata.SFTPsetting" :rules="editdata.ruleValidate" label-position="top">
+                    <row :gutter="16">
+                        <Col span="24">
+                        <FormItem label="KeyName" prop="keyName">
+                            <Input v-model="editdata.SFTPsetting.keyName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="Host" prop="host">
+                            <Input v-model="editdata.SFTPsetting.host"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="Port" prop="port">
+                            <Input v-model="editdata.SFTPsetting.port"></Input>
+                        </FormItem>
+                        </Col>
+
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="FromAddresses" prop="fromAddresses">
+                            <Input v-model="editdata.SFTPsetting.fromAddresses"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="ToAddresses" prop="toAddresses">
+                            <Input v-model="editdata.SFTPsetting.toAddresses"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="UserName" prop="userName">
+                            <Input v-model="editdata.SFTPsetting.userName"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="Password" prop="password">
+                            <Input v-model="editdata.SFTPsetting.password"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="24">
+                        <FormItem label="SFTPSubject" prop="subject">
+                            <Input v-model="editdata.SFTPsetting.subject"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="24">
+                        <FormItem label="SFTPBody" prop="body">
+                            <Input type="textarea" v-model="editdata.SFTPsetting.body"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="3">
+                        <FormItem label="IsCompress">
+                            <i-switch v-model="editdata.SFTPsetting.isCompress" size="large">
+                                <span slot="open">true</span>
+                                <span slot="close">false</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="21">
+                        <FormItem label="CompressFileName" prop="compressFileName">
+                            <Input v-model="editdata.SFTPsetting.compressFileName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="3">
+                        <FormItem label="IsAttachment">
+                            <i-switch v-model="editdata.SFTPsetting.isAttachment" size="large">
+                                <span slot="open">true</span>
+                                <span slot="close">false</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="21">
+                        <FormItem label="AttachmentName" prop="attachmentName">
+                            <Input v-model="editdata.SFTPsetting.attachmentName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                </Form>
+            </div>
+            <div slot="footer">
+                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+            </div>
+        </Modal>
+    </script>
+    <script>
+        Vue.component("editmodal", {
+            template: "#editmodal-div",
+            props: ["editdata"],
+            methods: {
+                modalOk() {
+
+                    this.$refs['editdata.SFTPsetting'].validate((valid) => {
+                        if (valid) {
+                            axios.put("/modifySFTPsetting", this.editdata.SFTPsetting)
+                                .then(function (response) {
+                                    //判断请求状态
+                                    if (response.status == 200) {
+                                        var returnData = response.data;
+                                        if (returnData.result) {
+                                            editVue.editdata.showmodal = false;
+                                        } else {
+                                            alert(returnData.messages);
+                                        }
+                                    }
+                                    else {
+                                        alert(response.statusText);
+                                    }
+                                })
+                                .catch(function (error) {
+                                    alert(error)
+                                    console.log(error);
+                                });
+
+                        } else {
+                            this.$Message.error('validate failure!');
+                        }
+                    })
+                },
+                modalCancel() {
+                    for (var key in this.editdata.SFTPsetting) {
+                        this.editdata.SFTPsetting[key] = tempSFTPsetting[key];
+                    }
+                    editVue.editdata.showmodal = false;
+                }
+            }
+        })
+    </script>
+
+
+    <script type="text/x-template" id="addmodal-div">
+        <div>
+            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+            <Modal v-model="showmodal"
+                   title="Add"
+                   width="800px"
+                   :mask-closable="false">
+                <div>
+                    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="KeyName" prop="keyName">
+                                <Input v-model="formValidate.keyName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="Host" prop="host">
+                                <Input v-model="formValidate.host"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Port" prop="port">
+                                <Input v-model="formValidate.port"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="FromAddresses" prop="fromAddresses">
+                                <Input v-model="formValidate.fromAddresses"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="ToAddresses" prop="toAddresses">
+                                <Input v-model="formValidate.toAddresses"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="UserName" prop="userName">
+                                <Input v-model="formValidate.userName"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Password" prop="password">
+                                <Input v-model="formValidate.password"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="SFTPSubject" prop="subject">
+                                <Input v-model="formValidate.subject"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="SFTPBody" prop="body">
+                                <Input type="textarea" v-model="formValidate.body"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="3">
+                            <FormItem label="IsCompress">
+                                <i-switch v-model="formValidate.isCompress" size="large">
+                                    <span slot="open">true</span>
+                                    <span slot="close">false</span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+                            <Col span="21">
+                            <FormItem label="CompressFileName" prop="compressFileName">
+                                <Input v-model="formValidate.compressFileName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="3">
+                            <FormItem label="IsAttachment">
+                                <i-switch v-model="formValidate.isAttachment" size="large">
+                                    <span slot="open">true</span>
+                                    <span slot="close">false</span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+                            <Col span="21">
+                            <FormItem label="AttachmentName" prop="attachmentName">
+                                <Input v-model="formValidate.attachmentName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                    </Form>
+                </div>
+                <div slot="footer">
+                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                </div>
+            </Modal>
+        </div>
+    </script>
+    <script>
+        Vue.component("addmodal", {
+            template: "#addmodal-div",
+            data: function () {
+                return {
+                    showmodal: false,
+                    formValidate: {
+                        id: 0,
+                        keyName: "",
+                        host: "",
+                        port: 0,
+                        fromAddresses: "",
+                        toAddresses: "",
+                        userName: "",
+                        password: "",
+                        subject: "",
+                        body: "",
+                        isCompress: false,
+                        compressFileName: "",
+                        isAttachment: false,
+                        attachmentName: "",
+                        validate: false
+                    },
+                    ruleValidate: {
+                        keyName: [
+                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
+                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                        ],
+                        host: [
+                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        port: [
+                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
+                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
+                        ],
+                        userName: [
+                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        password: [
+                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        fromAddresses: [
+                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        toAddresses: [
+                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
+                        ],
+                    }
+                }
+            },
+            methods: {
+                modalOk() {
+                    this.$refs['formValidate'].validate((valid) => {
+                        if (valid) {
+                            var obj = this;
+                            addSFTP(this.formValidate, function (newSFTPSetting) {
+                                console.log(newSFTPSetting)
+                                //深度clone
+                                // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
+                                settlemtntSettingVue.SFTPsettings.push(newSFTPSetting)
+                                obj.$refs['formValidate'].resetFields();
+                                obj.showmodal = false;
+                            });
+                        } else {
+                            this.$Message.error('validate failure!');
+                        }
+                    })
+                },
+                modalCancel() {
+                    this.showmodal = false;
+                }
+            }
+        })
+
+        function addSFTP(SFTPsetting, callback) {
+            axios.post("/addSFTPsetting", SFTPsetting)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        var returnData = response.data;
+                        if (returnData.result) {
+                            callback(returnData.data);
+                        } else {
+                            alert(returnData.messages);
+                        }
+                    }
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error);
+                    console.log(error);
+                });
+        }
+        new Vue({
+            el: "#addSFTPsetting"
+        });
+    </script>
+}

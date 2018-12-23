@@ -8,6 +8,7 @@ namespace SealthModel
     public class SFTPSetting
     {
         public int ID { get; set; }
+        public string KeyName { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
 
