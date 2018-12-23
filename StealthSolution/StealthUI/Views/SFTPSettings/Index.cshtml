@@ -415,18 +415,6 @@
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="FromAddresses" prop="fromAddresses">
-                                <Input v-model="formValidate.fromAddresses"></Input>
-                            </FormItem>
-                            </Col>
-                            <Col span="12">
-                            <FormItem label="ToAddresses" prop="toAddresses">
-                                <Input v-model="formValidate.toAddresses"></Input>
-                            </FormItem>
-                            </Col>
-                        </row>
-                        <row :gutter="16">
-                            <Col span="12">
                             <FormItem label="UserName" prop="userName">
                                 <Input v-model="formValidate.userName"></Input>
                             </FormItem>
@@ -438,46 +426,41 @@
                             </Col>
                         </row>
                         <row :gutter="16">
-                            <Col span="24">
-                            <FormItem label="SFTPSubject" prop="subject">
-                                <Input v-model="formValidate.subject"></Input>
+                            <Col span="12">
+                            <FormItem label="CertificatePath" prop="certificatePath">
+                                <Input v-model="formValidate.certificatePath"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="TransferDirectory" prop="transferDirectory">
+                                <Input v-model="formValidate.transferDirectory"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
-                            <Col span="24">
-                            <FormItem label="SFTPBody" prop="body">
-                                <Input type="textarea" v-model="formValidate.body"></Input>
+                            <Col span="12">
+                            <FormItem label="TransferFilePrefix" prop="transferFilePrefix">
+                                <Input v-model="formValidate.transferFilePrefix"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="FileName" prop="fileName">
+                                <Input v-model="formValidate.fileName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
-                            <Col span="3">
-                            <FormItem label="IsCompress">
-                                <i-switch v-model="formValidate.isCompress" size="large">
-                                    <span slot="open">true</span>
-                                    <span slot="close">false</span>
+                            <Col span="12">
+                            <FormItem label="FileEncoding" prop="fileEncoding">
+                                <Input v-model="formValidate.fileEncoding"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="Vaidate">
+                                <i-switch v-model="formValidate.validate" size="large">
+                                    <span slot="valid">true</span>
+                                    <span slot="invalid">false</span>
                                 </i-switch>
-                            </FormItem>
-                            </Col>
-                            <Col span="21">
-                            <FormItem label="CompressFileName" prop="compressFileName">
-                                <Input v-model="formValidate.compressFileName"></Input>
-                            </FormItem>
-                            </Col>
-                        </row>
-                        <row :gutter="16">
-                            <Col span="3">
-                            <FormItem label="IsAttachment">
-                                <i-switch v-model="formValidate.isAttachment" size="large">
-                                    <span slot="open">true</span>
-                                    <span slot="close">false</span>
-                                </i-switch>
-                            </FormItem>
-                            </Col>
-                            <Col span="21">
-                            <FormItem label="AttachmentName" prop="attachmentName">
-                                <Input v-model="formValidate.attachmentName"></Input>
                             </FormItem>
                             </Col>
                         </row>
@@ -500,17 +483,15 @@
                         id: 0,
                         keyName: "",
                         host: "",
-                        port: 0,
-                        fromAddresses: "",
-                        toAddresses: "",
+                        port: 0,                  
                         userName: "",
                         password: "",
                         subject: "",
-                        body: "",
-                        isCompress: false,
-                        compressFileName: "",
-                        isAttachment: false,
-                        attachmentName: "",
+                        certificatePath: "",
+                        transferDirectory: false,
+                        transferFilePrefix: "",
+                        fileName: false,
+                        fileEncoding: "",
                         validate: false
                     },
                     ruleValidate: {
@@ -530,13 +511,7 @@
                         ],
                         password: [
                             { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        fromAddresses: [
-                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        toAddresses: [
-                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
-                        ],
+                        ],              
                     }
                 }
             },
