@@ -15,5 +15,11 @@ Perform various tasks in the background！
 3. SFTPProvider
 4. FileProvider
 
+##### UI
+1. EmailSetting UI
+2. FTPSetting UI
+3. SFTPSetting UI
+4. FileSetting UI
+
 ## Milestone
 1. implementation PostgreProvider
