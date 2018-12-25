@@ -22,11 +22,22 @@ namespace StealthPostgreProvider
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
+
+        public bool AddQuartzSetting(QuartzEntity quartzEntity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<QuartzEntity> GetAllQuartzSetting()
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
         /// query QueartzEntity list
         /// </summary>
         /// <returns></returns>
-        public List<QuartzEntity> GetQuartzEntity()
+        public List<QuartzEntity> GetQuartzSetting()
         {
             var sql = "select * from quartzsettings where validate=true";
             using (var con = new NpgsqlConnection(_connectionString))
@@ -35,7 +46,14 @@ namespace StealthPostgreProvider
             }
         }
 
+        public bool ModifyQuartzSetting(QuartzEntity quartzEntity)
+        {
+            throw new System.NotImplementedException();
+        }
 
-
+        public bool RemoveQuartzSetting(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

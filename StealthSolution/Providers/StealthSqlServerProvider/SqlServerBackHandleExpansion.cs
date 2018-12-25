@@ -20,7 +20,7 @@ namespace StealthSqlServerProvider
         public static void UserPostgreBackHandle(this IApplicationBuilder app, IScheduler scheduler)
         {
             var provider = app.ApplicationServices.GetService<IQuartzProvider>();
-            app.UserBackHandle(scheduler, provider.GetQuartzEntity().ToArray());
+            app.UserBackHandle(scheduler, provider.GetQuartzSetting().ToArray());
         }
         /// <summary>
         /// di postgreprovider and backhandles
