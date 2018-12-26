@@ -164,11 +164,7 @@
                                         ],
                                         host: [
                                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                                        ],
-                                        port: [
-                                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
-                                        ],
+                                        ],                                   
                                         userName: [
                                             { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
                                         ],
@@ -194,14 +190,14 @@
                     tempemailsetting = JSON.parse(JSON.stringify(editVue.editdata.emailsetting))
                 },
                 delete: function (emailsetting, index) {
-                    if (confirm("delete" + emailsetting.keyName + "?")) {
+                    if (confirm("delete  " + emailsetting.keyName + " ?")) {
                         axios.delete("/removeemailsetting/" + emailsetting.id)
                             .then(function (response) {
                                 //判断请求状态
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        settlemtntSettingVue.emailsettings.splice(index, 1)
+                                        getEmail(settlemtntSettingVue.emailsettings.current);                                     
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -228,12 +224,10 @@
                 .then(function (response) {
                     //判断请求状态
                     if (response.status == 200) {
-
                         document.getElementById("tablediv").innerHTML = ' <emailsetting-row :emailsettings="emailsettings"></emailsetting-row>'
-
                         var returnData = response.data
                         if (returnData.result) {
-                            console.log(returnData.data.list)
+                         
                             settlemtntSettingVue = new Vue({
                                 el: "#tablediv",
                                 data: {
@@ -282,7 +276,7 @@
                         </Col>
                         <Col span="12">
                         <FormItem label="Port" prop="port">
-                            <Input v-model="editdata.emailsetting.port"></Input>
+                            <InputNumber v-model="editdata.emailsetting.port" :min="10" :step="1"></InputNumber>
                         </FormItem>
                         </Col>
 
@@ -384,15 +378,17 @@
 
                     this.$refs['editdata.emailsetting'].validate((valid) => {
                         if (valid) {
+                            console.log(this.editdata.emailsetting)
                             axios.put("/modifyemailsetting", this.editdata.emailsetting)
                                 .then(function (response) {
                                     //判断请求状态
                                     if (response.status == 200) {
                                         var returnData = response.data;
+                                        console.log(returnData)
                                         if (returnData.result) {
                                             editVue.editdata.showmodal = false;
                                         } else {
-                                            alert(returnData.messages);
+                                            alert(returnData.message);
                                         }
                                     }
                                     else {
@@ -444,7 +440,7 @@
                             </Col>
                             <Col span="12">
                             <FormItem label="Port" prop="port">
-                                <Input v-model="formValidate.port"></Input>
+                                <InputNumber v-model="formValidate.port" :min="10" :step="1"></InputNumber>
                             </FormItem>
                             </Col>
                         </row>
@@ -555,11 +551,7 @@
                         ],
                         host: [
                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        port: [
-                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
-                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
-                        ],
+                        ],                     
                         userName: [
                             { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
                         ],
@@ -581,10 +573,12 @@
                         if (valid) {
                             var obj = this;
                             addEmail(this.formValidate, function (newEmailSetting) {
-                                console.log(newEmailSetting)
+                             
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
-                                settlemtntSettingVue.emailsettings.push(newEmailSetting)
+                                //settlemtntSettingVue.emailsettings.push(newEmailSetting)
+
+                                getEmail(settlemtntSettingVue.emailsettings.current);
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });

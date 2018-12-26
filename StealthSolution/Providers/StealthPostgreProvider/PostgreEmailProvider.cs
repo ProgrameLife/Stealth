@@ -29,7 +29,7 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
         {
-            var sql = $"select * from emailsettings  limit 10  offset  {(pageIndex - 1) * 10}";
+            var sql = $"select * from emailsettings order by id  limit 10  offset  {(pageIndex - 1) * 10}";
             List<EmailSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
@@ -76,9 +76,9 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public bool AddEmailSetting(EmailSetting emailSetting)
         {
-            var sql = @"INSERT INTO public.emailsettings(
-	host, port, fromaddress, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
-	VALUES (@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
+            var sql = @"INSERT INTO public.emailsettings(keyname,
+	host, port, fromaddresses, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
+	VALUES (@keyname,@host, @port, @fromaddresses, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
             using (var con = new NpgsqlConnection(_connectionString))
             {
                 return con.Execute(sql, emailSetting) > 0;
@@ -92,7 +92,7 @@ namespace StealthPostgreProvider
         public bool ModifyEmailSetting(EmailSetting emailSetting)
         {
             var sql = @"UPDATE public.emailsettings
-	SET  host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
+	SET  host=@host, port=@port, fromaddresses = @fromaddresses, username=@username, password=@password, subject=@subject, body=@body,
 	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate, compresspassword=@compresspassword
 	WHERE id=@id;";
             using (var con = new NpgsqlConnection(_connectionString))

@@ -65,7 +65,7 @@ namespace StealthUI.Controllers
         /// <param name="emailSetting">emailsetting</param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
         [HttpPost("addemailsetting")]
-        public IActionResult AddEmailSetting(EmailSetting emailSetting)
+        public IActionResult AddEmailSetting([FromBody]EmailSetting emailSetting)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace StealthUI.Controllers
         /// <param name="emailSetting"></param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
         [HttpPut("modifyemailsetting")]
-        public IActionResult ModifyEmailSetting(EmailSetting emailSetting)
+        public IActionResult ModifyEmailSetting([FromBody] EmailSetting emailSetting)
         {
             try
             {

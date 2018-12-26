@@ -44,13 +44,14 @@ namespace StealthUI.Controllers
         /// get all SFTPsetting,contains invalidate
         /// </summary>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message,the third is data property, indicating the return data</returns>
-        [HttpGet("SFTPsettings")]
-        public IActionResult GetAllSetting()
+        [HttpGet("SFTPsettings/{pageIndex}")]
+        public IActionResult GetAllSetting(int pageIndex=1)
         {
             try
             {
                 _logger.LogInformation("get all SFTPsetting");
-                return new JsonResult(new { result = true, data = _SFTPProvider.GetSFTPSettings() });
+                var result = _SFTPProvider.GetAllSFTPSetting(pageIndex);
+                return new JsonResult(new { result = true, data = new { list = result.list, total = result.total } });        
             }
             catch (Exception exc)
             {

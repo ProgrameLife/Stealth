@@ -26,14 +26,21 @@ namespace StealthPostgreProvider
         /// get all sftpsetting
         /// </summary>
         /// <returns></returns>
-        public List<SFTPSetting> GetAllSFTPSetting()
+        public (List<SFTPSetting> list, int total) GetAllSFTPSetting(int pageIndex = 1)
         {
-
-            var sql = "select * from sftpettings";
+            var sql = $"select * from sftpettings  limit 10  offset  {(pageIndex - 1) * 10}";
+            List<SFTPSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<SFTPSetting>(sql).ToList();
+                list = con.Query<SFTPSetting>(sql).ToList();
             }
+            int total = 0;
+            sql = $"select count(*) from sftpettings";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
 
         /// <summary>

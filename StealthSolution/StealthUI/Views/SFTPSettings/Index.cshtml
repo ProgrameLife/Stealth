@@ -9,18 +9,25 @@
     <addmodal></addmodal>
 </div>
 <div id="tablediv" style="padding:10px;">
-    <SFTPsetting-row :SFTPsettings="SFTPsettings"></SFTPsetting-row>
+    <sftpsetting-row :SFTPsettings="sftpsettings"></sftpsetting-row>
 </div>
+
+
 <div id="editdiv">
     <editmodal v-bind:editdata="editdata"></editmodal>
 </div>
 @section Scripts{
 
-    <script type="text/x-template" id="SFTPsetting-tr">
+    <script type="text/x-template" id="sftpsetting-tr">
         <div>
             <row :gutter="16">
                 <col span="24">
                 <Table border :columns="columns" :data="data"></Table>
+                </col>
+            </row>
+            <row :gutter="16">
+                <col span="24">
+                <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
             </row>
         </div>
@@ -29,9 +36,9 @@
         var editVue = null;
         var tempSFTPsetting = null;
         //table组件
-        Vue.component("SFTPsetting-row", {
-            template: "#SFTPsetting-tr",
-            props: ["SFTPsettings"],
+        Vue.component("sftpsetting-row", {
+            template: "#sftpsetting-tr",
+            props: ["sftpsettings"],
             data: function () {
                 return {
                     columns: [
@@ -125,17 +132,19 @@
                             }
                         }
                     ],
-                    data: this.SFTPsettings
+                    data: this.sftpsettings.list,
+                    total: this.sftpsettings.total,
+                    current: this.sftpsettings.current
                 }
             },
             methods: {
-                edit: function (SFTPsetting) {
+                edit: function (sftpsetting) {
                     if (editVue == null) {
                         editVue = new Vue({
                             el: "#editdiv",
                             data: {
                                 editdata: {
-                                    SFTPsetting: SFTPsetting,
+                                    sftpsetting: sftpsetting,
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
@@ -161,22 +170,22 @@
                             }
                         });
                     } else {
-                        editVue.editdata.SFTPsetting = SFTPsetting;
+                        editVue.editdata.sftpsetting = sftpsetting;
                         editVue.editdata.showmodal = true;
                     }
 
                     //深度clone
-                    tempSFTPsetting = JSON.parse(JSON.stringify(editVue.editdata.SFTPsetting))
+                    tempSFTPsetting = JSON.parse(JSON.stringify(editVue.editdata.sftpsetting))
                 },
                 delete: function (SFTPsetting, index) {
-                    if (confirm("delete" + SFTPsetting.keyName + "?")) {
+                    if (confirm("delete" + sftpsettings.keyName + "?")) {
                         axios.delete("/removeSFTPsetting/" + SFTPsetting.id)
                             .then(function (response) {
                                 //判断请求状态
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        settlemtntSettingVue.SFTPsettings.splice(index, 1)
+                                        sftpSettingVue.SFTPsettings.splice(index, 1)
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -190,34 +199,47 @@
                                 console.log(error);
                             });
                     }
+                },
+                pageing: function (pageindex) {
+                    getSFTP(pageindex)
                 }
             }
         })
-        var settlemtntSettingVue = null;
-        axios.get("/SFTPsettings")
-            .then(function (response) {
-                //判断请求状态
-                if (response.status == 200) {
-                    var returnData = response.data
-                    if (returnData.result) {
-                        settlemtntSettingVue = new Vue({
-                            el: "#tablediv",
-                            data: {
-                                SFTPsettings: returnData.data
-                            }
-                        });
-                    } else {
-                        alert(returnData.messages)
+        var sftpSettingVue = null;
+        function getSFTP(pageindex) {
+            axios.get("/SFTPsettings/" + pageindex)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        document.getElementById("tablediv").innerHTML = ' <sftpsetting-row :SFTPsettings="sftpsettings"></sftpsetting-row>'
+                        var returnData = response.data
+                        console.log(returnData)
+                        if (returnData.result) {
+                            sftpSettingVue = new Vue({
+                                el: "#tablediv",
+                                data: {
+                                    sftpsettings:
+                                    {
+                                        list: returnData.data.list,
+                                        total: returnData.data.total,
+                                        current: pageindex
+                                    }
+                                }
+                            });
+                        } else {
+                            alert(returnData.messages)
+                        }
                     }
-                }
-                else {
-                    alert(response.statusText);
-                }
-            })
-            .catch(function (error) {
-                alert(error)
-                console.log(error);
-            });
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error)
+                    console.log(error);
+                });
+        }
+        getSFTP(1);
     </script>
 
     <script type="text/x-template" id="editmodal-div">
@@ -502,7 +524,7 @@
                                 console.log(newSFTPSetting)
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
-                                settlemtntSettingVue.SFTPsettings.push(newSFTPSetting)
+                                sftpSettingVue.SFTPsettings.push(newSFTPSetting)
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
@@ -538,8 +560,8 @@
                     console.log(error);
                 });
         }
-        new Vue({
-            el: "#addSFTPsetting"
-        });
+        //new Vue({
+        //    el: "#addSFTPsetting"
+        //});
     </script>
 }

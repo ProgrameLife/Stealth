@@ -7,9 +7,9 @@ namespace SealthProvider
     {       /// <summary>
             /// get all sftpsetting
             /// </summary>
-            /// <returns></returns>
-        List<SFTPSetting> GetAllSFTPSetting();
-
+            /// <param name="pageIndex">page index</param>
+            /// <returns></returns>   
+        (List<SFTPSetting> list, int total) GetAllSFTPSetting(int pageIndex = 1);
         /// <summary>
         /// get all sftpsetting
         /// </summary>

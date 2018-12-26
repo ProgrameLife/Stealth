@@ -8,6 +8,7 @@ namespace SealthProvider
         /// <summary>
         /// get all emailsetting
         /// </summary>
+        /// <param name="pageIndex">page index</param>
         /// <returns></returns>
         (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1);
 
