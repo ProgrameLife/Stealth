@@ -25,14 +25,23 @@ namespace StealthPostgreProvider
         /// <summary>
         /// get all emailSetting
         /// </summary>
+        /// <param name="pageIndex">page index</param>
         /// <returns></returns>
-        public List<EmailSetting> GetAllEmailSetting()
+        public (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
         {
-            var sql = "select * from emailsettings";
+            var sql = $"select * from emailsettings  limit 10  offset  {(pageIndex - 1) * 10}";
+            List<EmailSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<EmailSetting>(sql).ToList();
+                list = con.Query<EmailSetting>(sql).ToList();
             }
+            int total = 0;
+            sql = $"select count(*) from emailsettings";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
         /// <summary>
         /// get a emailsetting by keyname

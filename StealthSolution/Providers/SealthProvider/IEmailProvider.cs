@@ -9,7 +9,7 @@ namespace SealthProvider
         /// get all emailsetting
         /// </summary>
         /// <returns></returns>
-        List<EmailSetting> GetAllEmailSetting();
+        (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1);
 
         /// <summary>
         /// get all emailsetting

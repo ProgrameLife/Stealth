@@ -44,13 +44,14 @@ namespace StealthUI.Controllers
         /// get all emailsetting,contains invalidate
         /// </summary>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message,the third is data property, indicating the return data</returns>
-        [HttpGet("emailsettings")]
-        public IActionResult GetAllSetting()
+        [HttpGet("emailsettings/{pageindex}")]
+        public IActionResult GetAllSetting(int pageindex = 1)
         {
             try
             {
-                _logger.LogInformation("get all emailsetting");
-                return new JsonResult(new { result = true, data = _emailProvider.GetEmailSettings() });
+                _logger.LogInformation($"get all emailsetting， pageindex={pageindex}");
+                var result = _emailProvider.GetAllEmailSetting(pageindex);
+                return new JsonResult(new { result = true, data = new { list = result.list, total = result.total } });
             }
             catch (Exception exc)
             {

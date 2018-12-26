@@ -11,6 +11,7 @@
 <div id="tablediv" style="padding:10px;">
     <emailsetting-row :emailsettings="emailsettings"></emailsetting-row>
 </div>
+
 <div id="editdiv">
     <editmodal v-bind:editdata="editdata"></editmodal>
 </div>
@@ -21,6 +22,11 @@
             <row :gutter="16">
                 <col span="24">
                 <Table border :columns="columns" :data="data"></Table>
+                </col>
+            </row>
+            <row :gutter="16">
+                <col span="24">
+                <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing"/>
                 </col>
             </row>
         </div>
@@ -137,7 +143,9 @@
                             }
                         }
                     ],
-                    data: this.emailsettings
+                    data: this.emailsettings.list,
+                    total: this.emailsettings.total,
+                    current: this.emailsettings.current 
                 }
             },
             methods: {
@@ -207,34 +215,49 @@
                                 console.log(error);
                             });
                     }
+                },
+                pageing: function (pageindex) {
+                    getEmail(pageindex)
                 }
             }
         })
         var settlemtntSettingVue = null;
-        axios.get("/emailsettings")
-            .then(function (response) {
-                //判断请求状态
-                if (response.status == 200) {
-                    var returnData = response.data
-                    if (returnData.result) {
-                        settlemtntSettingVue = new Vue({
-                            el: "#tablediv",
-                            data: {
-                                emailsettings: returnData.data
-                            }
-                        });
-                    } else {
-                        alert(returnData.messages)
+
+        function getEmail(pageindex) {
+            axios.get("/emailsettings/" + pageindex)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+
+                        document.getElementById("tablediv").innerHTML = ' <emailsetting-row :emailsettings="emailsettings"></emailsetting-row>'
+
+                        var returnData = response.data
+                        if (returnData.result) {
+                            console.log(returnData.data.list)
+                            settlemtntSettingVue = new Vue({
+                                el: "#tablediv",
+                                data: {
+                                    emailsettings: {
+                                        list: returnData.data.list,
+                                        total: returnData.data.total,
+                                        current: pageindex
+                                    },
+                                }
+                            });
+                        } else {
+                            alert(returnData.messages)
+                        }
                     }
-                }
-                else {
-                    alert(response.statusText);
-                }
-            })
-            .catch(function (error) {
-                alert(error)
-                console.log(error);
-            });
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error)
+                    console.log(error);
+                });
+        }
+        getEmail(1);
     </script>
 
     <script type="text/x-template" id="editmodal-div">
@@ -341,7 +364,7 @@
                             </i-switch>
                         </FormItem>
                         </Col>
-                        <Col span="12">                        
+                        <Col span="12">
                         </Col>
                     </row>
                 </Form>
@@ -601,4 +624,9 @@
             el: "#addemailsetting"
         });
     </script>
+
+
+  
+
+
 }
