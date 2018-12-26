@@ -28,7 +28,7 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public (List<SFTPSetting> list, int total) GetAllSFTPSetting(int pageIndex = 1)
         {
-            var sql = $"select * from sftpettings  limit 10  offset  {(pageIndex - 1) * 10}";
+            var sql = $"select * from sftpettings order by id limit 10  offset  {(pageIndex - 1) * 10}";
             List<SFTPSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
@@ -76,8 +76,8 @@ namespace StealthPostgreProvider
         public bool AddSFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"INSERT INTO sftpettings
-		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
-        (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
+		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate)VALUES
+        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate)";
             using (var con = new NpgsqlConnection(_connectionString))
             {
                 return con.Execute(sql, sFTPSetting) > 0;

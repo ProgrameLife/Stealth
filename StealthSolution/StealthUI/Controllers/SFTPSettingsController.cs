@@ -65,7 +65,7 @@ namespace StealthUI.Controllers
         /// <param name="SFTPSetting">SFTPsetting</param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
         [HttpPost("addSFTPsetting")]
-        public IActionResult AddSFTPSetting(SFTPSetting SFTPSetting)
+        public IActionResult AddSFTPSetting([FromBody]SFTPSetting SFTPSetting)
         {
             try
             {
@@ -83,8 +83,8 @@ namespace StealthUI.Controllers
         /// </summary>
         /// <param name="SFTPSetting"></param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
-        [HttpPut("modifySFTPsetting")]
-        public IActionResult ModifySFTPSetting(SFTPSetting SFTPSetting)
+        [HttpPut("modifysftpsetting")]
+        public IActionResult ModifySFTPSetting([FromBody]SFTPSetting SFTPSetting)
         {
             try
             {

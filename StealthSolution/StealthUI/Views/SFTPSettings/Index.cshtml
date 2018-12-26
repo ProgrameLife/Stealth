@@ -5,11 +5,11 @@
 <div style="margin-top:10px;">
     <h2 style="height: 50px;">SFTPSettings</h2>
 </div>
-<div id="addSFTPsetting" style="text-align:right;margin:10px;">
+<div id="addsftpsetting" style="text-align:right;margin:10px;">
     <addmodal></addmodal>
 </div>
 <div id="tablediv" style="padding:10px;">
-    <sftpsetting-row :SFTPsettings="sftpsettings"></sftpsetting-row>
+    <sftpsetting-row :sftpsettings="sftpsettings"></sftpsetting-row>
 </div>
 
 
@@ -154,10 +154,6 @@
                                         host: [
                                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
                                         ],
-                                        port: [
-                                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
-                                        ],
                                         userName: [
                                             { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
                                         ],
@@ -177,15 +173,17 @@
                     //深度clone
                     tempSFTPsetting = JSON.parse(JSON.stringify(editVue.editdata.sftpsetting))
                 },
-                delete: function (SFTPsetting, index) {
-                    if (confirm("delete" + sftpsettings.keyName + "?")) {
-                        axios.delete("/removeSFTPsetting/" + SFTPsetting.id)
+                delete: function (sftpsetting, index) {
+                
+                    if (confirm("delete  " + sftpsetting.keyName + "?")) {
+                        axios.delete("/removeSFTPsetting/" + sftpsetting.id)
                             .then(function (response) {
                                 //判断请求状态
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        sftpSettingVue.SFTPsettings.splice(index, 1)
+                                        getSFTP(sftpSettingVue.sftpsettings.current);
+                                        // sftpSettingVue.SFTPsettings.splice(index, 1)
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -207,13 +205,12 @@
         })
         var sftpSettingVue = null;
         function getSFTP(pageindex) {
-            axios.get("/SFTPsettings/" + pageindex)
+            axios.get("/sftpsettings/" + pageindex)
                 .then(function (response) {
                     //判断请求状态
                     if (response.status == 200) {
-                        document.getElementById("tablediv").innerHTML = ' <sftpsetting-row :SFTPsettings="sftpsettings"></sftpsetting-row>'
+                        document.getElementById("tablediv").innerHTML = ' <sftpsetting-row :sftpsettings="sftpsettings"></sftpsetting-row>'
                         var returnData = response.data
-                        console.log(returnData)
                         if (returnData.result) {
                             sftpSettingVue = new Vue({
                                 el: "#tablediv",
@@ -227,7 +224,7 @@
                                 }
                             });
                         } else {
-                            alert(returnData.messages)
+                            alert(returnData.message)
                         }
                     }
                     else {
@@ -248,84 +245,71 @@
                width="800px"
                :mask-closable="false">
             <div>
-                <Form ref="editdata.SFTPsetting" :model="editdata.SFTPsetting" :rules="editdata.ruleValidate" label-position="top">
+                <Form ref="editdata.sftpsetting" :model="editdata.sftpsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
                         <FormItem label="KeyName" prop="keyName">
-                            <Input v-model="editdata.SFTPsetting.keyName"></Input>
+                            <Input v-model="editdata.sftpsetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="Host" prop="host">
-                            <Input v-model="editdata.SFTPsetting.host"></Input>
+                            <Input v-model="editdata.sftpsetting.host"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="Port" prop="port">
-                            <Input v-model="editdata.SFTPsetting.port"></Input>
-                        </FormItem>
-                        </Col>
-
-                    </row>
-                    <row :gutter="16">
-                        <Col span="12">
-                        <FormItem label="FromAddresses" prop="fromAddresses">
-                            <Input v-model="editdata.SFTPsetting.fromAddresses"></Input>
-                        </FormItem>
-                        </Col>
-                        <Col span="12">
-                        <FormItem label="ToAddresses" prop="toAddresses">
-                            <Input v-model="editdata.SFTPsetting.toAddresses"></Input>
+                            <InputNumber v-model="editdata.sftpsetting.port" :min="10" :step="1"></InputNumber>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="UserName" prop="userName">
-                            <Input v-model="editdata.SFTPsetting.userName"></Input>
+                            <Input v-model="editdata.sftpsetting.userName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="Password" prop="password">
-                            <Input v-model="editdata.SFTPsetting.password"></Input>
+                            <Input v-model="editdata.sftpsetting.password"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="CertificatePath" prop="certificatePath">
-                            <Input v-model="editdata.SFTPsetting.certificatePath"></Input>
+                            <Input v-model="editdata.sftpsetting.certificatePath"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="TransferDirectory" prop="transferDirectory">
-                            <Input v-model="editdata.SFTPsetting.transferDirectory"></Input>
+                            <Input v-model="editdata.sftpsetting.transferDirectory"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="TransferFilePrefix" prop="transferFilePrefix">
-                            <Input v-model="editdata.SFTPsetting.transferFilePrefix"></Input>
+                            <Input v-model="editdata.sftpsetting.transferFilePrefix"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="FileName" prop="fileName">
-                            <Input v-model="editdata.SFTPsetting.fileName"></Input>
+                            <Input v-model="editdata.sftpsetting.fileName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="FileEncoding" prop="fileEncoding">
-                            <Input v-model="editdata.SFTPsetting.fileEncoding"></Input>
+                            <Input v-model="editdata.sftpsetting.fileEncoding"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="Validate">
-                            <i-switch v-model="editdata.emailsetting.validate" size="large">
+                            <i-switch v-model="editdata.sftpsetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
                             </i-switch>
@@ -346,10 +330,10 @@
             props: ["editdata"],
             methods: {
                 modalOk() {
-
-                    this.$refs['editdata.SFTPsetting'].validate((valid) => {
+                    this.$refs['editdata.sftpsetting'].validate((valid) => {
                         if (valid) {
-                            axios.put("/modifySFTPsetting", this.editdata.SFTPsetting)
+                            console.log(this.editdata.sftpsetting)
+                            axios.put("/modifysftpsetting", this.editdata.sftpsetting)
                                 .then(function (response) {
                                     //判断请求状态
                                     if (response.status == 200) {
@@ -409,7 +393,7 @@
                             </Col>
                             <Col span="12">
                             <FormItem label="Port" prop="port">
-                                <Input v-model="formValidate.port"></Input>
+                                <InputNumber v-model="formValidate.port" :min="10" :step="1"></InputNumber>
                             </FormItem>
                             </Col>
                         </row>
@@ -487,10 +471,10 @@
                         userName: "",
                         password: "",
                         subject: "",
-                        certificatePath: "",
-                        transferDirectory: false,
+                        certificatePath: "",                     
+                        transferDirectory: "",
                         transferFilePrefix: "",
-                        fileName: false,
+                        fileName: "",
                         fileEncoding: "",
                         validate: false
                     },
@@ -501,10 +485,6 @@
                         ],
                         host: [
                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        port: [
-                            { required: true, message: 'Port cannot be empty, is required', trigger: 'blur' },
-                            { type: 'integer', message: 'Port is integer', trigger: 'change' }
                         ],
                         userName: [
                             { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
@@ -524,7 +504,8 @@
                                 console.log(newSFTPSetting)
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
-                                sftpSettingVue.SFTPsettings.push(newSFTPSetting)
+                                //sftpSettingVue.sftpsettings.push(newSFTPSetting)
+                                getSFTP(sftpSettingVue.sftpsettings.current);
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
@@ -539,8 +520,8 @@
             }
         })
 
-        function addSFTP(SFTPsetting, callback) {
-            axios.post("/addSFTPsetting", SFTPsetting)
+        function addSFTP(sftpsetting, callback) {
+            axios.post("/addsftpsetting", sftpsetting)
                 .then(function (response) {
                     //判断请求状态
                     if (response.status == 200) {
@@ -548,7 +529,7 @@
                         if (returnData.result) {
                             callback(returnData.data);
                         } else {
-                            alert(returnData.messages);
+                            alert(returnData.message);
                         }
                     }
                     else {
@@ -560,8 +541,8 @@
                     console.log(error);
                 });
         }
-        //new Vue({
-        //    el: "#addSFTPsetting"
-        //});
+        new Vue({
+            el: "#addsftpsetting"
+        });
     </script>
 }
