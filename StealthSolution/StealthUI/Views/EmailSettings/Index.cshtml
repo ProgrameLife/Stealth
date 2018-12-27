@@ -14,7 +14,7 @@
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 50px;">EmailSettings</h2>
+            <h2 style="height: 20px;">EmailSettings</h2>
         </div>
         <div id="addemailsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -43,7 +43,7 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-            <row :gutter="16">
+            <row :gutter="16"  style="text-align:right;margin-top:3px;">
                 <col span="24">
                 <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
@@ -436,7 +436,7 @@
 
 
     <script type="text/x-template" id="addmodal-div">
-        <div>
+        <div>      
             <Button type="primary" v-on:click="showmodal = true">Add</Button>
             <Modal v-model="showmodal"
                    title="Add"

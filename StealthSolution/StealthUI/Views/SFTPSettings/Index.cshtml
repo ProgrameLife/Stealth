@@ -16,7 +16,7 @@
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 50px;">SFTPSettings</h2>
+            <h2 style="height: 20px;">SFTPSettings</h2>
         </div>
         <div id="addsftpsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -46,7 +46,7 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-            <row :gutter="16">
+            <row :gutter="16"  style="text-align:right;margin-top:3px;">
                 <col span="24">
                 <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>

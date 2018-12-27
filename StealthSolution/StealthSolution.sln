@@ -44,7 +44,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthFileBackHandle", "Ba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8565308F-7C71-41A5-89A1-B804C4A5D214}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StealthDapperPlus", "Infrastructure\StealthDapperPlus\StealthDapperPlus.csproj", "{5C0F762C-9A49-454D-8245-4FBB191F74A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthDapperPlus", "Infrastructure\StealthDapperPlus\StealthDapperPlus.csproj", "{5C0F762C-9A49-454D-8245-4FBB191F74A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
