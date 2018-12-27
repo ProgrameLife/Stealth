@@ -49,7 +49,7 @@ namespace StealthGirder
                 options.FileProviders.Add(
                     new EmbeddedFileProvider(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly));
             });
-            services.AddMvc().AddApplicationPart(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().AddApplicationPart(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IScheduler scheduler)
@@ -71,16 +71,6 @@ namespace StealthGirder
           
             app.UseMvc();
         }
-
-
-
-
     }
-    class BackHandle1 : IBackHandle
-    {
-        public bool Handle(string keyName)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+ 
 }
