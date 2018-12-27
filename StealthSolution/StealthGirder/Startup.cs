@@ -68,7 +68,12 @@ namespace StealthGirder
             #region postgre mode
             app.UserPostgreBackHandle(scheduler);
             #endregion
-          
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new EmbeddedFileProvider(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly),
+
+            });
             app.UseMvc();
         }
     }

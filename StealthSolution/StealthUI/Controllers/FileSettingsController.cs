@@ -36,7 +36,7 @@ namespace StealthUI.Controllers
         /// index view
         /// </summary>
         /// <returns>Return a view</returns>
-        [HttpGet("/fielsettings")]
+        [HttpGet("/filesettings")]
         public IActionResult Index()
         {
             return View();
