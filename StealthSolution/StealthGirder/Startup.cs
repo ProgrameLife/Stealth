@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Quartz;
 using SealthProvider;
 using StealthBackHandle;
@@ -10,6 +12,7 @@ using StealthBuildData;
 using StealthEmailBackHandle;
 using StealthFileBackHandle;
 using StealthPostgreProvider;
+using System.Reflection;
 
 namespace StealthGirder
 {
@@ -29,9 +32,10 @@ namespace StealthGirder
             //services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
             #endregion
             
-            #region stealth provider
+            #region stealth provider          
             services.AddTransient<IEmailProvider, PostgreEmailProvider>();
             services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
+            services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
             #endregion
 
             #region postgre mode               
@@ -40,8 +44,12 @@ namespace StealthGirder
             services.AddTransient<FileBackHandle>();
             services.AddPostgreBackHandle();
             #endregion
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.FileProviders.Add(
+                    new EmbeddedFileProvider(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly));
+            });
+            services.AddMvc().AddApplicationPart(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IScheduler scheduler)

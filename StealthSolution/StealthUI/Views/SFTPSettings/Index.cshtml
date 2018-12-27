@@ -2,21 +2,42 @@
     ViewData["Title"] = "SFTPSetting";
 }
 
-<div style="margin-top:10px;">
-    <h2 style="height: 50px;">SFTPSettings</h2>
-</div>
-<div id="addsftpsetting" style="text-align:right;margin:10px;">
-    <addmodal></addmodal>
-</div>
-<div id="tablediv" style="padding:10px;">
-    <sftpsetting-row :sftpsettings="sftpsettings"></sftpsetting-row>
-</div>
 
 
-<div id="editdiv">
-    <editmodal v-bind:editdata="editdata"></editmodal>
-</div>
-@section Scripts{
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SFTPSettings- StealthUI</title>
+    <link href="~/lib/iview/dist/styles/iview.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container body-content">
+        <div style="margin-top:10px;">
+            <h2 style="height: 50px;">SFTPSettings</h2>
+        </div>
+        <div id="addsftpsetting" style="text-align:right;margin:10px;">
+            <addmodal></addmodal>
+        </div>
+        <div id="tablediv" style="padding:10px;">
+            <sftpsetting-row :sftpsettings="sftpsettings"></sftpsetting-row>
+        </div>
+
+
+        <div id="editdiv">
+            <editmodal v-bind:editdata="editdata"></editmodal>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - StealthUI</p>
+        </footer>
+    </div>
+    <script src="~/lib/vue/dist/vue.js"></script>
+    <script src="~/lib/iview/dist/iview.js"></script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+
 
     <script type="text/x-template" id="sftpsetting-tr">
         <div>
@@ -174,7 +195,7 @@
                     tempSFTPsetting = JSON.parse(JSON.stringify(editVue.editdata.sftpsetting))
                 },
                 delete: function (sftpsetting, index) {
-                
+
                     if (confirm("delete  " + sftpsetting.keyName + "?")) {
                         axios.delete("/removeSFTPsetting/" + sftpsetting.id)
                             .then(function (response) {
@@ -471,7 +492,7 @@
                         userName: "",
                         password: "",
                         subject: "",
-                        certificatePath: "",                     
+                        certificatePath: "",
                         transferDirectory: "",
                         transferFilePrefix: "",
                         fileName: "",
@@ -545,4 +566,5 @@
             el: "#addsftpsetting"
         });
     </script>
-}
+</body>
+</html>

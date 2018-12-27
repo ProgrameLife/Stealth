@@ -36,6 +36,7 @@ namespace StealthUI.Controllers
         /// index view
         /// </summary>
         /// <returns>Return a view</returns>
+        [HttpGet("/emailsettings")]
         public IActionResult Index()
         {
             return View();

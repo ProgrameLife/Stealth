@@ -20,9 +20,8 @@ namespace StealthGirder.Controllers
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
-        {
-            var result = _srviceAccessore("EmailBackHandle").Handle("emailtest");
-            return new string[] { "value1", "value2" + result };
+        {          
+            return new string[] { "value1", "value2"  };
         }
 
         // GET api/values/5

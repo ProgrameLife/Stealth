@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <StartupObject>StealthGirder.Program</StartupObject>
     <Version>1.0.0-alpha</Version>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
+    <ProjectReference Include="..\StealthUI\StealthUI.csproj" />
   </ItemGroup>
 
 </Project>

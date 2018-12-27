@@ -1,21 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "FileSetting";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FileSettings - StealthUI</title>
+    <link href="~/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
-<div style="margin-top:10px;">
-    <h2 style="height: 50px;">FileSettings</h2>
-</div>
-<div id="addfilesetting" style="text-align:right;margin:10px;">
-    <addmodal></addmodal>
-</div>
-<div id="tablediv" style="padding:10px;">
-    <filesetting-row :filesettings="filesettings"></filesetting-row>
-</div>
-<div id="editdiv">
-    <editmodal v-bind:editdata="editdata"></editmodal>
-</div>
-@section Scripts{
-
+</head>
+<body>
+    <div class="container body-content">
+        <div style="margin-top:10px;">
+            <h2 style="height: 50px;">FileSettings</h2>
+        </div>
+        <div id="addfilesetting" style="text-align:right;margin:10px;">
+            <addmodal></addmodal>
+        </div>
+        <div id="tablediv" style="padding:10px;">
+            <filesetting-row :filesettings="filesettings"></filesetting-row>
+        </div>
+        <div id="editdiv">
+            <editmodal v-bind:editdata="editdata"></editmodal>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - StealthUI</p>
+        </footer>
+    </div>
+    <script src="~/lib/vue/dist/vue.js"></script>
+    <script src="~/lib/iview/dist/iview.js"></script>
+    <script src="~/lib/axios/dist/axios.js"></script>
     <script type="text/x-template" id="filesetting-tr">
         <div>
             <row :gutter="16">
@@ -108,7 +124,7 @@
                     ],
                     data: this.filesettings.list,
                     total: this.filesettings.total,
-                    current: this.filesettings.current 
+                    current: this.filesettings.current
                 }
             },
             methods: {
@@ -151,7 +167,7 @@
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        getFile(fileSettingVue.filesettings.current); 
+                                        getFile(fileSettingVue.filesettings.current);
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -316,7 +332,7 @@
                             </FormItem>
                             </Col>
                         </row>
-                        <row :gutter="16">                         
+                        <row :gutter="16">
                             <Col span="12">
                             <FormItem label="FileName" prop="fileName">
                                 <Input v-model="formValidate.fileName"></Input>
@@ -341,7 +357,7 @@
                                 </i-switch>
                             </FormItem>
                             </Col>
-                        </row>                  
+                        </row>
                     </Form>
                 </div>
                 <div slot="footer">
@@ -372,7 +388,7 @@
                         ],
                         fileName: [
                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],      
+                        ],
                         fileEncoding: [
                             { required: true, message: 'FileEncoding cannot be empty, is required', trigger: 'blur' }
                         ],
@@ -389,7 +405,7 @@
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
                                 //settlemtntSettingVue.Filesettings.push(newFileSetting)
-                                getFile(fileSettingVue.filesettings.current); 
+                                getFile(fileSettingVue.filesettings.current);
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
@@ -429,4 +445,5 @@
             el: "#addfilesetting"
         });
     </script>
-}
+</body>
+</html>

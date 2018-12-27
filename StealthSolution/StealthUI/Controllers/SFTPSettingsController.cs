@@ -36,6 +36,7 @@ namespace StealthUI.Controllers
         /// index view
         /// </summary>
         /// <returns>Return a view</returns>
+        [HttpGet("/sftpsettings")]
         public IActionResult Index()
         {
             return View();
