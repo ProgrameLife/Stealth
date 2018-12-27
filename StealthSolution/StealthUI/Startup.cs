@@ -27,6 +27,7 @@ namespace StealthUI
         {
             services.AddTransient<IEmailProvider, PostgreEmailProvider>();
             services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
+            services.AddTransient<IFileProvider, PostgreFileProvider>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

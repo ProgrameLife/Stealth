@@ -5,22 +5,27 @@
 <div style="margin-top:10px;">
     <h2 style="height: 50px;">FileSettings</h2>
 </div>
-<div id="addFilesetting" style="text-align:right;margin:10px;">
+<div id="addfilesetting" style="text-align:right;margin:10px;">
     <addmodal></addmodal>
 </div>
 <div id="tablediv" style="padding:10px;">
-    <Filesetting-row :Filesettings="Filesettings"></Filesetting-row>
+    <filesetting-row :filesettings="filesettings"></filesetting-row>
 </div>
 <div id="editdiv">
     <editmodal v-bind:editdata="editdata"></editmodal>
 </div>
 @section Scripts{
 
-    <script type="text/x-template" id="Filesetting-tr">
+    <script type="text/x-template" id="filesetting-tr">
         <div>
             <row :gutter="16">
                 <col span="24">
                 <Table border :columns="columns" :data="data"></Table>
+                </col>
+            </row>
+            <row :gutter="16">
+                <col span="24">
+                <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
             </row>
         </div>
@@ -29,9 +34,9 @@
         var editVue = null;
         var tempFilesetting = null;
         //table组件
-        Vue.component("Filesetting-row", {
-            template: "#Filesetting-tr",
-            props: ["Filesettings"],
+        Vue.component("filesetting-row", {
+            template: "#filesetting-tr",
+            props: ["filesettings"],
             data: function () {
                 return {
                     columns: [
@@ -101,17 +106,19 @@
                             }
                         }
                     ],
-                    data: this.Filesettings
+                    data: this.filesettings.list,
+                    total: this.filesettings.total,
+                    current: this.filesettings.current 
                 }
             },
             methods: {
-                edit: function (Filesetting) {
+                edit: function (filesetting) {
                     if (editVue == null) {
                         editVue = new Vue({
                             el: "#editdiv",
                             data: {
                                 editdata: {
-                                    Filesetting: Filesetting,
+                                    filesetting: filesetting,
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
@@ -129,22 +136,22 @@
                             }
                         });
                     } else {
-                        editVue.editdata.Filesetting = Filesetting;
+                        editVue.editdata.filesetting = filesetting;
                         editVue.editdata.showmodal = true;
                     }
 
                     //深度clone
-                    tempFilesetting = JSON.parse(JSON.stringify(editVue.editdata.Filesetting))
+                    tempFilesetting = JSON.parse(JSON.stringify(editVue.editdata.filesetting))
                 },
-                delete: function (Filesetting, index) {
-                    if (confirm("delete" + Filesetting.keyName + "?")) {
-                        axios.delete("/removeFilesetting/" + Filesetting.id)
+                delete: function (filesetting, index) {
+                    if (confirm("delete " + filesetting.keyName + "?")) {
+                        axios.delete("/removeFilesetting/" + filesetting.id)
                             .then(function (response) {
                                 //判断请求状态
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        settlemtntSettingVue.Filesettings.splice(index, 1)
+                                        getFile(fileSettingVue.filesettings.current); 
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -158,34 +165,45 @@
                                 console.log(error);
                             });
                     }
+                },
+                pageing: function (pageindex) {
+                    getFile(pageindex)
                 }
             }
         })
-        var settlemtntSettingVue = null;
-        axios.get("/Filesettings")
-            .then(function (response) {
-                //判断请求状态
-                if (response.status == 200) {
-                    var returnData = response.data
-                    if (returnData.result) {
-                        settlemtntSettingVue = new Vue({
-                            el: "#tablediv",
-                            data: {
-                                Filesettings: returnData.data
-                            }
-                        });
-                    } else {
-                        alert(returnData.messages)
+        var fileSettingVue = null;
+        function getFile(pageindex) {
+            axios.get("/filesettings/" + pageindex)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        document.getElementById("tablediv").innerHTML = '<filesetting-row :filesettings="filesettings"></filesetting-row>'
+                        var returnData = response.data
+                        if (returnData.result) {
+                            fileSettingVue = new Vue({
+                                el: "#tablediv",
+                                data: {
+                                    filesettings: {
+                                        list: returnData.data.list,
+                                        total: returnData.data.total,
+                                        current: pageindex
+                                    }
+                                }
+                            });
+                        } else {
+                            alert(returnData.messages)
+                        }
                     }
-                }
-                else {
-                    alert(response.statusText);
-                }
-            })
-            .catch(function (error) {
-                alert(error)
-                console.log(error);
-            });
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error)
+                    console.log(error);
+                });
+        }
+        getFile(1);
     </script>
 
     <script type="text/x-template" id="editmodal-div">
@@ -194,35 +212,35 @@
                width="800px"
                :mask-closable="false">
             <div>
-                <Form ref="editdata.Filesetting" :model="editdata.Filesetting" :rules="editdata.ruleValidate" label-position="top">
+                <Form ref="editdata.filesetting" :model="editdata.filesetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
                         <FormItem label="KeyName" prop="keyName">
-                            <Input v-model="editdata.Filesetting.keyName"></Input>
+                            <Input v-model="editdata.filesetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="FileName" prop="fileName">
-                            <Input v-model="editdata.Filesetting.fileName"></Input>
+                            <Input v-model="editdata.filesetting.fileName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="FilePath" prop="filePath">
-                            <Input v-model="editdata.Filesetting.filePath"></Input>
+                            <Input v-model="editdata.filesetting.filePath"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="FileEncoding" prop="fileEncoding">
-                            <Input v-model="editdata.Filesetting.fileEncoding"></Input>
+                            <Input v-model="editdata.filesetting.fileEncoding"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="Validate">
-                            <i-switch v-model="editdata.Filesetting.validate" size="large">
+                            <i-switch v-model="editdata.filesetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
                             </i-switch>
@@ -244,9 +262,9 @@
             methods: {
                 modalOk() {
 
-                    this.$refs['editdata.Filesetting'].validate((valid) => {
+                    this.$refs['editdata.filesetting'].validate((valid) => {
                         if (valid) {
-                            axios.put("/modifyFilesetting", this.editdata.Filesetting)
+                            axios.put("/modifyFilesetting", this.editdata.filesetting)
                                 .then(function (response) {
                                     //判断请求状态
                                     if (response.status == 200) {
@@ -272,8 +290,8 @@
                     })
                 },
                 modalCancel() {
-                    for (var key in this.editdata.Filesetting) {
-                        this.editdata.Filesetting[key] = tempFilesetting[key];
+                    for (var key in this.editdata.filesetting) {
+                        this.editdata.filesetting[key] = tempFilesetting[key];
                     }
                     editVue.editdata.showmodal = false;
                 }
@@ -317,7 +335,7 @@
                             </FormItem>
                             </Col>
                             <FormItem label="Validate">
-                                <i-switch v-model="editdata.Filesetting.validate" size="large">
+                                <i-switch v-model="formValidate.validate" size="large">
                                     <span slot="valid">true</span>
                                     <span slot="invalid">false</span>
                                 </i-switch>
@@ -354,7 +372,10 @@
                         ],
                         fileName: [
                             { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],                      
+                        ],      
+                        fileEncoding: [
+                            { required: true, message: 'FileEncoding cannot be empty, is required', trigger: 'blur' }
+                        ],
                     }
                 }
             },
@@ -367,7 +388,8 @@
                                 console.log(newFileSetting)
                                 //深度clone
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
-                                settlemtntSettingVue.Filesettings.push(newFileSetting)
+                                //settlemtntSettingVue.Filesettings.push(newFileSetting)
+                                getFile(fileSettingVue.filesettings.current); 
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
@@ -382,8 +404,8 @@
             }
         })
 
-        function addFile(Filesetting, callback) {
-            axios.post("/addFilesetting", Filesetting)
+        function addFile(filesetting, callback) {
+            axios.post("/addFilesetting", filesetting)
                 .then(function (response) {
                     //判断请求状态
                     if (response.status == 200) {
@@ -404,7 +426,7 @@
                 });
         }
         new Vue({
-            el: "#addFilesetting"
+            el: "#addfilesetting"
         });
     </script>
 }

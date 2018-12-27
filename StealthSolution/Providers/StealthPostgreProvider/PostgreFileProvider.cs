@@ -26,13 +26,21 @@ namespace StealthPostgreProvider
         /// get all fileSetting
         /// </summary>
         /// <returns></returns>
-        public List<FileSetting> GetAllFileSetting()
-        {
-            var sql = "select * from filesettings";
+        public (List<FileSetting> list, int total) GetAllFileSetting(int pageIndex=1)
+        {   
+            var sql = $"select * from filesettings order by id  limit 10  offset  {(pageIndex - 1) * 10}";
+            List<FileSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<FileSetting>(sql).ToList();
+                list = con.Query<FileSetting>(sql).ToList();
             }
+            int total = 0;
+            sql = $"select count(*) from filesettings";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
         /// <summary>
         /// get a fileSetting by keyname

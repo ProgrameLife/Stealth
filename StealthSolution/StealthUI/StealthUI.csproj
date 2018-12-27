@@ -101,4 +101,8 @@
     <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
 </Project>

@@ -8,11 +8,12 @@ namespace SealthProvider
     /// </summary>
     public interface IFileProvider
     {
+
         /// <summary>
         /// get all fileSetting
         /// </summary>
         /// <returns></returns>
-        List<FileSetting> GetAllFileSetting();
+        (List<FileSetting> list, int total) GetAllFileSetting(int pageIndex = 1);
 
         /// <summary>
         /// get a fileSetting by keyname

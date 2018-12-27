@@ -43,14 +43,16 @@ namespace StealthUI.Controllers
         /// <summary>
         /// get all Filesetting,contains invalidate
         /// </summary>
+        /// <param name="pageindex">pageindex</param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message,the third is data property, indicating the return data</returns>
-        [HttpGet("Filesettings")]
-        public IActionResult GetAllSetting()
+        [HttpGet("filesettings/{pageindex}")]
+        public IActionResult GetAllSetting(int pageindex = 1)
         {
             try
             {
-                _logger.LogInformation("get all Filesetting");
-                return new JsonResult(new { result = true, data = _fileProvider.GetAllFileSetting() });
+                _logger.LogInformation($"get all Filesetting， pageindex={pageindex}");
+                var result = _fileProvider.GetAllFileSetting(pageindex);
+                return new JsonResult(new { result = true, data = new { list = result.list, total = result.total } });
             }
             catch (Exception exc)
             {
@@ -58,13 +60,15 @@ namespace StealthUI.Controllers
                 return new JsonResult(new { result = false, message = exc.Message });
             }
         }
+
+
         /// <summary>
         /// add Filesetting
         /// </summary>
         /// <param name="FileSetting">Filesetting</param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
         [HttpPost("addFilesetting")]
-        public IActionResult AddFileSetting(FileSetting FileSetting)
+        public IActionResult AddFileSetting([FromBody]FileSetting FileSetting)
         {
             try
             {
@@ -83,7 +87,7 @@ namespace StealthUI.Controllers
         /// <param name="FileSetting"></param>
         /// <returns>Return json object, one property is result, of Boolean type, indicating whether the return is successful, and the other is message, indicating the error message</returns>
         [HttpPut("modifyFilesetting")]
-        public IActionResult ModifyFileSetting(FileSetting FileSetting)
+        public IActionResult ModifyFileSetting([FromBody]FileSetting FileSetting)
         {
             try
             {
