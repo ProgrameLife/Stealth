@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>1.0.0-alpha</Version>
+    <PackageIconUrl>https://en.gravatar.com/userimage/127492023/e2808b6369f28a33ccb2f7aee71de3cc</PackageIconUrl>
+    <Authors>桂素伟</Authors>
+    <Description>StealthBackHandle Interface</Description>
+    <PackageProjectUrl>https://github.com/ProgrameLife/Stealth</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ProgrameLife/Stealth/blob/master/License</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ProgrameLife/Stealth.git</RepositoryUrl>
+    <PackageTags>Stealth,StealthBackHandle</PackageTags>
+    <Copyright>Copyright (c) 2018 桂素伟</Copyright>
+    <PackageReleaseNotes>the first version</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

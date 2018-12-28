@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>1.0.0-alpha</Version>
+    <Authors>桂素伟</Authors>
+    <Description>StealthFTPBackHandle</Description>
+    <Copyright>Copyright (c) 2018 桂素伟</Copyright>
+    <PackageLicenseUrl>https://github.com/ProgrameLife/Stealth/blob/master/License</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ProgrameLife/Stealth</PackageProjectUrl>
+    <PackageIconUrl>https://en.gravatar.com/userimage/127492023/e2808b6369f28a33ccb2f7aee71de3cc</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ProgrameLife/Stealth.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Stealth,StealthFTPBackHandle</PackageTags>
+    <PackageReleaseNotes>the first version</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
