@@ -3,7 +3,7 @@
     /// <summary>
     /// Quartz Core Entity
     /// </summary>
-    public class QuartzEntity
+    public class QuartzSetting
     {
         /// <summary>
         /// Key Name

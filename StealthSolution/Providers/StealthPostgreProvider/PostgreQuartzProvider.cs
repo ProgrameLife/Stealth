@@ -22,38 +22,73 @@ namespace StealthPostgreProvider
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
-
-        public bool AddQuartzSetting(QuartzEntity quartzEntity)
+        /// <summary>
+        /// add QuartzSetting
+        /// </summary>
+        /// <param name="quartzSetting"></param>
+        /// <returns></returns>
+        public bool AddQuartzSetting(QuartzSetting quartzSetting)
         {
-            throw new System.NotImplementedException();
+            var sql = @"INSERT INTO public.quartzsettings(
+	id, keyname, typename, cronexpression, validate, createon)
+	VALUES (@keyname, @typename, @cronexpression, @validate);";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, quartzSetting) > 0;
+            }
         }
-
-        public List<QuartzEntity> GetAllQuartzSetting()
+        /// <summary>
+        /// get all QuartzSetting
+        /// </summary>
+        /// <returns></returns>
+        public List<QuartzSetting> GetAllQuartzSetting()
         {
-            throw new System.NotImplementedException();
+            var sql = "select * from quartzsettings";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Query<QuartzSetting>(sql).ToList();
+            }
         }
 
         /// <summary>
-        /// query QueartzEntity list
+        /// query QuartzSetting list
         /// </summary>
         /// <returns></returns>
-        public List<QuartzEntity> GetQuartzSetting()
+        public List<QuartzSetting> GetQuartzSetting()
         {
             var sql = "select * from quartzsettings where validate=true";
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<QuartzEntity>(sql).ToList();
+                return con.Query<QuartzSetting>(sql).ToList();
             }
         }
-
-        public bool ModifyQuartzSetting(QuartzEntity quartzEntity)
+        /// <summary>
+        /// modify QuartzSetting
+        /// </summary>
+        /// <param name="quartzSetting"></param>
+        /// <returns></returns>
+        public bool ModifyQuartzSetting(QuartzSetting quartzSetting)
         {
-            throw new System.NotImplementedException();
+            var sql = @"UPDATE public.quartzsettings
+	SET keyname=@keyname, typename=@typename, cronexpression=@cronexpression, validate=@validate
+	WHERE id=@id;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, quartzSetting) > 0;
+            }
         }
-
+        /// <summary>
+        /// delete QuartzSetting
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool RemoveQuartzSetting(int id)
         {
-            throw new System.NotImplementedException();
+            var sql = @"DELETE FROM public.quartzsettings where id=@id;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, new { id }) > 0;
+            }
         }
     }
 }

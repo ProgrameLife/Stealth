@@ -13,24 +13,24 @@ namespace SealthProvider
         /// query validate quartzsetting 
         /// </summary>
         /// <returns>validate quartzsetting list</returns>
-        List<QuartzEntity> GetQuartzSetting();
+        List<QuartzSetting> GetQuartzSetting();
         /// <summary>
         /// get all quartzsetting
         /// </summary>
         /// <returns>all  quartzsetting</returns>
-        List<QuartzEntity> GetAllQuartzSetting();
+        List<QuartzSetting> GetAllQuartzSetting();
         /// <summary>
         /// add quartzsetting
         /// </summary>
         /// <param name="quartzEntity">quartz setting</param>
         /// <returns>modify quartzsetting resul</returns>
-        bool AddQuartzSetting(QuartzEntity quartzEntity);
+        bool AddQuartzSetting(QuartzSetting quartzEntity);
         /// <summary>
         /// modify quartzsetting
         /// </summary>
         /// <param name="quartzEntity">quartz setting</param>
         /// <returns>modify quartzsetting resul</returns>
-        bool ModifyQuartzSetting(QuartzEntity quartzEntity);
+        bool ModifyQuartzSetting(QuartzSetting quartzEntity);
         /// <summary>
         /// remove quartzsetting
         /// </summary>

@@ -22,12 +22,12 @@ namespace StealthSqlServerProvider
             _connectionString = connectionString;
         }
 
-        public bool AddQuartzSetting(QuartzEntity quartzEntity)
+        public bool AddQuartzSetting(QuartzSetting quartzEntity)
         {
             throw new System.NotImplementedException();
         }
 
-        public List<QuartzEntity> GetAllQuartzSetting()
+        public List<QuartzSetting> GetAllQuartzSetting()
         {
             throw new System.NotImplementedException();
         }
@@ -36,16 +36,16 @@ namespace StealthSqlServerProvider
         /// query QueartzEntity list
         /// </summary>
         /// <returns></returns>
-        public List<QuartzEntity> GetQuartzSetting()
+        public List<QuartzSetting> GetQuartzSetting()
         {
             var sql = "select * from quartzsettings where validate=true";
             using (var con = new SqlConnection(_connectionString))
             {
-                return con.Query<QuartzEntity>(sql).ToList();
+                return con.Query<QuartzSetting>(sql).ToList();
             }
         }
 
-        public bool ModifyQuartzSetting(QuartzEntity quartzEntity)
+        public bool ModifyQuartzSetting(QuartzSetting quartzEntity)
         {
             throw new System.NotImplementedException();
         }

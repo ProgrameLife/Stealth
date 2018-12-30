@@ -67,7 +67,7 @@ namespace StealthQuartz
         /// <param name="app"></param>
         /// <param name="scheduler"></param>
         /// <param name="quartzEntities"></param>
-        public static void UserBackHandle(this IApplicationBuilder app, IScheduler scheduler, params QuartzEntity[] quartzEntities)
+        public static void UserBackHandle(this IApplicationBuilder app, IScheduler scheduler, params QuartzSetting[] quartzEntities)
         {
             foreach (var quartzEntitie in quartzEntities)
             {
