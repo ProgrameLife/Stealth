@@ -22,20 +22,44 @@ namespace StealthPostgreProvider
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
-
+        /// <summary>
+        /// add DataSetting
+        /// </summary>
+        /// <param name="dataSetting">DataSetting</param>
+        /// <returns>Returns whether the add result was successful,result is true or false</returns>
         public bool AddDataSetting(DataSetting dataSetting)
         {
-            throw new System.NotImplementedException();
+            var sql = @"INSERT INTO public.datasqls(
+    id, keyname, datasettingid, sql, transactionno, groupno, validate, createon)
+	VALUES(@keyname, @datasettingid, @sql, @transactionno, @groupno, @validate); ";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, dataSetting) > 0;
+            }
         }
-
+        /// <summary>
+        /// get all DataSetting
+        /// </summary>
+        /// <returns></returns>
         public List<DataSetting> GetAllDataSetting()
         {
-            throw new System.NotImplementedException();
+            var sql = @"select * from datasettings;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Query<DataSetting>(sql).ToList();
+            }
         }
-
+        /// <summary>
+        /// get validate DataSettings
+        /// </summary>
+        /// <returns></returns>
         public List<DataSetting> GetDataSettings()
         {
-            throw new System.NotImplementedException();
+            var sql = @"select * from datasettings where validate=true;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Query<DataSetting>(sql).ToList();
+            }
         }
         /// <summary>
         /// get datasettings 
@@ -53,15 +77,33 @@ where datasqls.keyname=@keyname;";
                 return con.Query<DataSetting>(sql, new { keyname = keyName });
             }
         }
-
+        /// <summary>
+        /// modify DataSetting
+        /// </summary>
+        /// <param name="dataSetting"></param>
+        /// <returns></returns>
         public bool ModifyDataSetting(DataSetting dataSetting)
         {
-            throw new System.NotImplementedException();
+            var sql = @"UPDATE public.datasqls
+	 keyname=@keyname, datasettingid=@datasettingid, sql=@sql, transactionno=@transactionno, groupno=@groupno, validate=@validate
+	WHERE id=@id;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, dataSetting) > 0;
+            }
         }
-
+        /// <summary>
+        /// remove DataSetting
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool RemoveDataSetting(int id)
         {
-            throw new System.NotImplementedException();
+            var sql = @"DELETE FROM public.datasqls	WHERE id=@id;";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                return con.Execute(sql, new { id }) > 0;
+            }
         }
     }
 }

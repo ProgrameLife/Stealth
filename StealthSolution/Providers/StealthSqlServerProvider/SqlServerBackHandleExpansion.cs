@@ -27,10 +27,10 @@ namespace StealthSqlServerProvider
         /// </summary>
         /// <param name="services">service collection</param>
         /// <param name="backHandles">back handles</param>
-        public static void AddPostgreBackHandle(this IServiceCollection services, params IBackHandle[] backHandles)
+        public static void AddPostgreBackHandle(this IServiceCollection services)
         {
             services.AddScoped<IQuartzProvider, SqlServerQuartzProvider>();
-            services.AddBackHandle(backHandles);
+            services.AddBackHandle();
         }
     }
 }
