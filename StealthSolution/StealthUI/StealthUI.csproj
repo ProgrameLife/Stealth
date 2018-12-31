@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\QuartzSettings\Index.cshtml" />
     <Content Remove="Views\EmailSettings\Index.cshtml" />
     <Content Remove="Views\FileSettings\Index.cshtml" />
     <Content Remove="Views\SFTPSettings\Index.cshtml" />
@@ -38,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Views\QuartzSettings\Index.cshtml" />
     <EmbeddedResource Include="Views\EmailSettings\Index.cshtml" />
     <EmbeddedResource Include="Views\FileSettings\Index.cshtml" />
     <EmbeddedResource Include="Views\SFTPSettings\Index.cshtml" />

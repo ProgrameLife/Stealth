@@ -17,8 +17,9 @@ namespace SealthProvider
         /// <summary>
         /// get all quartzsetting
         /// </summary>
-        /// <returns>all  quartzsetting</returns>
-        List<QuartzSetting> GetAllQuartzSetting();
+        /// <param name="pageIndex">page index</param>
+        /// <returns></returns>
+        (List<QuartzSetting> list, int total) GetAllQuartzSetting(int pageIndex = 1);
         /// <summary>
         /// add quartzsetting
         /// </summary>

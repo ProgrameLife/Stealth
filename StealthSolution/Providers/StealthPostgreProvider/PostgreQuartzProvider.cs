@@ -40,14 +40,23 @@ namespace StealthPostgreProvider
         /// <summary>
         /// get all QuartzSetting
         /// </summary>
+        /// <param name="pageIndex">page index</param>
         /// <returns></returns>
-        public List<QuartzSetting> GetAllQuartzSetting()
+        public (List<QuartzSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
         {
-            var sql = "select * from quartzsettings";
+            var sql = $"select * from quartzsettings order by id  limit 10  offset  {(pageIndex - 1) * 10}";
+            List<QuartzSetting> list = null;
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<QuartzSetting>(sql).ToList();
+                list = con.Query<QuartzSetting>(sql).ToList();
             }
+            int total = 0;
+            sql = $"select count(*) from quartzsettings";
+            using (var con = new NpgsqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
 
         /// <summary>

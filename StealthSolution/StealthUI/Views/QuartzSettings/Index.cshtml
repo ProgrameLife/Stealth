@@ -1,0 +1,446 @@
+﻿@{
+    ViewData["Title"] = "QuartzSetting";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuartzSettings - StealthUI</title>
+    <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container body-content">
+        <div style="margin-top:10px;">
+            <h2 style="height: 20px;">QuartzSettings</h2>
+        </div>
+        <div id="addQuartzsetting" style="text-align:right;margin:10px;">
+            <addmodal></addmodal>
+        </div>
+        <div id="tablediv" style="padding:10px;">
+            <Quartzsetting-row :Quartzsettings="Quartzsettings"></Quartzsetting-row>
+        </div>
+
+        <div id="editdiv">
+            <editmodal v-bind:editdata="editdata"></editmodal>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - StealthUI</p>
+        </footer>
+    </div>
+    <script src="~/wwwroot/lib/vue/dist/vue.js"></script>
+    <script src="~/wwwroot/lib/iview/dist/iview.js"></script>
+    <script src="~/wwwroot/lib/axios/dist/axios.js"></script>
+
+
+    <script type="text/x-template" id="Quartzsetting-tr">
+        <div>
+            <row :gutter="16">
+                <col span="24">
+                <Table border :columns="columns" :data="data"></Table>
+                </col>
+            </row>
+            <row :gutter="16"  style="text-align:right;margin-top:3px;">
+                <col span="24">
+                <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
+                </col>
+            </row>
+        </div>
+    </script>
+    <script>
+        var editVue = null;
+        var tempQuartzsetting = null;
+        //table组件
+        Vue.component("Quartzsetting-row", {
+            template: "#Quartzsetting-tr",
+            props: ["Quartzsettings"],
+            data: function () {
+                return {
+                    columns: [
+                        {
+                            title: 'ID',
+                            key: 'id',
+                            width: 50,
+                        },
+                        {
+                            title: 'KeyName',
+                            key: 'keyName',
+                        },
+                        {
+                            title: 'TypeName',
+                            key: 'typeName',
+
+                        },
+                        {
+                            title: 'CronExpression',
+                            key: 'cronExpression'
+                        },   
+                        {
+                            title: 'Validate',
+                            key: 'validate'
+                        }, 
+                        {
+                            title: 'operate',
+                            key: 'action',
+                            width: 100,
+                            align: 'center',
+                            render: (h, params) => {
+                                return h('div', [
+                                    h('Button', {
+                                        props: {
+                                            type: 'success',
+                                            icon: 'md-create',
+                                            size: 'small'
+                                        },
+                                        style: {
+                                            marginRight: '5px'
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.edit(params.row)
+                                            }
+                                        }
+                                    }),
+                                    h('Button', {
+                                        props: {
+                                            type: 'error',
+                                            icon: 'ios-trash',
+                                            size: 'small',
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.delete(params.row, params.index)
+                                            }
+                                        }
+                                    })
+                                ]);
+                            }
+                        }
+                    ],
+                    data: this.Quartzsettings.list,
+                    total: this.Quartzsettings.total,
+                    current: this.Quartzsettings.current
+                }
+            },
+            methods: {
+                edit: function (Quartzsetting) {
+                    if (editVue == null) {
+                        editVue = new Vue({
+                            el: "#editdiv",
+                            data: {
+                                editdata: {
+                                    Quartzsetting: Quartzsetting,
+                                    showmodal: true,
+                                    ruleValidate: {
+                                        keyName: [
+                                            { required: true, message: 'KeyName cannot be empty, is required', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                        ],
+                                        typeName: [
+                                            { required: true, message: 'TypeName cannot be empty, is required', trigger: 'blur' }
+                                        ],
+                                        cronExpression: [
+                                            { required: true, message: 'CronExpression cannot be empty, is required', trigger: 'blur' }
+                                        ],                                    
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        editVue.editdata.Quartzsetting = Quartzsetting;
+                        editVue.editdata.showmodal = true;
+                    }
+
+                    //深度clone
+                    tempQuartzsetting = JSON.parse(JSON.stringify(editVue.editdata.Quartzsetting))
+                },
+                delete: function (Quartzsetting, index) {
+                    if (confirm("delete  " + Quartzsetting.keyName + " ?")) {
+                        axios.delete("/removeQuartzsetting/" + Quartzsetting.id)
+                            .then(function (response) {
+                                //判断请求状态
+                                if (response.status == 200) {
+                                    var returnData = response.data
+                                    if (returnData.result) {
+                                        getQuartz(settlemtntSettingVue.Quartzsettings.current);
+                                    } else {
+                                        alert(returnData.messages)
+                                    }
+                                }
+                                else {
+                                    alert(response.statusText);
+                                }
+                            })
+                            .catch(function (error) {
+                                alert(error)
+                                console.log(error);
+                            });
+                    }
+                },
+                pageing: function (pageindex) {
+                    getQuartz(pageindex)
+                }
+            }
+        })
+        var settlemtntSettingVue = null;
+
+        function getQuartz(pageindex) {
+            axios.get("/Quartzsettings/" + pageindex)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        document.getElementById("tablediv").innerHTML = ' <Quartzsetting-row :Quartzsettings="Quartzsettings"></Quartzsetting-row>'
+                        var returnData = response.data
+                        if (returnData.result) {
+
+                            settlemtntSettingVue = new Vue({
+                                el: "#tablediv",
+                                data: {
+                                    Quartzsettings: {
+                                        list: returnData.data.list,
+                                        total: returnData.data.total,
+                                        current: pageindex
+                                    },
+                                }
+                            });
+                        } else {
+                            alert(returnData.messages)
+                        }
+                    }
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error)
+                    console.log(error);
+                });
+        }
+        getQuartz(1);
+    </script>
+
+    <script type="text/x-template" id="editmodal-div">
+        <Modal v-model="editdata.showmodal"
+               title="Edit"
+               width="800px"
+               :mask-closable="false">
+            <div>
+                <Form ref="editdata.Quartzsetting" :model="editdata.Quartzsetting" :rules="editdata.ruleValidate" label-position="top">
+                    <row :gutter="16">
+                        <Col span="24">
+                        <FormItem label="KeyName" prop="keyName">
+                            <Input v-model="editdata.Quartzsetting.keyName"></Input>
+                        </FormItem>
+                        </Col>
+                    </row>
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="TypeName" prop="typeName">
+                            <Input v-model="editdata.Quartzsetting.typeName"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        <FormItem label="CronExpression" prop="cronExpression">
+                            <InputNumber v-model="editdata.Quartzsetting.cronExpression" :min="10" :step="1"></InputNumber>
+                        </FormItem>
+                        </Col>
+                    </row>     
+                    <row :gutter="16">
+                        <Col span="12">
+                        <FormItem label="Validate">
+                            <i-switch v-model="editdata.Quartzsetting.validate" size="large">
+                                <span slot="valid">true</span>
+                                <span slot="invalid">false</span>
+                            </i-switch>
+                        </FormItem>
+                        </Col>
+                        <Col span="12">
+                        </Col>
+                    </row>
+                </Form>
+            </div>
+            <div slot="footer">
+                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+            </div>
+        </Modal>
+    </script>
+    <script>
+        Vue.component("editmodal", {
+            template: "#editmodal-div",
+            props: ["editdata"],
+            methods: {
+                modalOk() {
+
+                    this.$refs['editdata.Quartzsetting'].validate((valid) => {
+                        if (valid) {
+                            console.log(this.editdata.Quartzsetting)
+                            axios.put("/modifyQuartzsetting", this.editdata.Quartzsetting)
+                                .then(function (response) {
+                                    //判断请求状态
+                                    if (response.status == 200) {
+                                        var returnData = response.data;
+                                        console.log(returnData)
+                                        if (returnData.result) {
+                                            editVue.editdata.showmodal = false;
+                                        } else {
+                                            alert(returnData.message);
+                                        }
+                                    }
+                                    else {
+                                        alert(response.statusText);
+                                    }
+                                })
+                                .catch(function (error) {
+                                    alert(error)
+                                    console.log(error);
+                                });
+
+                        } else {
+                            this.$Message.error('validate failure!');
+                        }
+                    })
+                },
+                modalCancel() {
+                    for (var key in this.editdata.Quartzsetting) {
+                        this.editdata.Quartzsetting[key] = tempQuartzsetting[key];
+                    }
+                    editVue.editdata.showmodal = false;
+                }
+            }
+        })
+    </script>
+
+
+    <script type="text/x-template" id="addmodal-div">
+        <div>      
+            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+            <Modal v-model="showmodal"
+                   title="Add"
+                   width="800px"
+                   :mask-closable="false">
+                <div>
+                    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
+                        <row :gutter="16">
+                            <Col span="24">
+                            <FormItem label="KeyName" prop="keyName">
+                                <Input v-model="formValidate.keyName"></Input>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="TypeName" prop="typeName">
+                                <Input v-model="formValidate.typeName"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="CronExpression" prop="cronExpression">
+                                <InputNumber v-model="formValidate.cronExpression" :min="10" :step="1"></InputNumber>
+                            </FormItem>
+                            </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="Validate">
+                                <i-switch v-model="formValidate.validate" size="large">
+                                    <span slot="valid">true</span>
+                                    <span slot="invalid">false</span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            </Col>
+                        </row>
+                    </Form>
+                </div>
+                <div slot="footer">
+                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                </div>
+            </Modal>
+        </div>
+    </script>
+    <script>
+        Vue.component("addmodal", {
+            template: "#addmodal-div",
+            data: function () {
+                return {
+                    showmodal: false,
+                    formValidate: {
+                        id: 0,
+                        keyName: "",
+                        typeName: "",                  
+                        cronExpression: "",                      
+                        validate: false
+                    },
+                    ruleValidate: {
+                        keyName: [
+                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
+                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                        ],
+                        typeName: [
+                            { required: true, message: 'TypeName cannot be empty, is required', trigger: 'blur' }
+                        ],
+                        cronExpression: [
+                            { required: true, message: 'CronExpression cannot be empty, is required', trigger: 'blur' }
+                        ],                       
+                    }
+                }
+            },
+            methods: {
+                modalOk() {
+                    this.$refs['formValidate'].validate((valid) => {
+                        if (valid) {
+                            var obj = this;
+                            addQuartz(this.formValidate, function (newQuartzSetting) {
+
+                                //深度clone
+                                // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
+                                //settlemtntSettingVue.Quartzsettings.push(newQuartzSetting)
+
+                                getQuartz(settlemtntSettingVue.Quartzsettings.current);
+                                obj.$refs['formValidate'].resetFields();
+                                obj.showmodal = false;
+                            });
+                        } else {
+                            this.$Message.error('validate failure!');
+                        }
+                    })
+                },
+                modalCancel() {
+                    this.showmodal = false;
+                }
+            }
+        })
+
+        function addQuartz(Quartzsetting, callback) {
+            axios.post("/addQuartzsetting", Quartzsetting)
+                .then(function (response) {
+                    //判断请求状态
+                    if (response.status == 200) {
+                        var returnData = response.data;
+                        if (returnData.result) {
+                            callback(returnData.data);
+                        } else {
+                            alert(returnData.messages);
+                        }
+                    }
+                    else {
+                        alert(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    alert(error);
+                    console.log(error);
+                });
+        }
+        new Vue({
+            el: "#addQuartzsetting"
+        });
+    </script>
+</body>
+</html>
