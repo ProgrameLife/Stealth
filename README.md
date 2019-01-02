@@ -25,4 +25,4 @@ Perform various tasks in the background！
 4. FileSetting UI
 
 ## Milestone
-1. implementation PostgreProvider
+1. implementation SqlServerProvider
