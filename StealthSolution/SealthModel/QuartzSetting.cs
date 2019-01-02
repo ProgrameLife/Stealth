@@ -6,6 +6,10 @@
     public class QuartzSetting
     {
         /// <summary>
+        /// ID
+        /// </summary>
+        public int ID { get; set; }
+        /// <summary>
         /// Key Name
         /// </summary>
         public string KeyName
@@ -20,6 +24,10 @@
         /// </summary>
         public string CronExpression
         { get; set; }
+        /// <summary>
+        /// Validate
+        /// </summary>
+        public bool Validate { get; set; }
 
     }
 }

@@ -20,7 +20,7 @@
             <addmodal></addmodal>
         </div>
         <div id="tablediv" style="padding:10px;">
-            <Quartzsetting-row :Quartzsettings="Quartzsettings"></Quartzsetting-row>
+            <Quartzsetting-row :quartzsettings="quartzsettings"></Quartzsetting-row>
         </div>
 
         <div id="editdiv">
@@ -36,7 +36,7 @@
     <script src="~/wwwroot/lib/axios/dist/axios.js"></script>
 
 
-    <script type="text/x-template" id="Quartzsetting-tr">
+    <script type="text/x-template" id="quartzsetting-tr">
         <div>
             <row :gutter="16">
                 <col span="24">
@@ -54,9 +54,9 @@
         var editVue = null;
         var tempQuartzsetting = null;
         //table组件
-        Vue.component("Quartzsetting-row", {
-            template: "#Quartzsetting-tr",
-            props: ["Quartzsettings"],
+        Vue.component("quartzsetting-row", {
+            template: "#quartzsetting-tr",
+            props: ["quartzsettings"],
             data: function () {
                 return {
                     columns: [
@@ -120,19 +120,20 @@
                             }
                         }
                     ],
-                    data: this.Quartzsettings.list,
-                    total: this.Quartzsettings.total,
-                    current: this.Quartzsettings.current
+                    data: this.quartzsettings.list,
+                    total: this.quartzsettings.total,
+                    current: this.quartzsettings.current
                 }
             },
             methods: {
-                edit: function (Quartzsetting) {
+                edit: function (quartzsetting) {
+                 
                     if (editVue == null) {
                         editVue = new Vue({
                             el: "#editdiv",
                             data: {
                                 editdata: {
-                                    Quartzsetting: Quartzsetting,
+                                    quartzsetting: quartzsetting,
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
@@ -150,22 +151,22 @@
                             }
                         });
                     } else {
-                        editVue.editdata.Quartzsetting = Quartzsetting;
+                        editVue.editdata.quartzsetting = quartzsetting;
                         editVue.editdata.showmodal = true;
                     }
 
                     //深度clone
                     tempQuartzsetting = JSON.parse(JSON.stringify(editVue.editdata.Quartzsetting))
                 },
-                delete: function (Quartzsetting, index) {
-                    if (confirm("delete  " + Quartzsetting.keyName + " ?")) {
-                        axios.delete("/removeQuartzsetting/" + Quartzsetting.id)
+                delete: function (quartzsetting, index) {
+                    if (confirm("delete  " + quartzsetting.keyName + " ?")) {
+                        axios.delete("/removeQuartzsetting/" + quartzsetting.id)
                             .then(function (response) {
                                 //判断请求状态
                                 if (response.status == 200) {
                                     var returnData = response.data
                                     if (returnData.result) {
-                                        getQuartz(settlemtntSettingVue.Quartzsettings.current);
+                                        getQuartz(quartzSettingVue.quartzsettings.current);
                                     } else {
                                         alert(returnData.messages)
                                     }
@@ -185,21 +186,20 @@
                 }
             }
         })
-        var settlemtntSettingVue = null;
+        var quartzSettingVue = null;
 
         function getQuartz(pageindex) {
-            axios.get("/Quartzsettings/" + pageindex)
+            axios.get("/quartzsettings/" + pageindex)
                 .then(function (response) {
                     //判断请求状态
                     if (response.status == 200) {
-                        document.getElementById("tablediv").innerHTML = ' <Quartzsetting-row :Quartzsettings="Quartzsettings"></Quartzsetting-row>'
-                        var returnData = response.data
+                        document.getElementById("tablediv").innerHTML = ' <Quartzsetting-row :quartzsettings="quartzsettings"></Quartzsetting-row>'
+                        var returnData = response.data;
                         if (returnData.result) {
-
-                            settlemtntSettingVue = new Vue({
+                            quartzSettingVue = new Vue({
                                 el: "#tablediv",
                                 data: {
-                                    Quartzsettings: {
+                                    quartzsettings: {
                                         list: returnData.data.list,
                                         total: returnData.data.total,
                                         current: pageindex
@@ -228,30 +228,30 @@
                width="800px"
                :mask-closable="false">
             <div>
-                <Form ref="editdata.Quartzsetting" :model="editdata.Quartzsetting" :rules="editdata.ruleValidate" label-position="top">
+                <Form ref="editdata.quartzsetting" :model="editdata.quartzsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
                         <FormItem label="KeyName" prop="keyName">
-                            <Input v-model="editdata.Quartzsetting.keyName"></Input>
+                            <Input v-model="editdata.quartzsetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="TypeName" prop="typeName">
-                            <Input v-model="editdata.Quartzsetting.typeName"></Input>
+                            <Input v-model="editdata.quartzsetting.typeName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
                         <FormItem label="CronExpression" prop="cronExpression">
-                            <InputNumber v-model="editdata.Quartzsetting.cronExpression" :min="10" :step="1"></InputNumber>
+                            <Input v-model="editdata.quartzsetting.cronExpression"></Input>
                         </FormItem>
                         </Col>
                     </row>     
                     <row :gutter="16">
                         <Col span="12">
                         <FormItem label="Validate">
-                            <i-switch v-model="editdata.Quartzsetting.validate" size="large">
+                            <i-switch v-model="editdata.quartzsetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
                             </i-switch>
@@ -275,15 +275,15 @@
             methods: {
                 modalOk() {
 
-                    this.$refs['editdata.Quartzsetting'].validate((valid) => {
+                    this.$refs['editdata.quartzsetting'].validate((valid) => {
                         if (valid) {
-                            console.log(this.editdata.Quartzsetting)
-                            axios.put("/modifyQuartzsetting", this.editdata.Quartzsetting)
+                        
+                            axios.put("/modifyQuartzsetting", this.editdata.quartzsetting)
                                 .then(function (response) {
                                     //判断请求状态
                                     if (response.status == 200) {
                                         var returnData = response.data;
-                                        console.log(returnData)
+                                       
                                         if (returnData.result) {
                                             editVue.editdata.showmodal = false;
                                         } else {
@@ -305,7 +305,7 @@
                     })
                 },
                 modalCancel() {
-                    for (var key in this.editdata.Quartzsetting) {
+                    for (var key in this.editdata.quartzsetting) {
                         this.editdata.Quartzsetting[key] = tempQuartzsetting[key];
                     }
                     editVue.editdata.showmodal = false;
@@ -339,7 +339,7 @@
                             </Col>
                             <Col span="12">
                             <FormItem label="CronExpression" prop="cronExpression">
-                                <InputNumber v-model="formValidate.cronExpression" :min="10" :step="1"></InputNumber>
+                                <Input v-model="formValidate.cronExpression"></Input>
                             </FormItem>
                             </Col>
                         </row>
@@ -402,7 +402,7 @@
                                 // var newSettlemtntSetting = JSON.parse(JSON.stringify(obj.formValidate))
                                 //settlemtntSettingVue.Quartzsettings.push(newQuartzSetting)
 
-                                getQuartz(settlemtntSettingVue.Quartzsettings.current);
+                                getQuartz(quartzSettingVue.quartzsettings.current);
                                 obj.$refs['formValidate'].resetFields();
                                 obj.showmodal = false;
                             });
@@ -426,7 +426,7 @@
                         if (returnData.result) {
                             callback(returnData.data);
                         } else {
-                            alert(returnData.messages);
+                            alert(returnData.message);
                         }
                     }
                     else {

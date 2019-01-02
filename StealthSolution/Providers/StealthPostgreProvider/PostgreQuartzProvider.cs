@@ -30,7 +30,7 @@ namespace StealthPostgreProvider
         public bool AddQuartzSetting(QuartzSetting quartzSetting)
         {
             var sql = @"INSERT INTO public.quartzsettings(
-	id, keyname, typename, cronexpression, validate, createon)
+	 keyname, typename, cronexpression, validate)
 	VALUES (@keyname, @typename, @cronexpression, @validate);";
             using (var con = new NpgsqlConnection(_connectionString))
             {
@@ -42,7 +42,7 @@ namespace StealthPostgreProvider
         /// </summary>
         /// <param name="pageIndex">page index</param>
         /// <returns></returns>
-        public (List<QuartzSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
+        public (List<QuartzSetting> list, int total) GetAllQuartzSetting(int pageIndex = 1)
         {
             var sql = $"select * from quartzsettings order by id  limit 10  offset  {(pageIndex - 1) * 10}";
             List<QuartzSetting> list = null;
@@ -57,6 +57,7 @@ namespace StealthPostgreProvider
                 total = con.ExecuteScalar<int>(sql);
             }
             return (list, total);
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
