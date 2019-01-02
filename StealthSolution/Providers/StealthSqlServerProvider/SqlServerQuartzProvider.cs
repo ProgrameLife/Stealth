@@ -27,7 +27,7 @@ namespace StealthSqlServerProvider
             throw new System.NotImplementedException();
         }
 
-        public List<QuartzSetting> GetAllQuartzSetting()
+        public (List<QuartzSetting> list, int total) GetAllQuartzSetting(int pageIndex = 1)
         {
             throw new System.NotImplementedException();
         }

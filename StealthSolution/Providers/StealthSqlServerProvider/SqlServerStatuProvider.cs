@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using SealthModel;
+using SealthProvider;
 using StealthQuartz;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,7 +12,7 @@ namespace StealthSqlServerProvider
     /// <summary>
     /// postgresql provider status setting
     /// </summary>
-     public class SqlServerStatuProvider
+     public class SqlServerStatuProvider: IStatuProvider
     {
         /// <summary>
         /// postgresql connection string

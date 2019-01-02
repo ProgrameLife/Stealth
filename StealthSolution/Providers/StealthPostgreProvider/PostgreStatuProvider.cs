@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
+using SealthProvider;
 using StealthQuartz;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider status setting
     /// </summary>
-     public class PostgreProvider 
+     public class PostgreProvider: IStatuProvider
     {
         /// <summary>
         /// postgresql connection string

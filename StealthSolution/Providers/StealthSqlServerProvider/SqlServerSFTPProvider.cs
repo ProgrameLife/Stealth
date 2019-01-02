@@ -22,19 +22,7 @@ namespace StealthSqlServerProvider
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
-        /// <summary>
-        /// get all sftpsetting
-        /// </summary>
-        /// <returns></returns>
-        public List<SFTPSetting> GetAllSFTPSetting()
-        {
-
-            var sql = "select * from sftpettings";
-            using (var con = new SqlConnection(_connectionString))
-            {
-                return con.Query<SFTPSetting>(sql).ToList();
-            }
-        }
+  
 
         /// <summary>
         /// get all sftpsetting
@@ -104,6 +92,11 @@ namespace StealthSqlServerProvider
             {
                 return con.Execute(sql, new { id }) > 0;
             }
+        }
+
+        public (List<SFTPSetting> list, int total) GetAllSFTPSetting(int pageIndex = 1)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

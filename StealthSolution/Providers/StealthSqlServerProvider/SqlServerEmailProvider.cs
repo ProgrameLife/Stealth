@@ -25,15 +25,25 @@ namespace StealthSqlServerProvider
         /// <summary>
         /// get all emailSetting
         /// </summary>
+        /// <param name="pageIndex">page index</param>
         /// <returns></returns>
-        public List<EmailSetting> GetAllEmailSetting()
+        public (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
         {
-
-            var sql = "select * from emailsettings";
+            var sql = $@"select top 10 * from(
+select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events] 
+)a where rownum>{(pageIndex - 1) * 10}";           
+            List<EmailSetting> list = null;
             using (var con = new SqlConnection(_connectionString))
             {
-                return con.Query<EmailSetting>(sql).ToList();
+                list = con.Query<EmailSetting>(sql).ToList();
             }
+            int total = 0;
+            sql = $"select count(*) from emailsettings";
+            using (var con = new SqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
         /// <summary>
         /// get a emailsetting by keyname
