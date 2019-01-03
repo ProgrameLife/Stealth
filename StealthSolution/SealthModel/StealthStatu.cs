@@ -5,8 +5,8 @@ namespace SealthModel
     /// <summary>
     /// exec statu
     /// </summary>
-    public class StealthsStatu
-    {
+    public class StealthStatu
+    {      
         /// <summary>
         /// key name
         /// </summary>

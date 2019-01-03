@@ -36,6 +36,7 @@ namespace StealthGirder
             services.AddTransient<IEmailProvider, PostgreEmailProvider>();
             services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
             services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
+            services.AddTransient<IStealthStatuProvider, PostgreStealthStatuProvider>();
             #endregion
 
             #region postgre mode               

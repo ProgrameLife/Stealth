@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace SealthProvider
 { 
-    public interface IStatuProvider
+    public interface IStealthStatuProvider
     {
         /// <summary>
         /// get all stealths statu
         /// </summary>
         /// <returns></returns>
-        List<StealthsStatu> GetAllStealthsStatus();
+        List<StealthStatu> GetAllStealthsStatus();
         /// <summary>
         /// set status success
         /// </summary>

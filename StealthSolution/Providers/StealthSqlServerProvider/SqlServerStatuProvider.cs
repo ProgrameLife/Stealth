@@ -12,7 +12,7 @@ namespace StealthSqlServerProvider
     /// <summary>
     /// postgresql provider status setting
     /// </summary>
-     public class SqlServerStatuProvider: IStatuProvider
+     public class SqlServerStatuProvider: IStealthStatuProvider
     {
         /// <summary>
         /// postgresql connection string
@@ -27,12 +27,12 @@ namespace StealthSqlServerProvider
         /// get all stealths statu
         /// </summary>
         /// <returns></returns>
-        public List<StealthsStatu> GetAllStealthsStatus()
+        public List<StealthStatu> GetAllStealthsStatus()
         {
             var sql = "select * from stealthstatus";
             using (var con = new SqlConnection(_connectionString))
             {
-                return con.Query<StealthsStatu>(sql).ToList();
+                return con.Query<StealthStatu>(sql).ToList();
             }
         }
 

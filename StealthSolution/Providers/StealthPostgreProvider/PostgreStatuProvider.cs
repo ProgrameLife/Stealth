@@ -12,13 +12,13 @@ namespace StealthPostgreProvider
     /// <summary>
     /// postgresql provider status setting
     /// </summary>
-     public class PostgreProvider: IStatuProvider
+     public class PostgreStealthStatuProvider: IStealthStatuProvider
     {
         /// <summary>
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
-        public PostgreProvider(IConfiguration configuration)
+        public PostgreStealthStatuProvider(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
@@ -27,12 +27,12 @@ namespace StealthPostgreProvider
         /// get all stealths statu
         /// </summary>
         /// <returns></returns>
-        public List<StealthsStatu> GetAllStealthsStatus()
+        public List<StealthStatu> GetAllStealthsStatus()
         {
             var sql = "select * from stealthstatus";
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<StealthsStatu>(sql).ToList();
+                return con.Query<StealthStatu>(sql).ToList();
             }
         }
 
