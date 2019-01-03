@@ -2,7 +2,6 @@
 <img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Stealth.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="200" height="200" />
 Perform various tasks in the background！
 
-[![NuGet Badge](https://buildstats.info/nuget/StealthBackHandle)](https://www.nuget.org/packages/StealthBackHandle)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ProgrameLife/Stealth/blob/master/License)
 
 ## Function of Complete
@@ -25,4 +24,4 @@ Perform various tasks in the background！
 4. FileSetting UI
 
 ## Milestone
-1. implementation PostgreProvider
+1. implementation SqlServerProvider
