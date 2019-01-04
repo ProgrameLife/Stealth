@@ -93,10 +93,27 @@ namespace StealthSqlServerProvider
                 return con.Execute(sql, new { id }) > 0;
             }
         }
-
+        /// <summary>
+        /// get all sftpsetting
+        /// </summary>
+        /// <returns></returns>
         public (List<SFTPSetting> list, int total) GetAllSFTPSetting(int pageIndex = 1)
         {
-            throw new System.NotImplementedException();
+            var sql = $@"select top 10 * from(
+select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [sftpettings] 
+)a where rownum>{(pageIndex - 1) * 10}";
+            List<SFTPSetting> list = null;
+            using (var con = new SqlConnection(_connectionString))
+            {
+                list = con.Query<SFTPSetting>(sql).ToList();
+            }
+            int total = 0;
+            sql = $"select count(*) from sftpettings";
+            using (var con = new SqlConnection(_connectionString))
+            {
+                total = con.ExecuteScalar<int>(sql);
+            }
+            return (list, total);
         }
     }
 }

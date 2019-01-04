@@ -10,7 +10,7 @@ using System.Linq;
 namespace StealthPostgreProvider
 {
     /// <summary>
-    /// postgresql provider
+    /// postgresql quartz provider
     /// </summary>
     public partial class PostgreQuartzProvider : IQuartzProvider
     {
