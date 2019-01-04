@@ -17,6 +17,12 @@ Perform various tasks in the background！
 3. SFTPProvider
 4. FileProvider
 
+##### SqlServerProvider
+1. EmailProvider
+2. FTPProvider
+3. SFTPProvider
+4. FileProvider
+
 ##### UI
 1. EmailSetting UI
 2. FTPSetting UI
@@ -24,4 +30,4 @@ Perform various tasks in the background！
 4. FileSetting UI
 
 ## Milestone
-1. implementation SqlServerProvider
+
