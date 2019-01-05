@@ -16,12 +16,14 @@ Perform various tasks in the background！
 2. FTPProvider
 3. SFTPProvider
 4. FileProvider
+5. StatuProvider
 
 ##### SqlServerProvider
 1. EmailProvider
 2. FTPProvider
 3. SFTPProvider
 4. FileProvider
+5. StatuProvider
 
 ##### UI
 1. EmailSetting UI
