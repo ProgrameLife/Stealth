@@ -40,8 +40,10 @@ namespace StealthDataHandle
 
         public bool Handle(string keyName)
         {
-            
-            throw new NotImplementedException();
-        }       
+            var data = _dataProvider.GetDataSettingSqls(keyName);
+
+            //todo not  implement
+            return true;
+        }
     }
 }
