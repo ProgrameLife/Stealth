@@ -16,18 +16,21 @@ Perform various tasks in the background！
 2. FTPProvider
 3. SFTPProvider
 4. FileProvider
+5. StatuProvider
 
 ##### SqlServerProvider
 1. EmailProvider
 2. FTPProvider
 3. SFTPProvider
 4. FileProvider
+5. StatuProvider
 
 ##### UI
 1. EmailSetting UI
 2. FTPSetting UI
 3. SFTPSetting UI
 4. FileSetting UI
+5. StealthStatu UI
 
 ## Milestone
 
