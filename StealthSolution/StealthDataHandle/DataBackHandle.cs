@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using Npgsql;
 using SealthProvider;
 using StealthBackHandle;
 using StealthBuildData;
 using StealthQuartz;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace StealthDataHandle
@@ -40,9 +42,7 @@ namespace StealthDataHandle
 
         public bool Handle(string keyName)
         {
-            var data = _dataProvider.GetDataSettingSqls(keyName);
-
-            //todo not  implement
+            //todo Implementing a Business Rule
             return true;
         }
     }

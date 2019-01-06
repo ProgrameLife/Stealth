@@ -67,7 +67,7 @@ namespace SealthProvider
         /// </summary>
         /// <param name="dataSetting">data setting</param>
         /// <returns></returns>
-        bool ModifyDataSql(DataSql  dataSql);
+        bool ModifyDataSql(DataSql dataSql);
         /// <summary>
         /// remove dataSql
         /// </summary>
@@ -83,6 +83,6 @@ namespace SealthProvider
         /// </summary>
         /// <param name="keyName"></param>
         /// <returns></returns>
-        DataSettingSql GetDataSettingSqls(string keyName);
+        IEnumerable<DataSettingSql> GetDataSettingSqls(string keyName);
     }
 }

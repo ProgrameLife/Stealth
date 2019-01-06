@@ -168,7 +168,7 @@ namespace StealthPostgreProvider
         /// </summary>
         /// <param name="keyName">key name</param>
         /// <returns></returns>
-        public DataSettingSql GetDataSettingSqls(string keyName)
+        public IEnumerable< DataSettingSql> GetDataSettingSqls(string keyName)
         {
             var sql = @"select datasettings.*,datasqls.id as sqlid,datasqls.sql,datasqls.transactionno,
 datasqls.validate as sqlvalidate,datasqls.createon as sqlcreateon from datasettings join datasqls
@@ -177,7 +177,7 @@ and datasqls.validate=true
 where datasqls.keyname=@keyname;";
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.QueryFirstOrDefault<DataSettingSql>(sql, new { keyname = keyName });
+                return con.Query<DataSettingSql>(sql, new { keyname = keyName });
             }
         }
     }
