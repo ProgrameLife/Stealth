@@ -30,7 +30,7 @@ namespace StealthSqlServerProvider
         public (List<EmailSetting> list, int total) GetAllEmailSetting(int pageIndex = 1)
         {
             var sql = $@"select top 10 * from(
-select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events] 
+select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [emailsettings] 
 )a where rownum>{(pageIndex - 1) * 10}";           
             List<EmailSetting> list = null;
             using (var con = new SqlConnection(_connectionString))
