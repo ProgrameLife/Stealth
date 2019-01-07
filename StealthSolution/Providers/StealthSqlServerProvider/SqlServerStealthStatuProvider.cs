@@ -10,15 +10,15 @@ using System.Linq;
 namespace StealthSqlServerProvider
 {
     /// <summary>
-    /// postgresql provider status setting
+    /// sqlserver provider status setting
     /// </summary>
-     public class SqlServerStatuProvider: IStealthStatuProvider
+     public class SqlServerStealthStatuProvider : IStealthStatuProvider
     {
         /// <summary>
         /// postgresql connection string
         /// </summary>
         readonly string _connectionString;
-        public SqlServerStatuProvider(IConfiguration configuration)
+        public SqlServerStealthStatuProvider(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }

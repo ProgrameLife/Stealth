@@ -13,24 +13,23 @@ namespace StealthSqlServerProvider
     public static class SqlServerBackHandleExpansion
     {
         /// <summary>
-        /// use postgre BackHandle
+        /// use SqlServer BackHandle
         /// </summary>
         /// <param name="app">application builder</param>
         /// <param name="scheduler">quartz scheduler</param>
-        public static void UserPostgreBackHandle(this IApplicationBuilder app, IScheduler scheduler)
+        public static void UserSqlServerBackHandle(this IApplicationBuilder app, IScheduler scheduler)
         {
             var provider = app.ApplicationServices.GetService<IQuartzProvider>();
             app.UserBackHandle(scheduler, provider.GetQuartzSetting().ToArray());
         }
         /// <summary>
-        /// di postgreprovider and backhandles
+        /// di SqlServerprovider and backhandles
         /// </summary>
         /// <param name="services">service collection</param>
-        /// <param name="backHandles">back handles</param>
-        public static void AddPostgreBackHandle(this IServiceCollection services)
+        public static void AddSqlServerBackHandle(this IServiceCollection services)
         {
-            services.AddScoped<IQuartzProvider, SqlServerQuartzProvider>();
+            services.AddTransient<IQuartzProvider, SqlServerQuartzProvider>();
             services.AddBackHandle();
-        }
+        }    
     }
 }

@@ -12,6 +12,7 @@ using StealthBuildData;
 using StealthEmailBackHandle;
 using StealthFileBackHandle;
 using StealthPostgreProvider;
+using StealthSqlServerProvider;
 using System.Reflection;
 
 namespace StealthGirder
@@ -31,19 +32,26 @@ namespace StealthGirder
             #region base mode
             //services.AddBackHandle(new BackHandle1("aaa"), new BackHandle2("123"));
             #endregion
-            
+
             #region stealth provider          
-            services.AddTransient<IEmailProvider, PostgreEmailProvider>();
-            services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
-            services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
-            services.AddTransient<IStealthStatuProvider, PostgreStealthStatuProvider>();
+            //services.AddTransient<IEmailProvider, PostgreEmailProvider>();
+            //services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
+            //services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
+            //services.AddTransient<IStealthStatuProvider, PostgreStealthStatuProvider>();
+
+            services.AddTransient<IEmailProvider, SqlServerEmailProvider>();
+            services.AddTransient<ISFTPProvider, SqlServerSFTPProvider>();
+            services.AddTransient<SealthProvider.IFileProvider, SqlServerFileProvider>();
+            services.AddTransient<IStealthStatuProvider, SqlServerStealthStatuProvider>();
             #endregion
 
             #region postgre mode               
             services.AddTransient<IBuildData, DemoBuildData>();
             services.AddTransient<EmailBackHandle>();
             services.AddTransient<FileBackHandle>();
-            services.AddPostgreBackHandle();
+
+             //services.AddPostgreBackHandle();
+            services.AddSqlServerBackHandle();
             #endregion
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -67,7 +75,8 @@ namespace StealthGirder
             #endregion
 
             #region postgre mode
-            app.UserPostgreBackHandle(scheduler);
+            //app.UserPostgreBackHandle(scheduler);
+            app.UserSqlServerBackHandle(scheduler);
             #endregion
 
             app.UseStaticFiles(new StaticFileOptions

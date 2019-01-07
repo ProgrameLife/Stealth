@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
 using StealthQuartz;
@@ -17,9 +18,9 @@ namespace StealthSqlServerProvider
         /// sqlserver connection string
         /// </summary>
         readonly string _connectionString;
-        public SqlServerQuartzProvider(string connectionString)
+        public SqlServerQuartzProvider(IConfiguration configuration)
         {
-            _connectionString = connectionString;
+            _connectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
         /// <summary>
         /// add QuartzSetting
@@ -28,7 +29,7 @@ namespace StealthSqlServerProvider
         /// <returns></returns>
         public bool AddQuartzSetting(QuartzSetting quartzSetting)
         {
-            var sql = @"INSERT INTO public.quartzsettings(
+            var sql = @"INSERT INTO quartzsettings(
 	 keyname, typename, cronexpression, validate)
 	VALUES (@keyname, @typename, @cronexpression, @validate);";
             using (var con = new SqlConnection(_connectionString))
@@ -68,7 +69,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [quartzsettings]
         /// <returns></returns>
         public List<QuartzSetting> GetQuartzSetting()
         {
-            var sql = "select * from quartzsettings where validate=true";
+            var sql = "select * from quartzsettings where validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<QuartzSetting>(sql).ToList();
@@ -82,7 +83,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [quartzsettings]
         /// <returns></returns>
         public bool ModifyQuartzSetting(QuartzSetting quartzSetting)
         {
-            var sql = @"UPDATE public.quartzsettings
+            var sql = @"UPDATE quartzsettings
 	SET keyname=@keyname, typename=@typename, cronexpression=@cronexpression, validate=@validate
 	WHERE id=@id;";
             using (var con = new SqlConnection(_connectionString))

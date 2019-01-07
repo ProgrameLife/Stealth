@@ -34,6 +34,7 @@
     <ProjectReference Include="..\BackHandles\StealthSFTPBackHandle\StealthSFTPBackHandle.csproj" />
     <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
+    <ProjectReference Include="..\Providers\StealthSqlServerProvider\StealthSqlServerProvider.csproj" />
     <ProjectReference Include="..\StealthQuartz\StealthQuartz.csproj" />
     <ProjectReference Include="..\StealthUI\StealthUI.csproj" />
   </ItemGroup>

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SealthProvider;
-using StealthPostgreProvider;
 
 namespace StealthUI
 {
@@ -25,9 +24,6 @@ namespace StealthUI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IEmailProvider, PostgreEmailProvider>();
-            services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
-            services.AddTransient<IFileProvider, PostgreFileProvider>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

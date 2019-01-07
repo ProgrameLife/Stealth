@@ -52,7 +52,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [filesettings]
         /// <returns></returns>
         public FileSetting GetFileSetting(string keyName)
         {
-            var sql = "select * from filesettings where keyname=@keyname and  validate=true";
+            var sql = "select * from filesettings where keyname=@keyname and  validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<FileSetting>(sql, new { keyname = keyName }).FirstOrDefault();
@@ -65,7 +65,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [filesettings]
         /// <returns></returns>
         public List<FileSetting> GetFileSettings()
         {
-            var sql = "select * from filesettings where validate=true";
+            var sql = "select * from filesettings where validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<FileSetting>(sql).ToList();
@@ -78,7 +78,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [filesettings]
         /// <returns></returns>
         public bool AddFileSetting(FileSetting fileSetting)
         {
-            var sql = @"INSERT INTO public.filesettings(keyname, filename, filepath, fileencoding, validate)
+            var sql = @"INSERT INTO filesettings(keyname, filename, filepath, fileencoding, validate)
 	VALUES (@keyname, @filename, @filepath, @fileencoding, @validate);";
             using (var con = new SqlConnection(_connectionString))
             {
@@ -92,7 +92,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [filesettings]
         /// <returns></returns>
         public bool ModifyFileSetting(FileSetting fileSetting)
         {
-            var sql = @"UPDATE public.filesettings
+            var sql = @"UPDATE filesettings
 	SET keyname=@keyname, filename=@filename, filepath=@filepath, fileencoding=@fileencoding, validate=@validate
 	WHERE id=@id;";
             using (var con = new SqlConnection(_connectionString))

@@ -9,7 +9,7 @@ using System.Linq;
 namespace StealthSqlServerProvider
 {
     /// <summary>
-    /// postgresql provider backhandle settings
+    /// sqlserver provider backhandle settings
     /// </summary>
     public class SqlServerSFTPProvider : ISFTPProvider
     {
@@ -30,7 +30,7 @@ namespace StealthSqlServerProvider
         /// <returns></returns>
         public List<SFTPSetting> GetSFTPSettings()
         {
-            var sql = "select * from sftpettings where validate=true";
+            var sql = "select * from sftpettings where validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<SFTPSetting>(sql).ToList();

@@ -25,8 +25,7 @@ namespace StealthPostgreProvider
         /// <summary>
         /// di postgreprovider and backhandles
         /// </summary>
-        /// <param name="services">service collection</param>
-        /// <param name="backHandles">back handles</param>
+        /// <param name="services">service collection</param>  
         public static void AddPostgreBackHandle(this IServiceCollection services)
         {
             services.AddTransient<IQuartzProvider, PostgreQuartzProvider>();

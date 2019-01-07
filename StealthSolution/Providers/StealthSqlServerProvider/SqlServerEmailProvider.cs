@@ -9,7 +9,7 @@ using System.Linq;
 namespace StealthSqlServerProvider
 {
     /// <summary>
-    /// postgresql provider backhandle settings
+    /// sqlserver provider backhandle settings
     /// </summary>
     public class SqlServerEmailProvider : IEmailProvider
     {
@@ -52,7 +52,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events]
         /// <returns></returns>
         public EmailSetting GetEmailSetting(string keyName)
         {
-            var sql = "select * from emailsettings where keyname=@keyname and  validate=true";
+            var sql = "select * from emailsettings where keyname=@keyname and  validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<EmailSetting>(sql, new { keyname = keyName }).FirstOrDefault();
@@ -64,7 +64,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events]
         /// <returns></returns>
         public List<EmailSetting> GetEmailSettings()
         {
-            var sql = "select * from emailsettings where validate=true";
+            var sql = "select * from emailsettings where validate=1";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Query<EmailSetting>(sql).ToList();
@@ -77,7 +77,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events]
         /// <returns></returns>
         public bool AddEmailSetting(EmailSetting emailSetting)
         {
-            var sql = @"INSERT INTO public.emailsettings(
+            var sql = @"INSERT INTO emailsettings(
 	host, port, fromaddress, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
 	VALUES (@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
             using (var con = new SqlConnection(_connectionString))
@@ -92,7 +92,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [events]
         /// <returns></returns>
         public bool ModifyEmailSetting(EmailSetting  emailSetting)
         {
-            var sql = @"UPDATE public.emailsettings
+            var sql = @"UPDATE emailsettings
 	SET  host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
 	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate, compresspassword=@compresspassword
 	WHERE id=@id;";
