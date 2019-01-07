@@ -10,52 +10,12 @@ CREATE DATABASE stealthdb
     CONNECTION LIMIT = -1;
 
 
-
-CREATE TABLE "public"."quartzsettings" (
-	"id" serial PRIMARY KEY, 
-	"keyname" varchar(512), 
-	"typename" varchar(128), 
-	"cronexpression" varchar(32), 
-	"validate" boolean, 
-	"createon" timestamp(6)
-);
-
-CREATE UNIQUE INDEX "keyname"
-	ON "public"."quartzsettings"
-	USING btree (keyname);
-
-
-
-CREATE TABLE "public"."datasettings" (
-	"id" serial PRIMARY KEY, 
-	"keyname" varchar(128), 
-	"connectionstring" text, 
-	"groupno" varchar(64), 
-	"validate" boolean, 
-	"createon" timestamp(6)
-);
-
-CREATE TABLE "public"."datasqls" (
-	"id" serial PRIMARY KEY, 
-	"keyname" varchar(512), 
-	"datasettingid" integer, 
-	"sql" text, 
-	"transactionno" varchar(64), 
-	"groupno" varchar(64), 
-	"validate" boolean, 
-	"createon" timestamp(6), 
-	FOREIGN KEY ("id")
-		REFERENCES "public"."datasettings" ("id")
-		ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
-
 CREATE TABLE "public"."emailsettings" (
 	"id" serial PRIMARY KEY, 
 	"keyname" varchar(512), 
 	"host" varchar(256), 
 	"port" integer, 
-	"fromaddress" varchar(256), 
+	"fromaddresses" varchar(256), 
 	"username" varchar(256), 
 	"password" varchar(256), 
 	"subject" varchar(128), 
@@ -66,10 +26,33 @@ CREATE TABLE "public"."emailsettings" (
 	"compresspassword" varchar(254), 
 	"isattachment" boolean, 
 	"attachmentname" varchar(512), 
+	"attachmentencoding" varchar(32), 
 	"validate" boolean, 
 	"createon" timestamp(6) DEFAULT now()
-);
+)
+GO
 
+CREATE TABLE "public"."filesettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(128), 
+	"filename" varchar(256), 
+	"filepath" varchar(1024), 
+	"fileencoding" varchar(32), 
+	"validate" boolean, 
+	"createon" timestamp(6)
+)
+GO
+
+CREATE TABLE "public"."quartzsettings" (
+	"id" serial PRIMARY KEY, 
+	"keyname" varchar(512), 
+	"typename" varchar(128), 
+	"cronexpression" varchar(32), 
+	"validate" boolean, 
+	"createon" timestamp(6),
+	CONSTRAINT "keyname" UNIQUE ("keyname")
+)
+GO
 
 CREATE TABLE "public"."sftpettings" (
 	"id" serial PRIMARY KEY, 
@@ -82,12 +65,14 @@ CREATE TABLE "public"."sftpettings" (
 	"transferdirectory" varchar(256), 
 	"transferfileprefix" varchar(256), 
 	"filename" varchar(512), 
+	"fileencoding" varchar(32), 
 	"createon" timestamp(6), 
 	"validate" boolean
-);
+)
+GO
 
 CREATE TABLE "public"."stealthstatus" (
 	"keyname" varchar(128) NOT NULL PRIMARY KEY, 
 	"status" integer, 
 	"modifytime" time(6)
-);
+)
