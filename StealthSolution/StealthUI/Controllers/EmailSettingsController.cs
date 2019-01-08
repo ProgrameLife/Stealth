@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using SealthModel;
 using SealthProvider;
+using System.Collections;
 
 namespace StealthUI.Controllers
 {
@@ -22,6 +29,8 @@ namespace StealthUI.Controllers
         /// email data provider  
         /// </summary>
         readonly IEmailProvider _emailProvider;
+
+      
         /// <summary>
         /// cotr
         /// </summary>
@@ -32,13 +41,14 @@ namespace StealthUI.Controllers
             _logger = logger;
             _emailProvider = emailProvider;
         }
+
         /// <summary>
         /// index view
         /// </summary>
         /// <returns>Return a view</returns>
         [HttpGet("/emailsettings")]
         public IActionResult Index()
-        {
+        {        
             return View();
         }
         /// <summary>

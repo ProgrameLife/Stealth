@@ -13,7 +13,15 @@
     <RepositoryUrl>https://github.com/ProgrameLife/Stealth.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Stealth,StealthUI</PackageTags>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Program.cs" />
+    <Compile Remove="Startup.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\StealthStatu\Index.cshtml" />
@@ -136,7 +144,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj" />
+    <ProjectReference Include="..\BackHandles\StealthFileBackHandle\StealthFileBackHandle.csproj" />
+    <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\Providers\SealthProvider\SealthProvider.csproj" />
+    <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
 
