@@ -16,6 +16,7 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -144,11 +145,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj" />
-    <ProjectReference Include="..\BackHandles\StealthFileBackHandle\StealthFileBackHandle.csproj" />
-    <ProjectReference Include="..\BuildData\StealthBuildData\StealthBuildData.csproj" />
     <ProjectReference Include="..\Providers\SealthProvider\SealthProvider.csproj" />
-    <ProjectReference Include="..\Providers\StealthPostgreProvider\StealthPostgreProvider.csproj" />
     <ProjectReference Include="..\SealthModel\SealthModel.csproj" />
   </ItemGroup>
 

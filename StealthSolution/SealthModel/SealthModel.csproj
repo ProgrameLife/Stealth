@@ -13,6 +13,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Stealth,SealthModel</PackageTags>
     <PackageReleaseNotes>the first version</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
