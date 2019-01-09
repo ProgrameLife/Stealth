@@ -1,20 +1,17 @@
-﻿@{
-    ViewData["Title"] = "EmailSetting";
-}
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.EmailSettingsController> localizer
 
-@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.EmailSettingsController> localizer
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EmailSettings - StealthUI</title>
+    <title>@Html.Raw(localizer["EmailSettings"]) - StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">EmailSettings</h2>
+            <h2 style="height: 20px;">@Html.Raw(localizer["EmailSettings"])</h2>
         </div>
         <div id="addemailsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -61,9 +58,9 @@
                 return {
                     columns: [
                         {
-                            title: 'ID',
+                            title:'@Html.Raw(localizer["ID"])',
                             key: 'id',
-                            width: 50,
+                            width: 60,
                         },
                         {
                             title:'@Html.Raw(localizer["KeyName"])',
@@ -75,57 +72,57 @@
 
                         },
                         {
-                            title: 'Port',
+                            title:'@Html.Raw(localizer["Port"])',
                             key: 'port'
                         },
                         {
-                            title: 'UserName',
+                            title: '@Html.Raw(localizer["UserName"])',
                             key: 'userName',
 
                         },
                         {
-                            title: 'Password',
+                            title: '@Html.Raw(localizer["Password"])',
                             key: 'password',
                         },
                         {
-                            title: 'EmailSubject',
+                            title:'@Html.Raw(localizer["EmailSubject"])',
                             key: 'subject',
                         },
                         {
-                            title: 'EmailBody',
+                            title: '@Html.Raw(localizer["EmailBody"])',
                             key: 'body',
                         },
                         {
-                            title: 'FromAddresses',
+                            title: '@Html.Raw(localizer["FromAddresses"])',
                             key: 'fromAddresses',
                         },
                         {
-                            title: 'ToAddresses',
+                            title: '@Html.Raw(localizer["ToAddresses"])',
                             key: 'toAddresses',
                         },
                         {
-                            title: 'IsCompress',
+                            title:'@Html.Raw(localizer["IsCompress"])',
                             key: 'isCompress',
                         },
                         {
-                            title: 'CompressFileName',
+                            title: '@Html.Raw(localizer["CompressFileName"])',
                             key: 'compressFile',
                         },
                         {
-                            title: 'IsAttachment',
+                            title: '@Html.Raw(localizer["IsAttachment"])',
                             key: 'isAttachment',
                         },
                         {
-                            title: 'AttachmentName',
+                            title: '@Html.Raw(localizer["AttachmentName"])',
                             key: 'attachmentName',
                         },
                         {
-                            title: 'Validate',
+                            title:'@Html.Raw(localizer["Validate"])',
                             key: 'validate',
                             width: 90,
                         },
                         {
-                            title: 'operate',
+                            title: '@Html.Raw(localizer["Operate"])',
                             key: 'action',
                             width: 100,
                             align: 'center',
@@ -275,26 +272,26 @@
 
     <script type="text/x-template" id="editmodal-div">
         <Modal v-model="editdata.showmodal"
-               title="Edit"
+               title="@Html.Raw(localizer["Edit"])"
                width="800px"
                :mask-closable="false">
             <div>
                 <Form ref="editdata.emailsetting" :model="editdata.emailsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="KeyName" prop="keyName">
+                        <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                             <Input v-model="editdata.emailsetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="Host" prop="host">
+                        <FormItem label="@Html.Raw(localizer["Port"])" prop="host">
                             <Input v-model="editdata.emailsetting.host"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Port" prop="port">
+                        <FormItem label="@Html.Raw(localizer["keyName"])" prop="port">
                             <InputNumber v-model="editdata.emailsetting.port" :min="10" :step="1"></InputNumber>
                         </FormItem>
                         </Col>
@@ -302,45 +299,45 @@
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="FromAddresses" prop="fromAddresses">
+                        <FormItem label="@Html.Raw(localizer["FromAddresses"])" prop="fromAddresses">
                             <Input v-model="editdata.emailsetting.fromAddresses"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="ToAddresses" prop="toAddresses">
+                        <FormItem label="@Html.Raw(localizer["ToAddresses"])" prop="toAddresses">
                             <Input v-model="editdata.emailsetting.toAddresses"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="UserName" prop="userName">
+                        <FormItem label="@Html.Raw(localizer["UserName"])" prop="userName">
                             <Input v-model="editdata.emailsetting.userName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Password" prop="password">
+                        <FormItem label="@Html.Raw(localizer["Password"])" prop="password">
                             <Input v-model="editdata.emailsetting.password"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="EmailSubject" prop="subject">
+                        <FormItem label="@Html.Raw(localizer["EmailSubject"])" prop="subject">
                             <Input v-model="editdata.emailsetting.subject"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="EmailBody" prop="body">
+                        <FormItem label="@Html.Raw(localizer["EmailBody"])" prop="body">
                             <Input type="textarea" v-model="editdata.emailsetting.body"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="3">
-                        <FormItem label="IsCompress">
+                        <FormItem label="@Html.Raw(localizer["IsCompress"])">
                             <i-switch v-model="editdata.emailsetting.isCompress" size="large">
                                 <span slot="open">true</span>
                                 <span slot="close">false</span>
@@ -348,14 +345,14 @@
                         </FormItem>
                         </Col>
                         <Col span="21">
-                        <FormItem label="CompressFileName" prop="compressFileName">
+                        <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFileName">
                             <Input v-model="editdata.emailsetting.compressFileName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="3">
-                        <FormItem label="IsAttachment">
+                        <FormItem label="@Html.Raw(localizer["IsAttachment"])">
                             <i-switch v-model="editdata.emailsetting.isAttachment" size="large">
                                 <span slot="open">true</span>
                                 <span slot="close">false</span>
@@ -363,14 +360,14 @@
                         </FormItem>
                         </Col>
                         <Col span="21">
-                        <FormItem label="AttachmentName" prop="attachmentName">
+                        <FormItem label="@Html.Raw(localizer["AttachmentName"])" prop="attachmentName">
                             <Input v-model="editdata.emailsetting.attachmentName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="Validate">
+                        <FormItem label="@Html.Raw(localizer["Validate"])">
                             <i-switch v-model="editdata.emailsetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
@@ -437,73 +434,73 @@
 
     <script type="text/x-template" id="addmodal-div">
         <div>
-            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+            <Button type="primary" v-on:click="showmodal = true">@Html.Raw(localizer["Add"])</Button>
             <Modal v-model="showmodal"
-                   title="Add"
+                   title="@Html.Raw(localizer["Add"])"
                    width="800px"
                    :mask-closable="false">
                 <div>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="KeyName" prop="keyName">
+                            <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                                 <Input v-model="formValidate.keyName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="Host" prop="host">
+                            <FormItem label="@Html.Raw(localizer["Host"])" prop="host">
                                 <Input v-model="formValidate.host"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Port" prop="port">
+                            <FormItem label="@Html.Raw(localizer["Port"])" prop="port">
                                 <InputNumber v-model="formValidate.port" :min="10" :step="1"></InputNumber>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="FromAddresses" prop="fromAddresses">
+                            <FormItem label="@Html.Raw(localizer["FromAddresses"])" prop="fromAddresses">
                                 <Input v-model="formValidate.fromAddresses"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="ToAddresses" prop="toAddresses">
+                            <FormItem label="@Html.Raw(localizer["ToAddresses"])" prop="toAddresses">
                                 <Input v-model="formValidate.toAddresses"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="UserName" prop="userName">
+                            <FormItem label="@Html.Raw(localizer["UserName"])" prop="userName">
                                 <Input v-model="formValidate.userName"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Password" prop="password">
+                            <FormItem label="@Html.Raw(localizer["Password"])" prop="password">
                                 <Input v-model="formValidate.password"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="EmailSubject" prop="subject">
+                            <FormItem label="@Html.Raw(localizer["EmailSubject"])" prop="subject">
                                 <Input v-model="formValidate.subject"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="EmailBody" prop="body">
+                            <FormItem label="@Html.Raw(localizer["EmailBody"])" prop="body">
                                 <Input type="textarea" v-model="formValidate.body"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="3">
-                            <FormItem label="IsCompress">
+                            <FormItem label="@Html.Raw(localizer["IsCompress"])">
                                 <i-switch v-model="formValidate.isCompress" size="large">
                                     <span slot="open">true</span>
                                     <span slot="close">false</span>
@@ -511,14 +508,14 @@
                             </FormItem>
                             </Col>
                             <Col span="21">
-                            <FormItem label="CompressFileName" prop="compressFileName">
+                            <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFileName">
                                 <Input v-model="formValidate.compressFileName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="3">
-                            <FormItem label="IsAttachment">
+                            <FormItem label="@Html.Raw(localizer["IsAttachment"])">
                                 <i-switch v-model="formValidate.isAttachment" size="large">
                                     <span slot="open">true</span>
                                     <span slot="close">false</span>
@@ -526,7 +523,7 @@
                             </FormItem>
                             </Col>
                             <Col span="21">
-                            <FormItem label="AttachmentName" prop="attachmentName">
+                            <FormItem label="@Html.Raw(localizer["AttachmentName"])" prop="attachmentName">
                                 <Input v-model="formValidate.attachmentName"></Input>
                             </FormItem>
                             </Col>

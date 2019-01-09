@@ -86,15 +86,16 @@ namespace StealthGirder
             //app.UserSqlServerBackHandle(scheduler);
             #endregion
             var supportedCultures = new[]{           
+                new CultureInfo("en"),
                 new CultureInfo("zh")
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
             {                 
-                DefaultRequestCulture = new RequestCulture(new CultureInfo("zh")),
+                DefaultRequestCulture = new RequestCulture(new CultureInfo("en"),new CultureInfo("en")),
                 // Formatting numbers, dates, etc.
                 SupportedCultures = supportedCultures,
                 // UI strings that we have localized.
-                SupportedUICultures = supportedCultures
+                SupportedUICultures = supportedCultures,                
             });
             app.UseStaticFiles(new StaticFileOptions
             {

@@ -118,60 +118,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>添加</value>
+    <value>Add</value>
   </data>
   <data name="AttachmentName" xml:space="preserve">
-    <value>附件名称</value>
+    <value>AttachmentName</value>
   </data>
   <data name="CompressFileName" xml:space="preserve">
-    <value>压缩文件名</value>
+    <value>CompressFileName</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>编辑</value>
+    <value>Edit</value>
   </data>
   <data name="EmailBody" xml:space="preserve">
-    <value>邮件正文</value>
+    <value>EmailBody</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>邮件配置管理</value>
+    <value>EmailSettings</value>
   </data>
   <data name="EmailSubject" xml:space="preserve">
-    <value>邮件标题</value>
+    <value>EmailSubject</value>
   </data>
   <data name="FromAddresses" xml:space="preserve">
-    <value>发送地址</value>
+    <value>FromAddresses</value>
   </data>
   <data name="Host" xml:space="preserve">
-    <value>主机地址</value>
+    <value>Host</value>
   </data>
   <data name="ID" xml:space="preserve">
-    <value>编号</value>
+    <value>ID</value>
   </data>
   <data name="IsAttachment" xml:space="preserve">
-    <value>是否有附件</value>
+    <value>IsAttachment</value>
   </data>
   <data name="IsCompress" xml:space="preserve">
-    <value>是否压缩</value>
+    <value>IsCompress</value>
   </data>
   <data name="KeyName" xml:space="preserve">
-    <value>关键字</value>
+    <value>KeyName</value>
   </data>
   <data name="Operate" xml:space="preserve">
-    <value>操作</value>
+    <value>Operate</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>密码</value>
+    <value>Password</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>端口</value>
+    <value>Port</value>
   </data>
   <data name="ToAddresses" xml:space="preserve">
-    <value>接收地址</value>
+    <value>ToAddresses</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>用户名</value>
+    <value>UserName</value>
   </data>
   <data name="Validate" xml:space="preserve">
-    <value>有效性</value>
+    <value>Validate</value>
   </data>
 </root>
