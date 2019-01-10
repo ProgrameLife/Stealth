@@ -1,19 +1,17 @@
-﻿@{
-    Layout = null;
-}
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.FileSettingsController> localizer
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FileSettings - StealthUI</title>
+    <title>@Html.Raw(localizer["FileSettings"]) - StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">FileSettings</h2>
+            <h2 style="height: 20px;">@Html.Raw(localizer["FileSettings"])</h2>
         </div>
         <div id="addfilesetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -39,7 +37,7 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-            <row :gutter="16"  style="text-align:right;margin-top:3px;">
+            <row :gutter="16" style="text-align:right;margin-top:3px;">
                 <col span="24">
                 <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
@@ -57,35 +55,35 @@
                 return {
                     columns: [
                         {
-                            title: 'ID',
+                            title: '@Html.Raw(localizer["ID"])',
                             key: 'id',
                             width: 50,
                         },
                         {
-                            title: 'KeyName',
+                            title: '@Html.Raw(localizer["KeyName"])',
                             key: 'keyName',
                         },
                         {
-                            title: 'FileName',
+                            title: '@Html.Raw(localizer["FileName"])',
                             key: 'fileName',
 
                         },
                         {
-                            title: 'FilePath',
+                            title: '@Html.Raw(localizer["FilePath"])',
                             key: 'filePath'
                         },
                         {
-                            title: 'FileEncoding',
+                            title: '@Html.Raw(localizer["FileEncoding"])',
                             key: 'fileEncoding',
 
                         },
                         {
-                            title: 'Validate',
+                            title: '@Html.Raw(localizer["Validate"])',
                             key: 'validate',
                             width: 90,
                         },
                         {
-                            title: 'operate',
+                            title: '@Html.Raw(localizer["Operate"])',
                             key: 'action',
                             width: 100,
                             align: 'center',
@@ -224,38 +222,38 @@
 
     <script type="text/x-template" id="editmodal-div">
         <Modal v-model="editdata.showmodal"
-               title="Edit"
+               title="@Html.Raw(localizer["Edit"])"
                width="800px"
                :mask-closable="false">
             <div>
                 <Form ref="editdata.filesetting" :model="editdata.filesetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="KeyName" prop="keyName">
+                        <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                             <Input v-model="editdata.filesetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="FileName" prop="fileName">
+                        <FormItem label="@Html.Raw(localizer["FileName"])" prop="fileName">
                             <Input v-model="editdata.filesetting.fileName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="FilePath" prop="filePath">
+                        <FormItem label="@Html.Raw(localizer["FilePath"])" prop="filePath">
                             <Input v-model="editdata.filesetting.filePath"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="FileEncoding" prop="fileEncoding">
+                        <FormItem label="@Html.Raw(localizer["FileEncoding"])" prop="fileEncoding">
                             <Input v-model="editdata.filesetting.fileEncoding"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Validate">
+                        <FormItem label="@Html.Raw(localizer["Validate"])">
                             <i-switch v-model="editdata.filesetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
@@ -266,8 +264,8 @@
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
             </div>
         </Modal>
     </script>
@@ -318,40 +316,40 @@
 
     <script type="text/x-template" id="addmodal-div">
         <div>
-            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+            <Button type="primary" v-on:click="showmodal = true">@Html.Raw(localizer["Add"])</Button>
             <Modal v-model="showmodal"
-                   title="Add"
+                   title="@Html.Raw(localizer["Add"])"
                    width="800px"
                    :mask-closable="false">
                 <div>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="KeyName" prop="keyName">
+                            <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                                 <Input v-model="formValidate.keyName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="FileName" prop="fileName">
+                            <FormItem label="@Html.Raw(localizer["FileName"])" prop="fileName">
                                 <Input v-model="formValidate.fileName"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="FilePath" prop="filePath">
+                            <FormItem label="@Html.Raw(localizer["FilePath"])" prop="filePath">
                                 <Input v-model="formValidate.filePath"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="FileEncoding" prop="fileEncoding">
+                            <FormItem label="@Html.Raw(localizer["FileEncoding"])" prop="fileEncoding">
                                 <Input v-model="formValidate.fileEncoding"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Validate">
+                            <FormItem label="@Html.Raw(localizer["Validate"])">
                                 <i-switch v-model="formValidate.validate" size="large">
                                     <span slot="valid">true</span>
                                     <span slot="invalid">false</span>
@@ -362,8 +360,8 @@
                     </Form>
                 </div>
                 <div slot="footer">
-                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                    <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
                 </div>
             </Modal>
         </div>

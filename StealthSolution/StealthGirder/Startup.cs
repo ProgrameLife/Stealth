@@ -64,7 +64,9 @@ namespace StealthGirder
             services.AddLocalization(opt => opt.ResourcesPath = "Resources");
             services
                 .AddMvc()
-                .AddApplicationPart(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly)              
+                .AddApplicationPart(typeof(StealthUI.Controllers.FileSettingsController).GetTypeInfo().Assembly)
+                    .AddViewLocalization()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -85,17 +87,17 @@ namespace StealthGirder
             app.UserPostgreBackHandle(scheduler);
             //app.UserSqlServerBackHandle(scheduler);
             #endregion
-            var supportedCultures = new[]{           
-                new CultureInfo("en"),
-                new CultureInfo("zh")
+       
+            var supportedCultures = new[]{
+                new CultureInfo(Configuration.GetSection("Localization").Value)  
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
-            {                 
-                DefaultRequestCulture = new RequestCulture(new CultureInfo("en"),new CultureInfo("en")),
+            {
+                DefaultRequestCulture = new RequestCulture(supportedCultures[0]),
                 // Formatting numbers, dates, etc.
                 SupportedCultures = supportedCultures,
                 // UI strings that we have localized.
-                SupportedUICultures = supportedCultures,                
+                SupportedUICultures = supportedCultures
             });
             app.UseStaticFiles(new StaticFileOptions
             {

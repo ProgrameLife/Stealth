@@ -380,8 +380,8 @@
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
             </div>
         </Modal>
     </script>
@@ -531,8 +531,8 @@
                     </Form>
                 </div>
                 <div slot="footer">
-                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                    <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
                 </div>
             </Modal>
         </div>

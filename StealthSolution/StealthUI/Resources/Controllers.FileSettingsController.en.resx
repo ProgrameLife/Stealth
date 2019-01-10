@@ -120,41 +120,26 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AttachmentName" xml:space="preserve">
-    <value>AttachmentName</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="CompressFileName" xml:space="preserve">
-    <value>CompressFileName</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="EmailBody" xml:space="preserve">
-    <value>EmailBody</value>
+  <data name="FileEncoding" xml:space="preserve">
+    <value>FileEncoding</value>
   </data>
-  <data name="EmailSettings" xml:space="preserve">
-    <value>EmailSettings</value>
+  <data name="FileName" xml:space="preserve">
+    <value>FileName</value>
   </data>
-  <data name="EmailSubject" xml:space="preserve">
-    <value>EmailSubject</value>
+  <data name="FilePath" xml:space="preserve">
+    <value>FilePath</value>
   </data>
-  <data name="FromAddresses" xml:space="preserve">
-    <value>FromAddresses</value>
-  </data>
-  <data name="Host" xml:space="preserve">
-    <value>Host</value>
+  <data name="FileSettings" xml:space="preserve">
+    <value>FileSettings</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
-  </data>
-  <data name="IsAttachment" xml:space="preserve">
-    <value>IsAttachment</value>
-  </data>
-  <data name="IsCompress" xml:space="preserve">
-    <value>IsCompress</value>
   </data>
   <data name="KeyName" xml:space="preserve">
     <value>KeyName</value>
@@ -162,20 +147,8 @@
   <data name="Operate" xml:space="preserve">
     <value>Operate</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Port" xml:space="preserve">
-    <value>Port</value>
-  </data>
   <data name="Sava" xml:space="preserve">
     <value>Sava</value>
-  </data>
-  <data name="ToAddresses" xml:space="preserve">
-    <value>ToAddresses</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>UserName</value>
   </data>
   <data name="Validate" xml:space="preserve">
     <value>Validate</value>

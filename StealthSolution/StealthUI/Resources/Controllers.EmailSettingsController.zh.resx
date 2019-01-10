@@ -123,6 +123,9 @@
   <data name="AttachmentName" xml:space="preserve">
     <value>附件名称</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
   <data name="CompressFileName" xml:space="preserve">
     <value>压缩文件名</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Port" xml:space="preserve">
     <value>端口</value>
+  </data>
+  <data name="Sava" xml:space="preserve">
+    <value>保存</value>
   </data>
   <data name="ToAddresses" xml:space="preserve">
     <value>接收地址</value>
