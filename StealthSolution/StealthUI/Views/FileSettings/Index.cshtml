@@ -136,14 +136,14 @@
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
-                                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                                         ],
                                         fileName: [
-                                            { required: true, message: 'FileName cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["FileNameRequired"])', trigger: 'blur' }
                                         ],
                                         fileEncoding: [
-                                            { required: true, message: 'FileEncoding cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["FileEncodingRequired"])', trigger: 'blur' }
                                         ],
                                     }
                                 }
@@ -382,15 +382,15 @@
                     },
                     ruleValidate: {
                         keyName: [
-                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
-                        ],
-                        fileName: [
-                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        fileEncoding: [
-                            { required: true, message: 'FileEncoding cannot be empty, is required', trigger: 'blur' }
-                        ],
+                         { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                         { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
+                         ],
+                         fileName: [
+                             { required: true, message: '@Html.Raw(localizer["FileNameRequired"])', trigger: 'blur' }
+                         ],
+                         fileEncoding: [
+                             { required: true, message: '@Html.Raw(localizer["FileEncodingRequired"])', trigger: 'blur' }
+                         ],
                     }
                 }
             },

@@ -144,8 +144,14 @@
   <data name="FromAddresses" xml:space="preserve">
     <value>FromAddresses</value>
   </data>
+  <data name="FromAddressesRequired" xml:space="preserve">
+    <value>FromAddresses cannot be empty, is required</value>
+  </data>
   <data name="Host" xml:space="preserve">
     <value>Host</value>
+  </data>
+  <data name="HostRequired" xml:space="preserve">
+    <value>Host cannot be empty, is required</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
@@ -159,11 +165,20 @@
   <data name="KeyName" xml:space="preserve">
     <value>KeyName</value>
   </data>
+  <data name="KeyNameLength" xml:space="preserve">
+    <value>Length less than 256</value>
+  </data>
+  <data name="KeyNameRequired" xml:space="preserve">
+    <value>KeyName cannot be empty, is required</value>
+  </data>
   <data name="Operate" xml:space="preserve">
     <value>Operate</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password cannot be empty, is required</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
@@ -174,8 +189,14 @@
   <data name="ToAddresses" xml:space="preserve">
     <value>ToAddresses</value>
   </data>
+  <data name="ToAddressesRequired" xml:space="preserve">
+    <value>ToAddresses cannot be empty, is required</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>UserName</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>UserName cannot be empty, is required</value>
   </data>
   <data name="Validate" xml:space="preserve">
     <value>Validate</value>

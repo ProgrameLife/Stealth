@@ -123,26 +123,14 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CronExpression" xml:space="preserve">
+    <value>CronExpression</value>
+  </data>
+  <data name="CronExpressionRequired" xml:space="preserve">
+    <value>CronExpression cannot be empty, is required</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
-  </data>
-  <data name="FileEncoding" xml:space="preserve">
-    <value>FileEncoding</value>
-  </data>
-  <data name="FileEncodingRequired" xml:space="preserve">
-    <value>FileEncoding cannot be empty, is required</value>
-  </data>
-  <data name="FileName" xml:space="preserve">
-    <value>FileName</value>
-  </data>
-  <data name="FileNameRequired" xml:space="preserve">
-    <value>FileName cannot be empty, is required</value>
-  </data>
-  <data name="FilePath" xml:space="preserve">
-    <value>FilePath</value>
-  </data>
-  <data name="FileSettings" xml:space="preserve">
-    <value>FileSettings</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
@@ -159,8 +147,17 @@
   <data name="Operate" xml:space="preserve">
     <value>Operate</value>
   </data>
+  <data name="QuartzSettings" xml:space="preserve">
+    <value>QuartzSettings</value>
+  </data>
   <data name="Sava" xml:space="preserve">
     <value>Sava</value>
+  </data>
+  <data name="TypeName" xml:space="preserve">
+    <value>TypeName</value>
+  </data>
+  <data name="TypeNameRequired" xml:space="preserve">
+    <value>TypeName cannot be empty, is required</value>
   </data>
   <data name="Validate" xml:space="preserve">
     <value>Validate</value>

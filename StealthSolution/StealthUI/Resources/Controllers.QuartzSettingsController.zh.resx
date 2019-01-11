@@ -118,51 +118,48 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>添加</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
+  </data>
+  <data name="CronExpression" xml:space="preserve">
+    <value>Cron表达式</value>
+  </data>
+  <data name="CronExpressionRequired" xml:space="preserve">
+    <value>Cron表达式不能为空</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="FileEncoding" xml:space="preserve">
-    <value>FileEncoding</value>
-  </data>
-  <data name="FileEncodingRequired" xml:space="preserve">
-    <value>FileEncoding cannot be empty, is required</value>
-  </data>
-  <data name="FileName" xml:space="preserve">
-    <value>FileName</value>
-  </data>
-  <data name="FileNameRequired" xml:space="preserve">
-    <value>FileName cannot be empty, is required</value>
-  </data>
-  <data name="FilePath" xml:space="preserve">
-    <value>FilePath</value>
-  </data>
-  <data name="FileSettings" xml:space="preserve">
-    <value>FileSettings</value>
+    <value>编辑</value>
   </data>
   <data name="ID" xml:space="preserve">
-    <value>ID</value>
+    <value>编号</value>
   </data>
   <data name="KeyName" xml:space="preserve">
-    <value>KeyName</value>
+    <value>关键字</value>
   </data>
   <data name="KeyNameLength" xml:space="preserve">
-    <value>Length less than 256</value>
+    <value>长度不能超过256</value>
   </data>
   <data name="KeyNameRequired" xml:space="preserve">
-    <value>KeyName cannot be empty, is required</value>
+    <value>关键字不能为空</value>
   </data>
   <data name="Operate" xml:space="preserve">
-    <value>Operate</value>
+    <value>操作</value>
+  </data>
+  <data name="QuartzSettings" xml:space="preserve">
+    <value>后台任务设置</value>
   </data>
   <data name="Sava" xml:space="preserve">
-    <value>Sava</value>
+    <value>保存</value>
+  </data>
+  <data name="TypeName" xml:space="preserve">
+    <value>类型名</value>
+  </data>
+  <data name="TypeNameRequired" xml:space="preserve">
+    <value>类型名不能为空</value>
   </data>
   <data name="Validate" xml:space="preserve">
-    <value>Validate</value>
+    <value>有效性</value>
   </data>
 </root>

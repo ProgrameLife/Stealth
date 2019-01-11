@@ -1,20 +1,18 @@
-﻿@{
-    ViewData["Title"] = "QuartzSetting";
-}
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.QuartzSettingsController> localizer
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QuartzSettings - StealthUI</title>
+    <title>@Html.Raw(localizer["QuartzSettings"])QuartzSettings - StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">QuartzSettings</h2>
+            <h2 style="height: 20px;">@Html.Raw(localizer["QuartzSettings"])</h2>
         </div>
         <div id="addQuartzsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -43,7 +41,7 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-            <row :gutter="16"  style="text-align:right;margin-top:3px;">
+            <row :gutter="16" style="text-align:right;margin-top:3px;">
                 <col span="24">
                 <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
@@ -61,29 +59,29 @@
                 return {
                     columns: [
                         {
-                            title: 'ID',
+                            title: '@Html.Raw(localizer["ID"])',
                             key: 'id',
                             width: 50,
                         },
                         {
-                            title: 'KeyName',
+                            title: '@Html.Raw(localizer["KeyName"])',
                             key: 'keyName',
                         },
                         {
-                            title: 'TypeName',
+                            title: '@Html.Raw(localizer["TypeName"])',
                             key: 'typeName',
 
                         },
                         {
-                            title: 'CronExpression',
+                            title: '@Html.Raw(localizer["CronExpression"])',
                             key: 'cronExpression'
-                        },   
+                        },
                         {
-                            title: 'Validate',
+                            title: '@Html.Raw(localizer["Validate"])',
                             key: 'validate'
-                        }, 
+                        },
                         {
-                            title: 'operate',
+                            title: '@Html.Raw(localizer["Operate"])',
                             key: 'action',
                             width: 100,
                             align: 'center',
@@ -127,7 +125,7 @@
             },
             methods: {
                 edit: function (quartzsetting) {
-                 
+
                     if (editVue == null) {
                         editVue = new Vue({
                             el: "#editdiv",
@@ -137,15 +135,15 @@
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
-                                            { required: true, message: 'KeyName cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                                         ],
                                         typeName: [
-                                            { required: true, message: 'TypeName cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["TypeNameRequired"])', trigger: 'blur' }
                                         ],
                                         cronExpression: [
-                                            { required: true, message: 'CronExpression cannot be empty, is required', trigger: 'blur' }
-                                        ],                                    
+                                            { required: true, message: '@Html.Raw(localizer["CronExpressionRequired"])', trigger: 'blur' }
+                                        ],
                                     }
                                 }
                             }
@@ -224,33 +222,33 @@
 
     <script type="text/x-template" id="editmodal-div">
         <Modal v-model="editdata.showmodal"
-               title="Edit"
+               title="@Html.Raw(localizer["Edit"])"
                width="800px"
                :mask-closable="false">
             <div>
                 <Form ref="editdata.quartzsetting" :model="editdata.quartzsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="KeyName" prop="keyName">
+                        <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                             <Input v-model="editdata.quartzsetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="TypeName" prop="typeName">
+                        <FormItem label="@Html.Raw(localizer["TypeName"])" prop="typeName">
                             <Input v-model="editdata.quartzsetting.typeName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="CronExpression" prop="cronExpression">
+                        <FormItem label="@Html.Raw(localizer["CronExpression"])" prop="cronExpression">
                             <Input v-model="editdata.quartzsetting.cronExpression"></Input>
                         </FormItem>
                         </Col>
-                    </row>     
+                    </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="Validate">
+                        <FormItem label="@Html.Raw(localizer["Validate"])">
                             <i-switch v-model="editdata.quartzsetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
@@ -263,8 +261,8 @@
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
             </div>
         </Modal>
     </script>
@@ -277,13 +275,13 @@
 
                     this.$refs['editdata.quartzsetting'].validate((valid) => {
                         if (valid) {
-                        
+
                             axios.put("/modifyQuartzsetting", this.editdata.quartzsetting)
                                 .then(function (response) {
                                     //判断请求状态
                                     if (response.status == 200) {
                                         var returnData = response.data;
-                                       
+
                                         if (returnData.result) {
                                             editVue.editdata.showmodal = false;
                                         } else {
@@ -316,36 +314,36 @@
 
 
     <script type="text/x-template" id="addmodal-div">
-        <div>      
-            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+        <div>
+            <Button type="primary" v-on:click="showmodal = true">@Html.Raw(localizer["Add"])</Button>
             <Modal v-model="showmodal"
-                   title="Add"
+                   title="@Html.Raw(localizer["Add"])"
                    width="800px"
                    :mask-closable="false">
                 <div>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="KeyName" prop="keyName">
+                            <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                                 <Input v-model="formValidate.keyName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="TypeName" prop="typeName">
+                            <FormItem label="@Html.Raw(localizer["TypeName"])" prop="typeName">
                                 <Input v-model="formValidate.typeName"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="CronExpression" prop="cronExpression">
+                            <FormItem label="@Html.Raw(localizer["CronExpression"])" prop="cronExpression">
                                 <Input v-model="formValidate.cronExpression"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="Validate">
+                            <FormItem label="@Html.Raw(localizer["Validate"])">
                                 <i-switch v-model="formValidate.validate" size="large">
                                     <span slot="valid">true</span>
                                     <span slot="invalid">false</span>
@@ -358,8 +356,8 @@
                     </Form>
                 </div>
                 <div slot="footer">
-                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                    <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
                 </div>
             </Modal>
         </div>
@@ -373,21 +371,21 @@
                     formValidate: {
                         id: 0,
                         keyName: "",
-                        typeName: "",                  
-                        cronExpression: "",                      
+                        typeName: "",
+                        cronExpression: "",
                         validate: false
                     },
                     ruleValidate: {
                         keyName: [
-                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                         ],
                         typeName: [
-                            { required: true, message: 'TypeName cannot be empty, is required', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["TypeNameRequired"])', trigger: 'blur' }
                         ],
                         cronExpression: [
-                            { required: true, message: 'CronExpression cannot be empty, is required', trigger: 'blur' }
-                        ],                       
+                            { required: true, message: '@Html.Raw(localizer["CronExpressionRequired"])', trigger: 'blur' }
+                        ],
                     }
                 }
             },

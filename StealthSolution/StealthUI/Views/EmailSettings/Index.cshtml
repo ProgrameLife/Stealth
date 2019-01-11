@@ -175,23 +175,23 @@
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
-                                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                                         ],
                                         host: [
-                                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["HostRequired"])', trigger: 'blur' }
                                         ],
                                         userName: [
-                                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["UserNameRequired"])', trigger: 'blur' }
                                         ],
                                         password: [
-                                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["PasswordRequired"])', trigger: 'blur' }
                                         ],
                                         fromAddresses: [
-                                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["FromAddressesRequired"])', trigger: 'blur' }
                                         ],
                                         toAddresses: [
-                                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["ToAddressesRequired"])', trigger: 'blur' }
                                         ],
                                     }
                                 }
@@ -561,25 +561,25 @@
                         validate: false
                     },
                     ruleValidate: {
-                        keyName: [
-                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
-                        ],
-                        host: [
-                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        userName: [
-                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        password: [
-                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        fromAddresses: [
-                            { required: true, message: 'FromAddresses cannot be empty, is required', trigger: 'blur' }
-                        ],
-                        toAddresses: [
-                            { required: true, message: 'ToAddresses cannot be empty, is required', trigger: 'blur' }
-                        ],
+                           keyName: [
+                               { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                               { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
+                           ],
+                           host: [
+                               { required: true, message: '@Html.Raw(localizer["HostRequired"])', trigger: 'blur' }
+                           ],
+                           userName: [
+                               { required: true, message: '@Html.Raw(localizer["UserNameRequired"])', trigger: 'blur' }
+                           ],
+                           password: [
+                               { required: true, message: '@Html.Raw(localizer["PasswordRequired"])', trigger: 'blur' }
+                           ],
+                           fromAddresses: [
+                               { required: true, message: '@Html.Raw(localizer["FromAddressesRequired"])', trigger: 'blur' }
+                           ],
+                           toAddresses: [
+                               { required: true, message: '@Html.Raw(localizer["ToAddressesRequired"])', trigger: 'blur' }
+                           ],
                     }
                 }
             },

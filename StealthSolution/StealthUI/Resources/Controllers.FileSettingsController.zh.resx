@@ -129,20 +129,32 @@
   <data name="FileEncoding" xml:space="preserve">
     <value>文件编码</value>
   </data>
+  <data name="FileEncodingRequired" xml:space="preserve">
+    <value>文件编码不能为空</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>文件名称</value>
+  </data>
+  <data name="FileNameRequired" xml:space="preserve">
+    <value>文件名称不能为空</value>
   </data>
   <data name="FilePath" xml:space="preserve">
     <value>文件路径</value>
   </data>
   <data name="FileSettings" xml:space="preserve">
-    <value>文件设置管理</value>
+    <value>文件配置管理</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>编号</value>
   </data>
   <data name="KeyName" xml:space="preserve">
     <value>关键字</value>
+  </data>
+  <data name="KeyNameLength" xml:space="preserve">
+    <value>长度不能超过256</value>
+  </data>
+  <data name="KeyNameRequired" xml:space="preserve">
+    <value>关键字不能为空</value>
   </data>
   <data name="Operate" xml:space="preserve">
     <value>操作</value>

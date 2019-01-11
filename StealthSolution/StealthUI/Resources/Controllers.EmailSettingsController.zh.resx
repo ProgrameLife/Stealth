@@ -144,8 +144,14 @@
   <data name="FromAddresses" xml:space="preserve">
     <value>发送地址</value>
   </data>
+  <data name="FromAddressesRequired" xml:space="preserve">
+    <value>发送地址不能为空</value>
+  </data>
   <data name="Host" xml:space="preserve">
     <value>主机地址</value>
+  </data>
+  <data name="HostRequired" xml:space="preserve">
+    <value>主机地址不能为空，请输入IP地址</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>编号</value>
@@ -159,11 +165,20 @@
   <data name="KeyName" xml:space="preserve">
     <value>关键字</value>
   </data>
+  <data name="KeyNameLength" xml:space="preserve">
+    <value>关键字长度不能超过256</value>
+  </data>
+  <data name="KeyNameRequired" xml:space="preserve">
+    <value>关键字不能为空</value>
+  </data>
   <data name="Operate" xml:space="preserve">
     <value>操作</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>密码</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>密码不能为空</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>端口</value>
@@ -174,8 +189,14 @@
   <data name="ToAddresses" xml:space="preserve">
     <value>接收地址</value>
   </data>
+  <data name="ToAddressesRequired" xml:space="preserve">
+    <value>接收地址不能为空</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>用户名</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>用户名不能为空</value>
   </data>
   <data name="Validate" xml:space="preserve">
     <value>有效性</value>
