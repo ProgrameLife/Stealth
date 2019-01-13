@@ -1,22 +1,18 @@
-﻿@{
-    ViewData["Title"] = "SFTPSetting";
-}
-
-
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.QuartzSettingsController> localizer
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SFTPSettings- StealthUI</title>
+    <title>@Html.Raw(localizer["SFTPSettings"])- StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">SFTPSettings</h2>
+            <h2 style="height: 20px;">@Html.Raw(localizer["SFTPSettings"])</h2>
         </div>
         <div id="addsftpsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -46,7 +42,7 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-            <row :gutter="16"  style="text-align:right;margin-top:3px;">
+            <row :gutter="16" style="text-align:right;margin-top:3px;">
                 <col span="24">
                 <Page :total="total" :page-size="10" :current="current" v-on:on-change="pageing" />
                 </col>
@@ -64,59 +60,59 @@
                 return {
                     columns: [
                         {
-                            title: 'ID',
+                            title: '@Html.Raw(localizer["ID"])',
                             key: 'id',
                             width: 50,
                         },
                         {
-                            title: 'KeyName',
+                            title: '@Html.Raw(localizer["KeyName"])',
                             key: 'keyName',
                         },
                         {
-                            title: 'Host',
+                            title: '@Html.Raw(localizer["Host"])',
                             key: 'host',
 
                         },
                         {
-                            title: 'Port',
+                            title: '@Html.Raw(localizer["Port"])',
                             key: 'port'
                         },
                         {
-                            title: 'UserName',
+                            title: '@Html.Raw(localizer["UserName"])',
                             key: 'userName',
 
                         },
                         {
-                            title: 'Password',
+                            title: '@Html.Raw(localizer["Password"])',
                             key: 'password',
                         },
                         {
-                            title: 'CertificatePath',
+                            title: '@Html.Raw(localizer["CertificatePath"])',
                             key: 'certificatePath',
                         },
                         {
-                            title: 'TransferDirectory',
+                            title: '@Html.Raw(localizer["TransferDirectory"])',
                             key: 'transferDirectory',
                         },
                         {
-                            title: 'TransferFilePrefix',
+                            title: '@Html.Raw(localizer["TransferFilePrefix"])',
                             key: 'transferFilePrefix',
                         },
                         {
-                            title: 'FileName',
+                            title: '@Html.Raw(localizer["FileName"])',
                             key: 'filename',
                         },
                         {
-                            title: 'FileEncoding',
+                            title: '@Html.Raw(localizer["FileEncoding"])',
                             key: 'fileEncoding',
                         },
                         {
-                            title: 'Validate',
+                            title: '@Html.Raw(localizer["Validate"])',
                             key: 'validate',
                             width: 90,
                         },
                         {
-                            title: 'operate',
+                            title: '@Html.Raw(localizer["Operate"])',
                             key: 'action',
                             width: 100,
                             align: 'center',
@@ -169,17 +165,17 @@
                                     showmodal: true,
                                     ruleValidate: {
                                         keyName: [
-                                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                                         ],
                                         host: [
-                                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["HostRequired"])', trigger: 'blur' }
                                         ],
                                         userName: [
-                                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["UserNameRequired"])', trigger: 'blur' }
                                         ],
                                         password: [
-                                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                                            { required: true, message: '@Html.Raw(localizer["PasswordRequired"])', trigger: 'blur' }
                                         ],
 
                                     }
@@ -262,74 +258,74 @@
 
     <script type="text/x-template" id="editmodal-div">
         <Modal v-model="editdata.showmodal"
-               title="Edit"
+               title="@Html.Raw(localizer["Edit"])"
                width="800px"
                :mask-closable="false">
             <div>
                 <Form ref="editdata.sftpsetting" :model="editdata.sftpsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="KeyName" prop="keyName">
+                        <FormItem label="@Html.Raw(localizer["KenName"])" prop="keyName">
                             <Input v-model="editdata.sftpsetting.keyName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="Host" prop="host">
+                        <FormItem label="@Html.Raw(localizer["Host"])" prop="host">
                             <Input v-model="editdata.sftpsetting.host"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Port" prop="port">
+                        <FormItem label="@Html.Raw(localizer["Port"])" prop="port">
                             <InputNumber v-model="editdata.sftpsetting.port" :min="10" :step="1"></InputNumber>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="UserName" prop="userName">
+                        <FormItem label="@Html.Raw(localizer["UserName"])" prop="userName">
                             <Input v-model="editdata.sftpsetting.userName"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Password" prop="password">
+                        <FormItem label="@Html.Raw(localizer["Pwssword"])" prop="password">
                             <Input v-model="editdata.sftpsetting.password"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="CertificatePath" prop="certificatePath">
+                        <FormItem label="@Html.Raw(localizer[""])" prop="certificatePath">
                             <Input v-model="editdata.sftpsetting.certificatePath"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="TransferDirectory" prop="transferDirectory">
+                        <FormItem label="@Html.Raw(localizer["TransferDirectory"])" prop="transferDirectory">
                             <Input v-model="editdata.sftpsetting.transferDirectory"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="TransferFilePrefix" prop="transferFilePrefix">
+                        <FormItem label="@Html.Raw(localizer["TransferFilePrefix"])" prop="transferFilePrefix">
                             <Input v-model="editdata.sftpsetting.transferFilePrefix"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="FileName" prop="fileName">
+                        <FormItem label="@Html.Raw(localizer["FileName"])" prop="fileName">
                             <Input v-model="editdata.sftpsetting.fileName"></Input>
                         </FormItem>
                         </Col>
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="FileEncoding" prop="fileEncoding">
+                        <FormItem label="@Html.Raw(localizer["FileEncoding"])" prop="fileEncoding">
                             <Input v-model="editdata.sftpsetting.fileEncoding"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="Validate">
+                        <FormItem label="@Html.Raw(localizer["Validate"])">
                             <i-switch v-model="editdata.sftpsetting.validate" size="large">
                                 <span slot="valid">true</span>
                                 <span slot="invalid">false</span>
@@ -340,8 +336,8 @@
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
             </div>
         </Modal>
     </script>
@@ -392,76 +388,76 @@
 
     <script type="text/x-template" id="addmodal-div">
         <div>
-            <Button type="primary" v-on:click="showmodal = true">Add</Button>
+            <Button type="primary" v-on:click="showmodal = true">@Html.Raw(localizer["Add"])</Button>
             <Modal v-model="showmodal"
-                   title="Add"
+                   title="@Html.Raw(localizer["Add"])"
                    width="800px"
                    :mask-closable="false">
                 <div>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top">
                         <row :gutter="16">
                             <Col span="24">
-                            <FormItem label="KeyName" prop="keyName">
+                            <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                                 <Input v-model="formValidate.keyName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="Host" prop="host">
+                            <FormItem label="@Html.Raw(localizer["Host"])" prop="host">
                                 <Input v-model="formValidate.host"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Port" prop="port">
+                            <FormItem label="@Html.Raw(localizer["Port"])" prop="port">
                                 <InputNumber v-model="formValidate.port" :min="10" :step="1"></InputNumber>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="UserName" prop="userName">
+                            <FormItem label="@Html.Raw(localizer["UserName"])" prop="userName">
                                 <Input v-model="formValidate.userName"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Password" prop="password">
+                            <FormItem label="@Html.Raw(localizer["Password"])" prop="password">
                                 <Input v-model="formValidate.password"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="CertificatePath" prop="certificatePath">
+                            <FormItem label="@Html.Raw(localizer["CertificatePath"])" prop="certificatePath">
                                 <Input v-model="formValidate.certificatePath"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="TransferDirectory" prop="transferDirectory">
+                            <FormItem label="@Html.Raw(localizer["TransferDirectory"])" prop="transferDirectory">
                                 <Input v-model="formValidate.transferDirectory"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="TransferFilePrefix" prop="transferFilePrefix">
+                            <FormItem label="@Html.Raw(localizer["TransferFilePrefix"])" prop="transferFilePrefix">
                                 <Input v-model="formValidate.transferFilePrefix"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="FileName" prop="fileName">
+                            <FormItem label="@Html.Raw(localizer["FileName"])" prop="fileName">
                                 <Input v-model="formValidate.fileName"></Input>
                             </FormItem>
                             </Col>
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="FileEncoding" prop="fileEncoding">
+                            <FormItem label="@Html.Raw(localizer[""FileEncoding])" prop="fileEncoding">
                                 <Input v-model="formValidate.fileEncoding"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="Vaidate">
+                            <FormItem label="@Html.Raw(localizer["Vaidate"])">
                                 <i-switch v-model="formValidate.validate" size="large">
                                     <span slot="valid">true</span>
                                     <span slot="invalid">false</span>
@@ -472,8 +468,8 @@
                     </Form>
                 </div>
                 <div slot="footer">
-                    <Button type="text" size="large" v-on:click="modalCancel">Cancel</Button>
-                    <Button type="primary" size="large" v-on:click="modalOk">Sava</Button>
+                    <Button type="text" size="large" v-on:click="modalCancel">@Html.Raw(localizer["Cancel"])</Button>
+                    <Button type="primary" size="large" v-on:click="modalOk">@Html.Raw(localizer["Sava"])</Button>
                 </div>
             </Modal>
         </div>
@@ -501,17 +497,17 @@
                     },
                     ruleValidate: {
                         keyName: [
-                            { required: true, message: 'keyname cannot be empty, is required', trigger: 'blur' },
-                            { type: 'string', max: 64, message: 'length less than 256', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["KeyNameRequired"])', trigger: 'blur' },
+                            { type: 'string', max: 64, message: '@Html.Raw(localizer["KeyNameLength"])', trigger: 'blur' }
                         ],
                         host: [
-                            { required: true, message: 'Host cannot be empty, is required', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["HostRequired"])', trigger: 'blur' }
                         ],
                         userName: [
-                            { required: true, message: 'UserName cannot be empty, is required', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["UserNameRequired"])', trigger: 'blur' }
                         ],
                         password: [
-                            { required: true, message: 'Password cannot be empty, is required', trigger: 'blur' }
+                            { required: true, message: '@Html.Raw(localizer["PasswordRequired"])', trigger: 'blur' }
                         ],
                     }
                 }

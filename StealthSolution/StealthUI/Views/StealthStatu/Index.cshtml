@@ -1,23 +1,22 @@
-﻿@{
-    Layout = null;
-}
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.QuartzSettingsController> localizer
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StealthStatu - StealthUI</title>
+    <title>@Html.Raw(localizer["StealthStatu"]) - StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">StealthStatu</h2>
-        </div> 
+            <h2 style="height: 20px;">@Html.Raw(localizer["StealthStatu"])</h2>
+        </div>
         <div id="tablediv" style="padding:10px;">
             <stealthstatu-row :stealthstatu="stealthstatu"></stealthstatu-row>
-        </div> 
+        </div>
         <hr />
         <footer>
             <p>&copy; 2018 - StealthUI</p>
@@ -33,11 +32,11 @@
                 <Table border :columns="columns" :data="data"></Table>
                 </col>
             </row>
-     
+
         </div>
     </script>
     <script>
-    
+
         var tempstealthstatu = null;
         //table组件
         Vue.component("stealthstatu-row", {
@@ -45,40 +44,36 @@
             props: ["stealthstatu"],
             data: function () {
                 return {
-                    columns: [                  
+                    columns: [
                         {
-                            title: 'KeyName',
+                            title: '@Html.Raw(localizer["KeyName"])',
                             key: 'keyName',
                         },
                         {
-                            title: 'Status',
+                            title: '@Html.Raw(localizer["Status"])',
                             key: 'status',
                             render: function (h, o) {
                                 console.log(o.row.status);
-                            
-                                if (o.row.status == 1) {                                 
-                                    return h('div', "Starting");
-                                } 
-                                if (o.row.status == 2) {                                
-                                    return h('div', "Complete");
-                                } 
-                                if (o.row.status == 3) {                             
-                                    return h('div', "Error");
-                                }                                
-                            }                        
+
+                                if (o.row.status == 1) {
+                                    return h('div', "@Html.Raw(localizer["StatusStarting"])");
+                                }
+                                if (o.row.status == 2) {
+                                    return h('div', "@Html.Raw(localizer["StatusComplete"])");
+                                }
+                                if (o.row.status == 3) {
+                                    return h('div', "@Html.Raw(localizer["StatusError"])");
+                                }
+                            }
                         },
                         {
-                            title: 'Modifytime',
+                            title: '@Html.Raw(localizer["Modifytime"])',
                             key: 'modifytime',
-                            //render: function (h, o) {
-                            //    return h('div',
-                            //        new Date(o.row.modifytime).Format('yyyy-MM-dd HH:mm:ss'));/*这里的this.row能够获取当前行的数据*/
-                            //}
                         }
                     ],
-                    data: this.stealthstatu                  
+                    data: this.stealthstatu
                 }
-            }        
+            }
         })
         var stealthstatuVue = null;
         function getFile() {
@@ -92,7 +87,7 @@
                             stealthstatuVue = new Vue({
                                 el: "#tablediv",
                                 data: {
-                                    stealthstatu: returnData.data 
+                                    stealthstatu: returnData.data
                                 }
                             });
                         } else {
@@ -111,6 +106,6 @@
         getFile();
     </script>
 
- 
+
 </body>
 </html>
