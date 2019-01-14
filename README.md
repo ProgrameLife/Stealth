@@ -39,10 +39,11 @@ UI完成配置文件的添加，修改，删除，包括Quartz的配置
 
 ### appsetting.json
 
-#### "Localization": "zh","Localization": "en"
-
-中文UI
+##### 中文UI  "Localization": "zh",
 <img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
 
-英文UI
-<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
+
+
+##### 英文UI "Localization": "en"
+
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.en.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
