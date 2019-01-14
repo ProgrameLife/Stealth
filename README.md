@@ -37,5 +37,10 @@ UI完成配置文件的添加，修改，删除，包括Quartz的配置
 5. StealthStatu UI
 6. QuartzSetting UI
 
-## Milestone
+### appsetting.json
 
+#### "Localization": "zh","Localization": "en"
+中文UI
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="400"/>
+英文UI
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="400"/>
