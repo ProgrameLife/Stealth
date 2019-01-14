@@ -19,11 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthPostgreProvider", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthSqlServerProvider", "Providers\StealthSqlServerProvider\StealthSqlServerProvider.csproj", "{04D18985-91B0-41BE-ACDF-F7500516486F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{7B8F76B1-38A1-4E7E-8491-548258C7A5B8}"
-	ProjectSection(SolutionItems) = preProject
-		Stealth.png = Stealth.png
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthModel", "SealthModel\SealthModel.csproj", "{67964A30-0B21-44EA-ABE5-06AC68CC5117}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthEmailBackHandle", "BackHandles\StealthEmailHandle\StealthEmailBackHandle.csproj", "{04125AE7-8F68-4C3D-A395-5F67DB11E025}"
@@ -39,6 +34,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SealthProvider", "Providers\SealthProvider\SealthProvider.csproj", "{FF5E4CBC-A8FE-4263-9FE5-8507B552200B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StealthFileBackHandle", "BackHandles\StealthFileBackHandle\StealthFileBackHandle.csproj", "{D92EB3B5-8E21-423B-BBCC-785E2888B7C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C6B24FAD-59C0-400C-8490-A8F9B4196009}"
+	ProjectSection(SolutionItems) = preProject
+		Images\SFTPSetting.en.png = Images\SFTPSetting.en.png
+		Images\SFTPSetting.zh.png = Images\SFTPSetting.zh.png
+		Images\Stealth.png = Images\Stealth.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
