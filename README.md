@@ -1,5 +1,5 @@
 ﻿# Stealth
-<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Stealth.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="200" height="200" />
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/Stealth.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="200" height="200" />
 Perform various tasks in the background！
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ProgrameLife/Stealth/blob/master/License)
@@ -40,7 +40,9 @@ UI完成配置文件的添加，修改，删除，包括Quartz的配置
 ### appsetting.json
 
 #### "Localization": "zh","Localization": "en"
+
 中文UI
-<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="400"/>
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
+
 英文UI
-<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="400"/>
+<img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
