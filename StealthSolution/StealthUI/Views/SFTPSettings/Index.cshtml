@@ -1,18 +1,18 @@
-﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.QuartzSettingsController> localizer
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<StealthUI.Controllers.SFTPSettingsController> localizer
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@Html.Raw(localizer["SFTPSettings"])- StealthUI</title>
+    <title>@Html.Raw(localizer["SFTPSetting"])- StealthUI</title>
     <link href="~/wwwroot/lib/iview/dist/styles/iview.css" rel="stylesheet" />
 
 </head>
 <body>
     <div class="container body-content">
         <div style="margin-top:10px;">
-            <h2 style="height: 20px;">@Html.Raw(localizer["SFTPSettings"])</h2>
+            <h2 style="height: 20px;">@Html.Raw(localizer["SFTPSetting"])</h2>
         </div>
         <div id="addsftpsetting" style="text-align:right;margin:10px;">
             <addmodal></addmodal>
@@ -265,7 +265,7 @@
                 <Form ref="editdata.sftpsetting" :model="editdata.sftpsetting" :rules="editdata.ruleValidate" label-position="top">
                     <row :gutter="16">
                         <Col span="24">
-                        <FormItem label="@Html.Raw(localizer["KenName"])" prop="keyName">
+                        <FormItem label="@Html.Raw(localizer["KeyName"])" prop="keyName">
                             <Input v-model="editdata.sftpsetting.keyName"></Input>
                         </FormItem>
                         </Col>
@@ -289,7 +289,7 @@
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="@Html.Raw(localizer["Pwssword"])" prop="password">
+                        <FormItem label="@Html.Raw(localizer["Password"])" prop="password">
                             <Input v-model="editdata.sftpsetting.password"></Input>
                         </FormItem>
                         </Col>
@@ -452,12 +452,12 @@
                         </row>
                         <row :gutter="16">
                             <Col span="12">
-                            <FormItem label="@Html.Raw(localizer[""FileEncoding])" prop="fileEncoding">
+                            <FormItem label="@Html.Raw(localizer["FileEncoding"])" prop="fileEncoding">
                                 <Input v-model="formValidate.fileEncoding"></Input>
                             </FormItem>
                             </Col>
                             <Col span="12">
-                            <FormItem label="@Html.Raw(localizer["Vaidate"])">
+                            <FormItem label="@Html.Raw(localizer["Validate"])">
                                 <i-switch v-model="formValidate.validate" size="large">
                                     <span slot="valid">true</span>
                                     <span slot="invalid">false</span>
