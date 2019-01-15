@@ -37,8 +37,11 @@ UI完成配置文件的添加，修改，删除，包括Quartz的配置
 5. StealthStatu UI
 6. QuartzSetting UI
 
+##### 通过实现StealthBuildData的IBuildData接口来获取后台任务执行的数据
+
 ### appsetting.json
 
+#### 通过配置文件切换UI本地化
 ##### 中文UI  "Localization": "zh",
 <img src="https://github.com/ProgrameLife/Stealth/blob/master/StealthSolution/Images/SFTPSetting.zh.png" alt="GitHub" title="Ocelot.JwtAuthorize" width="600"/>
 
