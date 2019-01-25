@@ -1,16 +1,4 @@
-﻿-- Database: stealthdb
--- DROP DATABASE stealthdb;
-CREATE DATABASE stealthdb
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'Chinese (Simplified)_China.936'
-    LC_CTYPE = 'Chinese (Simplified)_China.936'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-
-
-
+﻿
 CREATE TABLE "public"."quartzsettings" (
 	"id" serial PRIMARY KEY, 
 	"keyname" varchar(512), 
@@ -23,31 +11,6 @@ CREATE TABLE "public"."quartzsettings" (
 CREATE UNIQUE INDEX "keyname"
 	ON "public"."quartzsettings"
 	USING btree (keyname);
-
-
-
-CREATE TABLE "public"."datasettings" (
-	"id" serial PRIMARY KEY, 
-	"keyname" varchar(128), 
-	"connectionstring" text, 
-	"groupno" varchar(64), 
-	"validate" boolean, 
-	"createon" timestamp(6)
-);
-
-CREATE TABLE "public"."datasqls" (
-	"id" serial PRIMARY KEY, 
-	"keyname" varchar(512), 
-	"datasettingid" integer, 
-	"sql" text, 
-	"transactionno" varchar(64), 
-	"groupno" varchar(64), 
-	"validate" boolean, 
-	"createon" timestamp(6), 
-	FOREIGN KEY ("id")
-		REFERENCES "public"."datasettings" ("id")
-		ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 
 CREATE TABLE "public"."emailsettings" (
@@ -70,6 +33,17 @@ CREATE TABLE "public"."emailsettings" (
 	"createon" timestamp(6) DEFAULT now()
 );
 
+
+CREATE TABLE public.filesettings
+(
+    id serial PRIMARY KEY,
+    keyname character varying(128) COLLATE pg_catalog."default",
+    filename character varying(256) COLLATE pg_catalog."default",
+    filepath character varying(1024) COLLATE pg_catalog."default",
+    fileencoding character varying(32) COLLATE pg_catalog."default",
+    validate boolean,
+    createon timestamp without time zone 
+);
 
 CREATE TABLE "public"."sftpettings" (
 	"id" serial PRIMARY KEY, 
