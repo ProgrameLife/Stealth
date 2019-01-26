@@ -68,7 +68,8 @@ namespace StealthFTPBackHandle
                     ftp.Login(sftpSetting.UserName, sftpSetting.Password);
                     ftp.Mode = FtpMode.Active;
                     ftp.ChangeFolder(sftpSetting.TransferDirectory);
-                    var response = ftp.Upload($"{sftpSetting.TransferFilePrefix}{sftpSetting.FileName}", 0, Encoding.UTF8.GetBytes(content));
+                    var encoding = Encoding.GetEncoding(sftpSetting.FileEncoding);
+                    var response = ftp.Upload($"{sftpSetting.TransferFilePrefix}{sftpSetting.FileName}", 0, encoding.GetBytes(content));
                     if (response.Code.HasValue && (response.Code.Value == 226 || response.Code.Value == 200))
                     {
 

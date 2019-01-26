@@ -109,12 +109,20 @@
                             key: 'compressFile',
                         },
                         {
+                            title: '@Html.Raw(localizer["CompressPassword"])',
+                            key: 'compressPassword',
+                        },
+                        {
                             title: '@Html.Raw(localizer["IsAttachment"])',
                             key: 'isAttachment',
                         },
                         {
                             title: '@Html.Raw(localizer["AttachmentName"])',
                             key: 'attachmentName',
+                        },
+                        {
+                            title: '@Html.Raw(localizer["AttachmentEncoding"])',
+                            key: 'attachmentEncoding',
                         },
                         {
                             title:'@Html.Raw(localizer["Validate"])',
@@ -286,12 +294,12 @@
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="@Html.Raw(localizer["Port"])" prop="host">
+                        <FormItem label="@Html.Raw(localizer["keyName"])" prop="host">
                             <Input v-model="editdata.emailsetting.host"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
-                        <FormItem label="@Html.Raw(localizer["keyName"])" prop="port">
+                        <FormItem label="@Html.Raw(localizer["Port"])" prop="port">
                             <InputNumber v-model="editdata.emailsetting.port" :min="10" :step="1"></InputNumber>
                         </FormItem>
                         </Col>
@@ -339,14 +347,19 @@
                         <Col span="3">
                         <FormItem label="@Html.Raw(localizer["IsCompress"])">
                             <i-switch v-model="editdata.emailsetting.isCompress" size="large">
-                                <span slot="open">true</span>
-                                <span slot="close">false</span>
+                                <span slot="open"></span>
+                                <span slot="close"></span>
                             </i-switch>
                         </FormItem>
                         </Col>
-                        <Col span="21">
-                        <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFileName">
-                            <Input v-model="editdata.emailsetting.compressFileName"></Input>
+                        <Col span="16">
+                        <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFile">
+                            <Input v-model="editdata.emailsetting.compressFile"></Input>
+                        </FormItem>
+                        </Col>
+                        <Col span="5">
+                        <FormItem label="@Html.Raw(localizer["CompressPassword"])" prop="compressPassword">
+                            <Input v-model="editdata.emailsetting.compressPassword"></Input>
                         </FormItem>
                         </Col>
                     </row>
@@ -354,8 +367,8 @@
                         <Col span="3">
                         <FormItem label="@Html.Raw(localizer["IsAttachment"])">
                             <i-switch v-model="editdata.emailsetting.isAttachment" size="large">
-                                <span slot="open">true</span>
-                                <span slot="close">false</span>
+                                <span slot="open"></span>
+                                <span slot="close"></span>
                             </i-switch>
                         </FormItem>
                         </Col>
@@ -367,15 +380,19 @@
                     </row>
                     <row :gutter="16">
                         <Col span="12">
-                        <FormItem label="@Html.Raw(localizer["Validate"])">
-                            <i-switch v-model="editdata.emailsetting.validate" size="large">
-                                <span slot="valid">true</span>
-                                <span slot="invalid">false</span>
-                            </i-switch>
+                        <FormItem label="@Html.Raw(localizer["AttachmentEncoding"])" prop="attachmentEncoding">
+                            <Input v-model="editdata.emailsetting.attachmentEncoding"></Input>
                         </FormItem>
                         </Col>
                         <Col span="12">
+                        <FormItem label="@Html.Raw(localizer["Validate"])">
+                            <i-switch v-model="editdata.emailsetting.validate" size="large">
+                                <span slot="valid"></span>
+                                <span slot="invalid"></span>
+                            </i-switch>
+                        </FormItem>
                         </Col>
+
                     </row>
                 </Form>
             </div>
@@ -502,14 +519,19 @@
                             <Col span="3">
                             <FormItem label="@Html.Raw(localizer["IsCompress"])">
                                 <i-switch v-model="formValidate.isCompress" size="large">
-                                    <span slot="open">true</span>
-                                    <span slot="close">false</span>
+                                    <span slot="open"></span>
+                                    <span slot="close"></span>
                                 </i-switch>
                             </FormItem>
                             </Col>
-                            <Col span="21">
-                            <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFileName">
-                                <Input v-model="formValidate.compressFileName"></Input>
+                            <Col span="16">
+                            <FormItem label="@Html.Raw(localizer["CompressFileName"])" prop="compressFile">
+                                <Input v-model="formValidate.compressFile"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="5">
+                            <FormItem label="@Html.Raw(localizer["CompressPassword"])" prop="compressPassword">
+                                <Input v-model="formValidate.compressPassword"></Input>
                             </FormItem>
                             </Col>
                         </row>
@@ -517,8 +539,8 @@
                             <Col span="3">
                             <FormItem label="@Html.Raw(localizer["IsAttachment"])">
                                 <i-switch v-model="formValidate.isAttachment" size="large">
-                                    <span slot="open">true</span>
-                                    <span slot="close">false</span>
+                                    <span slot="open"></span>
+                                    <span slot="close"></span>
                                 </i-switch>
                             </FormItem>
                             </Col>
@@ -527,6 +549,22 @@
                                 <Input v-model="formValidate.attachmentName"></Input>
                             </FormItem>
                             </Col>
+                        </row>
+                        <row :gutter="16">
+                            <Col span="12">
+                            <FormItem label="@Html.Raw(localizer["AttachmentEncoding"])" prop="attachmentEncoding">
+                                <Input v-model="formValidate.attachmentEncoding"></Input>
+                            </FormItem>
+                            </Col>
+                            <Col span="12">
+                            <FormItem label="@Html.Raw(localizer["Validate"])">
+                                <i-switch v-model="formValidate.validate" size="large">
+                                    <span slot="valid"></span>
+                                    <span slot="invalid"></span>
+                                </i-switch>
+                            </FormItem>
+                            </Col>
+
                         </row>
                     </Form>
                 </div>
@@ -555,9 +593,11 @@
                         subject: "",
                         body: "",
                         isCompress: false,
-                        compressFileName: "",
+                        compressFile: "",
+                        compressPassword: "",
                         isAttachment: false,
                         attachmentName: "",
+                        attachmentEncoding:"",
                         validate: false
                     },
                     ruleValidate: {

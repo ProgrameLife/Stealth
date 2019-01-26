@@ -77,9 +77,9 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [emailsettings]
         /// <returns></returns>
         public bool AddEmailSetting(EmailSetting emailSetting)
         {
-            var sql = @"INSERT INTO emailsettings(
+            var sql = @"INSERT INTO emailsettings(keyname,
 	host, port, fromaddress, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
-	VALUES (@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
+	VALUES (@keyname,@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, emailSetting) > 0;
@@ -93,7 +93,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [emailsettings]
         public bool ModifyEmailSetting(EmailSetting  emailSetting)
         {
             var sql = @"UPDATE emailsettings
-	SET  host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
+	SET  keyname=@keyname,host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
 	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate, compresspassword=@compresspassword
 	WHERE id=@id;";
             using (var con = new SqlConnection(_connectionString))

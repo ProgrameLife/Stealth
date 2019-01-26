@@ -57,8 +57,8 @@ namespace StealthSqlServerProvider
         public bool AddSFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"INSERT INTO sftpettings
-		(host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate,createon)VALUES
-        (@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate,@createon)";
+		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,filename,fileencoding,validate)VALUES
+        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@filename,@fileencoding,@validate)";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, sFTPSetting) > 0;
@@ -72,8 +72,8 @@ namespace StealthSqlServerProvider
         public bool ModifySFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"UPDATE sftpettings
-	SET  host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
-		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,validate = @validate	
+	SET  keyname=@keyname,host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
+		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,filename=@filename,fileencoding=@fileencoding,validate = @validate	
 	WHERE id=@id";
             using (var con = new SqlConnection(_connectionString))
             {

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
 using SealthProvider;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,7 +66,7 @@ namespace StealthPostgreProvider
             var sql = "select * from sftpettings where validate=true and keyname=@keyname";
             using (var con = new NpgsqlConnection(_connectionString))
             {
-                return con.Query<SFTPSetting>(sql,new { keyname= keyName }).FirstOrDefault();
+                return con.Query<SFTPSetting>(sql, new { keyname = keyName }).FirstOrDefault();
             }
         }
         /// <summary>
@@ -75,11 +76,13 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public bool AddSFTPSetting(SFTPSetting sFTPSetting)
         {
+
             var sql = @"INSERT INTO sftpettings
-		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,validate)VALUES
-        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@validate)";
+		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,filename,fileencoding,validate,createon)VALUES
+        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@filename,@fileencoding,@validate,@createon)";
             using (var con = new NpgsqlConnection(_connectionString))
             {
+                sFTPSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, sFTPSetting) > 0;
             }
         }
@@ -91,8 +94,8 @@ namespace StealthPostgreProvider
         public bool ModifySFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"UPDATE sftpettings
-	SET  host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
-		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,validate = @validate	
+	SET  keyname=@keyname,host =@host,port = @port,username = @username,password = @password,certificatepath =@certificatepath
+		,transferdirectory = @transferdirectory,transferfileprefix = @transferfileprefix,filename=@filename,fileencoding=@fileencoding,validate = @validate	
 	WHERE id=@id";
             using (var con = new NpgsqlConnection(_connectionString))
             {
