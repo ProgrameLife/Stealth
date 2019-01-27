@@ -1,4 +1,6 @@
-﻿namespace SealthModel
+﻿using System;
+
+namespace SealthModel
 {
     /// <summary>
     /// Quartz Core Entity
@@ -28,6 +30,12 @@
         /// Validate
         /// </summary>
         public bool Validate { get; set; }
+
+        /// <summary>
+        /// Create Time
+        /// </summary>
+        public DateTime CreateOn
+        { get; set; }
 
     }
 }

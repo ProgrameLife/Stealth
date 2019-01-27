@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Npgsql;
 using SealthModel;
 using SealthProvider;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -75,10 +76,11 @@ namespace StealthPostgreProvider
         /// <returns></returns>
         public bool AddFileSetting(FileSetting fileSetting)
         {
-            var sql = @"INSERT INTO public.filesettings(keyname, filename, filepath, fileencoding, validate)
-	VALUES (@keyname, @filename, @filepath, @fileencoding, @validate);";
+            var sql = @"INSERT INTO public.filesettings(keyname, filename, filepath, fileencoding, validate,createon)
+	VALUES (@keyname, @filename, @filepath, @fileencoding, @validate,@createon);";
             using (var con = new NpgsqlConnection(_connectionString))
             {
+                fileSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, fileSetting) > 0;
             }
         }

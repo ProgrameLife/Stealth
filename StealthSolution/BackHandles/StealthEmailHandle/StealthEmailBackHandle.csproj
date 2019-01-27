@@ -17,8 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.0.7" />
-    <PackageReference Include="SharpZipLib" Version="1.0.0" />
+    <PackageReference Include="MailKit" Version="2.1.2" />
+    <PackageReference Include="SharpZipLib" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

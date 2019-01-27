@@ -4,6 +4,7 @@ using Npgsql;
 using SealthModel;
 using SealthProvider;
 using StealthQuartz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,10 +31,11 @@ namespace StealthPostgreProvider
         public bool AddQuartzSetting(QuartzSetting quartzSetting)
         {
             var sql = @"INSERT INTO public.quartzsettings(
-	 keyname, typename, cronexpression, validate)
-	VALUES (@keyname, @typename, @cronexpression, @validate);";
+	 keyname, typename, cronexpression, validate,createon)
+	VALUES (@keyname, @typename, @cronexpression, @validate,@createon);";
             using (var con = new NpgsqlConnection(_connectionString))
             {
+                quartzSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, quartzSetting) > 0;
             }
         }

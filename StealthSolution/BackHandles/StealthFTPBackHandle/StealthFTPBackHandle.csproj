@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ftp.dll" Version="2.0.18141.1053" />
+    <PackageReference Include="Ftp.dll" Version="2.0.19002.942" />
   </ItemGroup>
 
   <ItemGroup>

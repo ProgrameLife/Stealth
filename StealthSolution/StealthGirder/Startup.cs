@@ -36,15 +36,15 @@ namespace StealthGirder
             #endregion
 
             #region stealth provider          
-            services.AddTransient<IEmailProvider, PostgreEmailProvider>();
-            services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
-            services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
-            services.AddTransient<IStealthStatuProvider, PostgreStealthStatuProvider>();
+            //services.AddTransient<IEmailProvider, PostgreEmailProvider>();
+            //services.AddTransient<ISFTPProvider, PostgreSFTPProvider>();
+            //services.AddTransient<SealthProvider.IFileProvider, PostgreFileProvider>();
+            //services.AddTransient<IStealthStatuProvider, PostgreStealthStatuProvider>();
 
-            //services.AddTransient<IEmailProvider, SqlServerEmailProvider>();
-            //services.AddTransient<ISFTPProvider, SqlServerSFTPProvider>();
-            //services.AddTransient<SealthProvider.IFileProvider, SqlServerFileProvider>();
-            //services.AddTransient<IStealthStatuProvider, SqlServerStealthStatuProvider>();
+            services.AddTransient<IEmailProvider, SqlServerEmailProvider>();
+            services.AddTransient<ISFTPProvider, SqlServerSFTPProvider>();
+            services.AddTransient<SealthProvider.IFileProvider, SqlServerFileProvider>();
+            services.AddTransient<IStealthStatuProvider, SqlServerStealthStatuProvider>();
             #endregion
 
             #region postgre mode               
@@ -83,8 +83,8 @@ namespace StealthGirder
             #endregion
 
             #region postgre mode
-            app.UserPostgreBackHandle(scheduler);
-            //app.UserSqlServerBackHandle(scheduler);
+            //app.UserPostgreBackHandle(scheduler);
+            app.UserSqlServerBackHandle(scheduler);
             #endregion
        
             var supportedCultures = new[]{
