@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -78,10 +79,11 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [filesettings]
         /// <returns></returns>
         public bool AddFileSetting(FileSetting fileSetting)
         {
-            var sql = @"INSERT INTO filesettings(keyname, filename, filepath, fileencoding, validate)
-	VALUES (@keyname, @filename, @filepath, @fileencoding, @validate);";
+            var sql = @"INSERT INTO filesettings(keyname, filename, filepath, fileencoding, validate,createon)
+	VALUES (@keyname, @filename, @filepath, @fileencoding, @validate,@createon);";
             using (var con = new SqlConnection(_connectionString))
             {
+                fileSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, fileSetting) > 0;
             }
         }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -57,10 +58,12 @@ namespace StealthSqlServerProvider
         public bool AddSFTPSetting(SFTPSetting sFTPSetting)
         {
             var sql = @"INSERT INTO sftpettings
-		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,filename,fileencoding,validate)VALUES
-        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@filename,@fileencoding,@validate)";
+		(keyname,host,port,username,password,certificatepath,transferdirectory,transferfileprefix,filename,fileencoding,validate,createon)VALUES
+        (@keyname,@host,@port,@username,@password,@certificatepath,@transferdirectory,@transferfileprefix,@filename,@fileencoding,@validate,@createon)";
+
             using (var con = new SqlConnection(_connectionString))
             {
+                sFTPSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, sFTPSetting) > 0;
             }
         }

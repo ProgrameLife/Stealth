@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
 using StealthQuartz;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -30,10 +31,11 @@ namespace StealthSqlServerProvider
         public bool AddQuartzSetting(QuartzSetting quartzSetting)
         {
             var sql = @"INSERT INTO quartzsettings(
-	 keyname, typename, cronexpression, validate)
-	VALUES (@keyname, @typename, @cronexpression, @validate);";
+	 keyname, typename, cronexpression, validate,createon)
+	VALUES (@keyname, @typename, @cronexpression, @validate,@createon);";
             using (var con = new SqlConnection(_connectionString))
             {
+                quartzSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, quartzSetting) > 0;
             }
         }
@@ -98,7 +100,7 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [quartzsettings]
         /// <returns></returns>
         public bool RemoveQuartzSetting(int id)
         {
-            var sql = @"DELETE FROM public.quartzsettings where id=@id;";
+            var sql = @"DELETE FROM quartzsettings where id=@id;";
             using (var con = new SqlConnection(_connectionString))
             {
                 return con.Execute(sql, new { id }) > 0;

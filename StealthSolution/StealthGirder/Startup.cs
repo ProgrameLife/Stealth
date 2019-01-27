@@ -52,8 +52,8 @@ namespace StealthGirder
             services.AddTransient<EmailBackHandle>();
             services.AddTransient<FileBackHandle>();
 
-             services.AddPostgreBackHandle();
-            //services.AddSqlServerBackHandle();
+            // services.AddPostgreBackHandle();
+            services.AddSqlServerBackHandle();
             #endregion
             services.Configure<RazorViewEngineOptions>(options =>
             {

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SealthModel;
 using SealthProvider;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -78,10 +79,12 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [emailsettings]
         public bool AddEmailSetting(EmailSetting emailSetting)
         {
             var sql = @"INSERT INTO emailsettings(keyname,
-	host, port, fromaddress, username, password, subject, body, toaddresses, iscompress, validate, compresspassword)
-	VALUES (@keyname,@host, @port, @fromaddress, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate, @compresspassword);";
+	host, port, fromaddresses, username, password, subject, body, toaddresses, iscompress, validate,compressfile,compresspassword,isattachment,attachmentencoding,attachmentname,createon)
+	VALUES (@keyname,@host, @port, @fromaddresses, @username, @password, @subject, @body, @toaddresses, @iscompress, @validate,@compressfile, @compresspassword,@isattachment,@attachmentencoding,@attachmentname,@createon);";
+
             using (var con = new SqlConnection(_connectionString))
             {
+                emailSetting.CreateOn = DateTime.Now;
                 return con.Execute(sql, emailSetting) > 0;
             }
         }
@@ -91,10 +94,11 @@ select  ROW_NUMBER() OVER (  ORDER BY id) AS rownum ,* from [emailsettings]
         /// <param name="emailSetting">emailSetting</param>
         /// <returns></returns>
         public bool ModifyEmailSetting(EmailSetting  emailSetting)
-        {
+        {            
             var sql = @"UPDATE emailsettings
-	SET  keyname=@keyname,host=@host, port=@port, fromaddress=@fromaddress, username=@username, password=@password, subject=@subject, body=@body,
-	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate, compresspassword=@compresspassword
+	SET keyname=@keyname,host=@host, port=@port, fromaddresses = @fromaddresses, username=@username, password=@password, subject=@subject, body=@body,
+	toaddresses=@toaddresses, iscompress=@iscompress, validate=@validate,compressfile=@compressfile, compresspassword=@compresspassword,isattachment=@isattachment,
+attachmentencoding=@attachmentencoding,attachmentname=@attachmentname
 	WHERE id=@id;";
             using (var con = new SqlConnection(_connectionString))
             {
