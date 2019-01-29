@@ -30,12 +30,13 @@ SqlServerProvider是负责各BackHandle和UI操作SqlServer中配置数据的类
 
 ##### UI
 UI完成配置文件的添加，修改，删除，包括Quartz的配置
-1. EmailSetting UI
-2. FTPSetting UI
-3. SFTPSetting UI
-4. FileSetting UI
-5. StealthStatu UI
-6. QuartzSetting UI
+运行StealthGirder项目
+1. EmailSetting UI  http://localhost:5000/emailsettings
+2. FTPSetting UI http://localhost:5000/sftpsettings
+3. SFTPSetting UI http://localhost:5000/sftpsettings
+4. FileSetting UI http://localhost:5000/filesettings
+5. StealthStatu UI http://localhost:5000/stealthstatu
+6. QuartzSetting UI http://localhost:5000/quartzsettings
 
 ##### 通过实现StealthBuildData的IBuildData接口来获取后台任务执行的数据
 
